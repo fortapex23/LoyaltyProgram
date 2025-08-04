@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Lenovo\\source\\repos\\LoyaltyConsole\\LoyaltyConsole.Core\\LoyaltyConsole.Core.csproj": {}
+    "C:\\Users\\Lenovo\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\LoyaltyConsole.Core\\LoyaltyConsole.Core.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Lenovo\\source\\repos\\LoyaltyConsole\\LoyaltyConsole.Core\\LoyaltyConsole.Core.csproj": {
+    "C:\\Users\\Lenovo\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\LoyaltyConsole.Core\\LoyaltyConsole.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lenovo\\source\\repos\\LoyaltyConsole\\LoyaltyConsole.Core\\LoyaltyConsole.Core.csproj",
+        "projectUniqueName": "C:\\Users\\Lenovo\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\LoyaltyConsole.Core\\LoyaltyConsole.Core.csproj",
         "projectName": "LoyaltyConsole.Core",
-        "projectPath": "C:\\Users\\Lenovo\\source\\repos\\LoyaltyConsole\\LoyaltyConsole.Core\\LoyaltyConsole.Core.csproj",
+        "projectPath": "C:\\Users\\Lenovo\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\LoyaltyConsole.Core\\LoyaltyConsole.Core.csproj",
         "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lenovo\\source\\repos\\LoyaltyConsole\\LoyaltyConsole.Core\\obj\\",
+        "outputPath": "C:\\Users\\Lenovo\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\LoyaltyConsole.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -51,7 +51,7 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[9.0.6, )"
+              "version": "[8.0.18, )"
             }
           },
           "imports": [

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using LoyaltyConsole.Core.Enums;
+using Microsoft.AspNetCore.Identity;
 
 namespace LoyaltyConsole.Core.Models
 {
@@ -6,9 +7,10 @@ namespace LoyaltyConsole.Core.Models
     {
         public string FullName { get; set; }           
         public DateTime Birthday { get; set; }
+        public GenderType Gender { get; set; }
 
         public List<CustomerTag> Tags { get; set; }
-        public List<Transaction> Transactions { get; set; } = new();
+        public List<Transaction> Transactions { get; set; }
         public CashbackBalance CashbackBalance { get; set; }
         public List<Reward> Rewards { get; set; }
     }
