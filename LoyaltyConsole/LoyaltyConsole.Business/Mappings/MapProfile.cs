@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using LoyaltyConsole.Business.DTOs.UserDtos;
+using LoyaltyConsole.Core.Models;
 
 namespace LoyaltyConsole.Business.Mappings
 {
@@ -6,13 +8,11 @@ namespace LoyaltyConsole.Business.Mappings
     {
         public MapProfile()
         {
+            CreateMap<UserGetDto, AppUser>().ReverseMap();
+
             //CreateMap<CreateProductDTO, Product>().ReverseMap();
             //CreateMap<CreateProductDTO, Product>().ReverseMap();
             //CreateMap<GetProductDTO, Product>().ReverseMap();
-
-            //CreateMap<CreatePurchaseDTO, Purchase>().ReverseMap();
-            //CreateMap<CreatePurchaseDTO, Purchase>().ReverseMap();
-            //CreateMap<GetPurchaseDTO, Purchase>().ReverseMap();
         }
     }
 }
