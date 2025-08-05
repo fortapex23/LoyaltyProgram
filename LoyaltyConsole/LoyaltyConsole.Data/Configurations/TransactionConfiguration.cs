@@ -16,7 +16,6 @@ namespace LoyaltyConsole.Data.Configurations
 
             builder.Property(t => t.Business)
                 .IsRequired()
-                .HasMaxLength(100);
         }
     }
 }
