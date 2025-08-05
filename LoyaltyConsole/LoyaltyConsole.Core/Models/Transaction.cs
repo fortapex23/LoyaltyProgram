@@ -1,4 +1,6 @@
-﻿namespace LoyaltyConsole.Core.Models
+﻿using LoyaltyConsole.Core.Enums;
+
+namespace LoyaltyConsole.Core.Models
 {
     public class Transaction : BaseModel
     {
@@ -6,7 +8,7 @@
         public AppUser AppUser { get; set; }
 
         public decimal AmountSpent { get; set; }
-        public string Business { get; set; }
+        public BusinessTypes Business { get; set; }
         public decimal CashbackEarned { get; set; }
 
         public int? RewardId { get; set; }
