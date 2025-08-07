@@ -2,11 +2,11 @@
 
 namespace LoyaltyConsole.Business.DTOs.CustomerTagDtos
 {
-    public record CustomerTagCreateDto(string TagName, string AppUserId);
+    public record CustomerTagUpdateDto(string TagName, string AppUserId);
 
-    public class CustomerTagCreateDtoValidator : AbstractValidator<CustomerTagCreateDto>
+    public class CustomerTagUpdateDtoValidator : AbstractValidator<CustomerTagUpdateDto>
     {
-        public CustomerTagCreateDtoValidator()
+        public CustomerTagUpdateDtoValidator()
         {
             RuleFor(x => x.TagName).NotNull().NotEmpty();
             RuleFor(x => x.AppUserId).NotNull().NotEmpty();
