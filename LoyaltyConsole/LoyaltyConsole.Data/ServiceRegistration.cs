@@ -13,6 +13,7 @@ namespace LoyaltyConsole.Data
             services.AddScoped<ICustomerTagRepository, CustomerTagRepository>();
             services.AddScoped<IRewardRepository, RewardRepository>();
             services.AddScoped<ITransactionRepository, TransactionRepository>();
+            services.AddScoped<IAppUserRewardRepository, AppUserRewardRepository>();
 
             services.AddDbContext<AppDbContext>(op =>
             {

@@ -12,6 +12,6 @@ namespace LoyaltyConsole.Core.Models
         public List<CustomerTag> Tags { get; set; }
         public List<Transaction> Transactions { get; set; }
         public CashbackBalance CashbackBalance { get; set; }
-        public List<Reward> Rewards { get; set; }
+        public List<AppUserReward> AppUserRewards { get; set; }
     }
 }

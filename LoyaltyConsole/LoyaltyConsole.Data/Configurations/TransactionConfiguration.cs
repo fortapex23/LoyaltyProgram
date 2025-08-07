@@ -15,7 +15,7 @@ namespace LoyaltyConsole.Data.Configurations
                 .HasColumnType("decimal(18,2)");
 
             builder.Property(t => t.Business)
-                .IsRequired()
+                .IsRequired();
         }
     }
 }

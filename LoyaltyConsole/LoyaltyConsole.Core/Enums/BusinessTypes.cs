@@ -10,7 +10,6 @@
         Pharmacy,
         GasStation,
         OnlineShopping,
-        TravelAgency,
         Airline,
         Hotel,
         Cinema,
