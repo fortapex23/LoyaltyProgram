@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LoyaltyConsole.Business.DTOs.RewardDtos;
 using LoyaltyConsole.Business.DTOs.TransactionDtos;
 using LoyaltyConsole.Business.DTOs.UserDtos;
 using LoyaltyConsole.Core.Models;
@@ -12,8 +13,11 @@ namespace LoyaltyConsole.Business.Mappings
             CreateMap<UserGetDto, AppUser>().ReverseMap();
 
             CreateMap<TransactionCreateDto, Transaction>().ReverseMap();
-            CreateMap<TransactionUpdateDto, Transaction>().ReverseMap();
             CreateMap<TransactionGetDto, Transaction>().ReverseMap();
+            CreateMap<TransactionUpdateDto, Transaction>().ReverseMap();
+
+            CreateMap<RewardCreateDto, Reward>().ReverseMap();
+            CreateMap<RewardGetDto, Reward>().ReverseMap();
         }
     }
 }

@@ -24,81 +24,81 @@ namespace LoyaltyConsole.API.Controllers
             _userManager = userManager;
         }
 
-        //[HttpGet("")]
-        //public async Task<IActionResult> GetAll()
-        //{
-        //    return Ok(new ApiResponse<ICollection<UserGetDto>>
-        //    {
-        //        Data = await _authService.GetAllUsersAsync(),
-        //        ErrorMessage = null,
-        //        StatusCode = StatusCodes.Status200OK
-        //    });
-        //}
+        [HttpGet("")]
+        public async Task<IActionResult> GetAll()
+        {
+            return Ok(new ApiResponse<ICollection<UserGetDto>>
+            {
+                Data = await _authService.GetAllUsersAsync(),
+                ErrorMessage = null,
+                StatusCode = StatusCodes.Status200OK
+            });
+        }
 
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> GetById(string id)
-        //{
-        //    UserGetDto dto = null;
-        //    try
-        //    {
-        //        dto = await _authService.GetById(id);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return NotFound(ex.Message);
-        //    }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(string id)
+        {
+            UserGetDto dto = null;
+            try
+            {
+                dto = await _authService.GetById(id);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
 
-        //    return Ok(new ApiResponse<UserGetDto>
-        //    {
-        //        Data = dto,
-        //        StatusCode = StatusCodes.Status200OK
-        //    });
-        //}
+            return Ok(new ApiResponse<UserGetDto>
+            {
+                Data = dto,
+                StatusCode = StatusCodes.Status200OK
+            });
+        }
 
-        //[HttpPost("[action]")]
-        //public async Task<IActionResult> Register(UserRegisterDto dto)
-        //{
-        //    try
-        //    {
-        //        await _authService.Register(dto);
-        //    }
-        //    catch (NullReferenceException)
-        //    {
-        //        return BadRequest();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Register(UserRegisterDto dto)
+        {
+            try
+            {
+                await _authService.Register(dto);
+            }
+            catch (NullReferenceException)
+            {
+                return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
-        //    return Ok();
-        //}
+            return Ok();
+        }
 
-        //[HttpPost("[action]")]
-        //public async Task<IActionResult> Login(UserLoginDto dto)
-        //{
-        //    TokenResponseDto rDto = null;
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Login(UserLoginDto dto)
+        {
+            TokenResponseDto rDto = null;
 
-        //    try
-        //    {
-        //        rDto = await _authService.Login(dto);
-        //    }
-        //    catch (Exception ex) when (ex.Message == "Invalid credentials")
-        //    {
-        //        return BadRequest(new ApiResponse<string>
-        //        {
-        //            Data = null,
-        //            ErrorMessage = "Invalid email or password",
-        //            StatusCode = StatusCodes.Status400BadRequest
-        //        });
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return BadRequest("An error occurred");
-        //    }
+            try
+            {
+                rDto = await _authService.Login(dto);
+            }
+            catch (Exception ex) when (ex.Message == "Invalid credentials")
+            {
+                return BadRequest(new ApiResponse<string>
+                {
+                    Data = null,
+                    ErrorMessage = "Invalid email or password",
+                    StatusCode = StatusCodes.Status400BadRequest
+                });
+            }
+            catch (Exception)
+            {
+                return BadRequest("An error occurred");
+            }
 
-        //    return Ok(rDto);
-        //}
+            return Ok(rDto);
+        }
 
         //[HttpGet("")]
         //public async Task<IActionResult> CreateAdmin()
@@ -111,17 +111,17 @@ namespace LoyaltyConsole.API.Controllers
         //}
 
 
-        [HttpGet("")]
-        public async Task<IActionResult> CreateRole()
-        {
-            IdentityRole role2 = new IdentityRole("Admin");
-            IdentityRole role3 = new IdentityRole("Client");
+        //[HttpGet("")]
+        //public async Task<IActionResult> CreateRole()
+        //{
+        //    IdentityRole role2 = new IdentityRole("Admin");
+        //    IdentityRole role3 = new IdentityRole("Client");
 
-            await _roleManager.CreateAsync(role2);
-            await _roleManager.CreateAsync(role3);
+        //    await _roleManager.CreateAsync(role2);
+        //    await _roleManager.CreateAsync(role3);
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
 
     }
 }
