@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
+﻿using LoyaltyConsole.MVC.ViewModels.AuthVMs;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 
 namespace LoyaltyConsole.MVC.Services.Interfaces
 {
@@ -8,6 +9,6 @@ namespace LoyaltyConsole.MVC.Services.Interfaces
         Task<LoginResponseVM> AdminLogin(UserLoginVM vm);
         void Logout();
         Task<bool> Register(UserRegisterVM vm);
-        Task<string> ForgotPassword(ForgotPasswordVM vm);
+        //Task<string> ForgotPassword(ForgotPasswordVM vm);
     }
 }
