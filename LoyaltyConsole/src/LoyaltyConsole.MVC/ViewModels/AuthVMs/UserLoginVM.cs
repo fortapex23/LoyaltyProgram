@@ -1,4 +1,4 @@
 ﻿namespace LoyaltyConsole.MVC.ViewModels.AuthVMs
 {
-    public record UserLoginVM()
+    public record UserLoginVM();
 }

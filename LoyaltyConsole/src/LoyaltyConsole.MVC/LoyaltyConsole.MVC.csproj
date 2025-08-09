@@ -15,10 +15,4 @@
     <ProjectReference Include="..\..\LoyaltyConsole.API\LoyaltyConsole.API.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Admin\Controllers\" />
-    <Folder Include="Areas\Admin\ViewModels\" />
-    <Folder Include="Areas\Admin\Views\" />
-  </ItemGroup>
-
 </Project>
