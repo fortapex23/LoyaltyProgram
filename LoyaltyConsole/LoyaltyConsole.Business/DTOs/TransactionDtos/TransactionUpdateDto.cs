@@ -4,7 +4,7 @@ using LoyaltyConsole.Core.Enums;
 namespace LoyaltyConsole.Business.DTOs.TransactionDtos
 {
     public record TransactionUpdateDto(string AppUserId, decimal AmountSpent, BusinessTypes Business,
-                                    decimal CashbackEarned, int? RewardId);
+                                    decimal CashbackEarned);
 
     public class TransactionUpdateDtoValidator : AbstractValidator<TransactionUpdateDto>
     {

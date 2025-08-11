@@ -11,10 +11,7 @@ namespace LoyaltyConsole.Data
 
         public DbSet<AppUser> Users { get; set; }
         public DbSet<CashbackBalance> CashbackBalances { get; set; }
-        public DbSet<CustomerTag> CustomerTags { get; set; }
-        public DbSet<Reward> Rewards { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
-        public DbSet<AppUserReward> AppUserRewards { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
