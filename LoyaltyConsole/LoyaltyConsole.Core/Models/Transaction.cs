@@ -11,7 +11,5 @@ namespace LoyaltyConsole.Core.Models
         public BusinessTypes Business { get; set; }
         public decimal CashbackEarned { get; set; }
 
-        public int? RewardId { get; set; }
-        public Reward? Reward { get; set; }
     }
 }

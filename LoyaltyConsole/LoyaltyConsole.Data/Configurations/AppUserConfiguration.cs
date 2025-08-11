@@ -25,10 +25,6 @@ namespace LoyaltyConsole.Data.Configurations
             builder.HasMany(u => u.Transactions)
                 .WithOne(t => t.AppUser)
                 .HasForeignKey(t => t.AppUserId);
-
-            builder.HasMany(u => u.Tags)
-                .WithOne(t => t.AppUser)
-                .HasForeignKey(t => t.AppUserId);
         }
     }
 }

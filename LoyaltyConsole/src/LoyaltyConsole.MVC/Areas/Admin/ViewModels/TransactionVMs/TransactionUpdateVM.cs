@@ -1,4 +1,6 @@
-﻿namespace LoyaltyConsole.MVC.Areas.Admin.ViewModels.TransactionVMs
+﻿using LoyaltyConsole.MVC.Enums;
+
+namespace LoyaltyConsole.MVC.Areas.Admin.ViewModels.TransactionVMs
 {
     public class TransactionUpdateVM
     {

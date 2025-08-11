@@ -10,9 +10,7 @@ namespace LoyaltyConsole.Business
         {
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ITransactionService, TransactionService>();
-            services.AddScoped<IRewardService, RewardService>();
-            services.AddScoped<ICustomerTagService, CustomerTagService>();
-            services.AddScoped<IAppUserRewardService, AppUserRewardService>();
+            services.AddScoped<ICashbackBalanceService, CashbackBalanceService>();
 
         }
     }

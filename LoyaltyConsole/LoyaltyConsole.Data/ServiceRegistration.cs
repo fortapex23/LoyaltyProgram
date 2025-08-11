@@ -10,10 +10,7 @@ namespace LoyaltyConsole.Data
         public static void AddRepositories(this IServiceCollection services, string connectionstring)
         {
             services.AddScoped<ICashbackBalanceRepository, CashbackBalanceRepository>();
-            services.AddScoped<ICustomerTagRepository, CustomerTagRepository>();
-            services.AddScoped<IRewardRepository, RewardRepository>();
             services.AddScoped<ITransactionRepository, TransactionRepository>();
-            services.AddScoped<IAppUserRewardRepository, AppUserRewardRepository>();
 
             services.AddDbContext<AppDbContext>(op =>
             {
