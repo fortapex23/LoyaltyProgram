@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 using AutoMapper;
 using LoyaltyConsole.Business.DTOs.TransactionDtos;
+using LoyaltyConsole.Business.ExternalServices.Interfaces;
 using LoyaltyConsole.Business.Interfaces;
 using LoyaltyConsole.Core.Models;
 using LoyaltyConsole.Core.Repositories;
@@ -11,12 +12,17 @@ namespace LoyaltyConsole.Business.Implementations
     public class TransactionService : ITransactionService
     {
         private readonly ITransactionRepository _transactionRepository;
+        private readonly ICashbackBalanceRepository _cashbackBalanceRepository;
+        private readonly ICashbackService _cashbackService;
         private readonly IMapper _mapper;
 
-        public TransactionService(ITransactionRepository transactionRepository, IMapper mapper)
+        public TransactionService(ITransactionRepository transactionRepository, IMapper mapper
+            , ICashbackBalanceRepository cashbackBalanceRepository)
         {
             _transactionRepository = transactionRepository;
             _mapper = mapper;
+            _cashbackBalanceRepository = cashbackBalanceRepository; 
+
         }
 
         public Task<bool> IsExist(Expression<Func<Transaction, bool>> expression)
@@ -27,11 +33,21 @@ namespace LoyaltyConsole.Business.Implementations
         public async Task<TransactionGetDto> CreateAsync(TransactionCreateDto dto)
         {
             var transaction = _mapper.Map<Transaction>(dto);
+
+            var cashbackRate = _cashbackService.GetCashbackRate(dto.Business);
+            transaction.CashbackEarned = dto.AmountSpent * cashbackRate;
             transaction.CreatedDate = DateTime.Now;
             transaction.UpdatedDate = DateTime.Now;
 
             await _transactionRepository.CreateAsync(transaction);
             await _transactionRepository.CommitAsync();
+
+            var balance = _cashbackBalanceRepository.GetByExpression(false, x => x.AppUserId == dto.AppUserId).FirstOrDefault();
+            if (balance == null) throw new Exception("CashbackBalance not found");
+
+            balance.TotalCashback += transaction.CashbackEarned;
+
+            await _cashbackBalanceRepository.CommitAsync();
 
             return _mapper.Map<TransactionGetDto>(transaction);
         }
