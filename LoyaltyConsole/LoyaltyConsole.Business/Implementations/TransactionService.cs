@@ -17,12 +17,12 @@ namespace LoyaltyConsole.Business.Implementations
         private readonly IMapper _mapper;
 
         public TransactionService(ITransactionRepository transactionRepository, IMapper mapper
-            , ICashbackBalanceRepository cashbackBalanceRepository)
+            , ICashbackBalanceRepository cashbackBalanceRepository, ICashbackService cashbackService)
         {
             _transactionRepository = transactionRepository;
             _mapper = mapper;
             _cashbackBalanceRepository = cashbackBalanceRepository; 
-
+            _cashbackService = cashbackService;
         }
 
         public Task<bool> IsExist(Expression<Func<Transaction, bool>> expression)
@@ -34,8 +34,8 @@ namespace LoyaltyConsole.Business.Implementations
         {
             var transaction = _mapper.Map<Transaction>(dto);
 
-            var cashbackRate = _cashbackService.GetCashbackRate(dto.Business);
-            transaction.CashbackEarned = dto.AmountSpent * cashbackRate;
+            transaction.CashbackEarned = _cashbackService.CalculateCashback(dto.AmountSpent, dto.Business);
+
             transaction.CreatedDate = DateTime.Now;
             transaction.UpdatedDate = DateTime.Now;
 

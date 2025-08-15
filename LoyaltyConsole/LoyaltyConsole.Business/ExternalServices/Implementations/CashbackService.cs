@@ -31,5 +31,11 @@ namespace LoyaltyConsole.Business.ExternalServices.Implementations
                 
             };
         }
+
+        public decimal CalculateCashback(decimal amountSpent, BusinessTypes businessType)
+        {
+            var rate = GetCashbackRate(businessType);
+            return Math.Round(amountSpent * rate, 2, MidpointRounding.AwayFromZero);
+        }
     }
 }

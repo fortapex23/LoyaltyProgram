@@ -10,6 +10,8 @@ namespace LoyaltyConsole.Data
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         public DbSet<AppUser> Users { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<CustomerImage> CustomerImages { get; set; }
         public DbSet<CashbackBalance> CashbackBalances { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
 

@@ -2,8 +2,8 @@
 {
     public class CashbackBalance : BaseModel
     {
-        public string AppUserId { get; set; }
-        public AppUser AppUser { get; set; }
+        public string CustomerId { get; set; }
+        public Customer Customer { get; set; }
 
         public decimal TotalCashback { get; set; }
         public decimal CashbackRedeemed { get; set; }
