@@ -9,7 +9,5 @@ namespace LoyaltyConsole.Core.Models
         public DateTime Birthday { get; set; }
         public GenderType Gender { get; set; }
 
-        public List<Transaction> Transactions { get; set; }
-        public CashbackBalance CashbackBalance { get; set; }
     }
 }

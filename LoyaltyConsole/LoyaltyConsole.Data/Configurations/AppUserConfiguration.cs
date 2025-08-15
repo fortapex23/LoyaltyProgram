@@ -18,13 +18,6 @@ namespace LoyaltyConsole.Data.Configurations
             builder.Property(u => u.Gender)
                 .IsRequired();
 
-            builder.HasOne(u => u.CashbackBalance)
-                .WithOne(cb => cb.AppUser)
-                .HasForeignKey<CashbackBalance>(cb => cb.AppUserId);
-
-            builder.HasMany(u => u.Transactions)
-                .WithOne(t => t.AppUser)
-                .HasForeignKey(t => t.AppUserId);
         }
     }
 }
