@@ -4,7 +4,7 @@ namespace LoyaltyConsole.Core.Models
 {
     public class Transaction : BaseModel
     {
-        public string CustomerId { get; set; }
+        public int CustomerId { get; set; }
         public Customer Customer { get; set; }
 
         public decimal AmountSpent { get; set; }
