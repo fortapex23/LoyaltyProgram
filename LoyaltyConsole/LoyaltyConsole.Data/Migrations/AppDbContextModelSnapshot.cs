@@ -30,15 +30,14 @@ namespace LoyaltyConsole.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AppUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<decimal>("CashbackRedeemed")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -51,10 +50,39 @@ namespace LoyaltyConsole.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserId")
+                    b.HasIndex("CustomerId")
                         .IsUnique();
 
                     b.ToTable("CashbackBalances");
+                });
+
+            modelBuilder.Entity("LoyaltyConsole.Core.Models.Customer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Birthday")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("LoyaltyConsole.Core.Models.Transaction", b =>
@@ -68,10 +96,6 @@ namespace LoyaltyConsole.Data.Migrations
                     b.Property<decimal>("AmountSpent")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("AppUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("Business")
                         .HasColumnType("int");
 
@@ -81,6 +105,9 @@ namespace LoyaltyConsole.Data.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -89,7 +116,7 @@ namespace LoyaltyConsole.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Transactions");
                 });
@@ -321,24 +348,24 @@ namespace LoyaltyConsole.Data.Migrations
 
             modelBuilder.Entity("LoyaltyConsole.Core.Models.CashbackBalance", b =>
                 {
-                    b.HasOne("LoyaltyConsole.Core.Models.AppUser", "AppUser")
+                    b.HasOne("LoyaltyConsole.Core.Models.Customer", "Customer")
                         .WithOne("CashbackBalance")
-                        .HasForeignKey("LoyaltyConsole.Core.Models.CashbackBalance", "AppUserId")
+                        .HasForeignKey("LoyaltyConsole.Core.Models.CashbackBalance", "CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AppUser");
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("LoyaltyConsole.Core.Models.Transaction", b =>
                 {
-                    b.HasOne("LoyaltyConsole.Core.Models.AppUser", "AppUser")
+                    b.HasOne("LoyaltyConsole.Core.Models.Customer", "Customer")
                         .WithMany("Transactions")
-                        .HasForeignKey("AppUserId")
+                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AppUser");
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -392,7 +419,7 @@ namespace LoyaltyConsole.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("LoyaltyConsole.Core.Models.AppUser", b =>
+            modelBuilder.Entity("LoyaltyConsole.Core.Models.Customer", b =>
                 {
                     b.Navigation("CashbackBalance")
                         .IsRequired();

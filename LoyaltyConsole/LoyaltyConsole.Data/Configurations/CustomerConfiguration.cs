@@ -12,10 +12,6 @@ namespace LoyaltyConsole.Data.Configurations
                 .WithOne(cb => cb.Customer)
                 .HasForeignKey<CashbackBalance>(cb => cb.CustomerId);
 
-            builder.HasOne(u => u.CustomerImage)
-                .WithOne(cb => cb.Customer)
-                .HasForeignKey<CustomerImage>(cb => cb.CustomerId);
-
             builder.HasMany(u => u.Transactions)
                 .WithOne(t => t.Customer)
                 .HasForeignKey(t => t.CustomerId);

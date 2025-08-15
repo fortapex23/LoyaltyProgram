@@ -197,20 +197,20 @@ namespace LoyaltyConsole.Business.Implementations
 
             if (member is not null)
             {
-                await _userManager.AddToRoleAsync(appUser, "Client");
+                await _userManager.AddToRoleAsync(appUser, "Admin");
             }
 
-            var cashbackBalance = new CashbackBalance()
-            {
-                AppUserId = appUser.Id,
-                CashbackRedeemed = 0,
-                TotalCashback = 0,
-                CreatedDate = DateTime.Now,
-                UpdatedDate = DateTime.Now,
-            };
+            //var cashbackBalance = new CashbackBalance()
+            //{
+            //    AppUserId = appUser.Id,
+            //    CashbackRedeemed = 0,
+            //    TotalCashback = 0,
+            //    CreatedDate = DateTime.Now,
+            //    UpdatedDate = DateTime.Now,
+            //};
 
-            await _cashbackBalanceRepository.CreateAsync(cashbackBalance);
-            await _cashbackBalanceRepository.CommitAsync();
+            //await _cashbackBalanceRepository.CreateAsync(cashbackBalance);
+            //await _cashbackBalanceRepository.CommitAsync();
 
         }
     }
