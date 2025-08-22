@@ -1,0 +1,1 @@
+C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\obj\Debug\net8.0\staticwebassets.build.json

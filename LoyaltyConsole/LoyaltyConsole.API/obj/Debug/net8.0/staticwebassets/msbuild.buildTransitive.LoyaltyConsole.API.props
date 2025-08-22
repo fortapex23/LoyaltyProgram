@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\LoyaltyConsole.API.props" />
-</Project>

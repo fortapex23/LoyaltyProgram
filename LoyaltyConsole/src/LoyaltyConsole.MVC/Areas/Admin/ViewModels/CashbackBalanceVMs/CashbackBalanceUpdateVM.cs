@@ -2,7 +2,7 @@
 {
     public class CashbackBalanceUpdateVM
     {
-        public string AppUserId { get; set; }
+        public int CustomerId { get; set; }
         public decimal TotalCashback { get; set; }
         public decimal CashbackRedeemed { get; set; }
     }
