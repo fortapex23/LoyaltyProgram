@@ -203,11 +203,6 @@ C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\obj\Deb
 C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\obj\Debug\net8.0\LoyaltyConsole.API.sourcelink.json
 C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\obj\Debug\net8.0\staticwebassets.development.json
-C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\obj\Debug\net8.0\staticwebassets\msbuild.LoyaltyConsole.API.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\obj\Debug\net8.0\staticwebassets\msbuild.build.LoyaltyConsole.API.props
-C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.LoyaltyConsole.API.props
-C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.LoyaltyConsole.API.props
-C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\obj\Debug\net8.0\scopedcss\bundle\LoyaltyConsole.API.styles.css
 C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\obj\Debug\net8.0\LoyaltyC.3ADBEC72.Up2Date
 C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\obj\Debug\net8.0\LoyaltyConsole.API.dll
@@ -238,7 +233,6 @@ C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\bin\Deb
 C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\bin\Debug\net8.0\System.ClientModel.dll
 C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
 C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\bin\Debug\net8.0\System.Drawing.Common.dll
-C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\bin\Debug\net8.0\System.Formats.Asn1.dll
 C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\bin\Debug\net8.0\System.Memory.Data.dll
 C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\bin\Debug\net8.0\System.Runtime.Caching.dll
@@ -278,3 +272,11 @@ C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\bin\Deb
 C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\bin\Debug\net8.0\Newtonsoft.Json.dll
 C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
+C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\bin\Debug\net8.0\LoyaltyConsole.API.staticwebassets.endpoints.json
+C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\obj\Debug\net8.0\rjimswa.dswa.cache.json
+C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
+C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
+C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\obj\Debug\net8.0\staticwebassets.build.json.cache
+C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

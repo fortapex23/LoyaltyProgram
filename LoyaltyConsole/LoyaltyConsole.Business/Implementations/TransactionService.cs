@@ -42,10 +42,10 @@ namespace LoyaltyConsole.Business.Implementations
             await _transactionRepository.CreateAsync(transaction);
             await _transactionRepository.CommitAsync();
 
-            //var balance = _cashbackBalanceRepository.GetByExpression(false, x => x.AppUserId == dto.AppUserId).FirstOrDefault();
-            //if (balance == null) throw new Exception("CashbackBalance not found");
+            var balance = _cashbackBalanceRepository.GetByExpression(false, x => x.CustomerId == dto.CustomerId).FirstOrDefault();
+            if (balance == null) throw new Exception("CashbackBalance not found");
 
-            //balance.TotalCashback += transaction.CashbackEarned;
+            balance.TotalCashback += transaction.CashbackEarned;
 
             await _cashbackBalanceRepository.CommitAsync();
 

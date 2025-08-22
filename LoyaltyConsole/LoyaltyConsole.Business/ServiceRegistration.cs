@@ -14,6 +14,7 @@ namespace LoyaltyConsole.Business
             services.AddScoped<ITransactionService, TransactionService>();
             services.AddScoped<ICashbackBalanceService, CashbackBalanceService>();
             services.AddScoped<ICashbackService, CashbackService>();
+            services.AddScoped<ICustomerService, CustomerService>();
 
         }
     }

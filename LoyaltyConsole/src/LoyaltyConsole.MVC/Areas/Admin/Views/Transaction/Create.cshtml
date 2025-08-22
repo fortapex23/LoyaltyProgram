@@ -1,0 +1,245 @@
+﻿@using LoyaltyConsole.MVC.Areas.Admin.ViewModels.CustomerVMs
+@using LoyaltyConsole.MVC.Areas.Admin.ViewModels.TransactionVMs
+@model TransactionCreateVM
+
+@{
+    List<CustomerGetVM> customers = ViewBag.Customers;
+}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        padding: 40px;
+        background: #f5f5f5;
+    }
+
+    .custom-select {
+        position: relative;
+        width: 250px;
+    }
+
+    .select-input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        cursor: pointer;
+        background: white;
+    }
+
+    .options {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        max-height: 200px;
+        overflow-y: auto;
+        border: 1px solid #ccc;
+        border-top: none;
+        background: white;
+        z-index: 1000;
+        display: none;
+        border-radius: 0 0 6px 6px;
+    }
+
+        .options div {
+            padding: 10px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+            .options div:hover {
+                background: #f0f0f0;
+            }
+
+    .search-box {
+        padding: 10px;
+        border: none;
+        border-bottom: 1px solid #ddd;
+        width: 100%;
+        outline: none;
+        box-sizing: border-box;
+    }
+</style>
+
+<!-- Content Start -->
+<div class="content">
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
+        <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+            <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
+        </a>
+        <a href="#" class="sidebar-toggler flex-shrink-0">
+            <i class="fa fa-bars"></i>
+        </a>
+        <form class="d-none d-md-flex ms-4">
+            <input class="form-control border-0" type="search" placeholder="Search">
+        </form>
+        <div class="navbar-nav align-items-center ms-auto">
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                    <i class="fa fa-envelope me-lg-2"></i>
+                    <span class="d-none d-lg-inline-flex">Message</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                    <a href="#" class="dropdown-item">
+                        <div class="d-flex align-items-center">
+                            <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                            <div class="ms-2">
+                                <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                <small>15 minutes ago</small>
+                            </div>
+                        </div>
+                    </a>
+                    <hr class="dropdown-divider">
+                    <a href="#" class="dropdown-item">
+                        <div class="d-flex align-items-center">
+                            <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                            <div class="ms-2">
+                                <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                <small>15 minutes ago</small>
+                            </div>
+                        </div>
+                    </a>
+                    <hr class="dropdown-divider">
+                    <a href="#" class="dropdown-item">
+                        <div class="d-flex align-items-center">
+                            <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                            <div class="ms-2">
+                                <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                                <small>15 minutes ago</small>
+                            </div>
+                        </div>
+                    </a>
+                    <hr class="dropdown-divider">
+                    <a href="#" class="dropdown-item text-center">See all message</a>
+                </div>
+            </div>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                    <i class="fa fa-bell me-lg-2"></i>
+                    <span class="d-none d-lg-inline-flex">Notificatin</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                    <a href="#" class="dropdown-item">
+                        <h6 class="fw-normal mb-0">Profile updated</h6>
+                        <small>15 minutes ago</small>
+                    </a>
+                    <hr class="dropdown-divider">
+                    <a href="#" class="dropdown-item">
+                        <h6 class="fw-normal mb-0">New user added</h6>
+                        <small>15 minutes ago</small>
+                    </a>
+                    <hr class="dropdown-divider">
+                    <a href="#" class="dropdown-item">
+                        <h6 class="fw-normal mb-0">Password changed</h6>
+                        <small>15 minutes ago</small>
+                    </a>
+                    <hr class="dropdown-divider">
+                    <a href="#" class="dropdown-item text-center">See all notifications</a>
+                </div>
+            </div>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                    <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                    <span class="d-none d-lg-inline-flex">John Doe</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                    <a href="#" class="dropdown-item">My Profile</a>
+                    <a href="#" class="dropdown-item">Settings</a>
+                    <a href="#" class="dropdown-item">Log Out</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+    <!-- Form Start -->
+    <div class="container-fluid pt-4 px-4">
+        <form method="post">
+            <div class="row g-4">
+                <div class="col-sm-12 col-xl-6">
+                    <div class="bg-light rounded h-100 p-4">
+                        <h6 class="mb-4">Create Transaction</h6>
+
+                        <div class="custom-select">
+                            <input type="text" class="select-input" readonly placeholder="Select a customer">
+                            <div class="options">
+                                <input type="text" class="search-box" placeholder="Search...">
+                                @foreach (var cus in customers)
+                                {
+                                    <div>@cus</div>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="AmountSpent" type="text" class="form-control" id="floatingInput"
+                                   placeholder="amount">
+                            <label for="floatingInput">Amount Spent</label>
+                        </div>
+                        <span asp-validation-for="AmountSpent" class="text-danger"></span>
+                        <div class="form-floating mb-3">
+                            <select class="form-control" asp-for="Business">
+                                <option selected disabled>choose Business</option>
+                            </select>
+                        </div>
+                        <span asp-validation-for="Business" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 10px">
+                <button type="submit" class="btn btn-primary">Create</button>
+                <button asp-action="" class="btn btn-secondary">Cancel</button>
+            </div>
+        </form>
+    </div>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <!-- Form End -->
+
+</div>
+<!-- Content End -->
+
+<script>
+    const selectInput = document.querySelector(".select-input");
+    const optionsBox = document.querySelector(".options");
+    const searchBox = document.querySelector(".search-box");
+    const options = optionsBox.querySelectorAll("div");
+
+    // Toggle dropdown
+    selectInput.addEventListener("click", () => {
+      optionsBox.style.display = optionsBox.style.display === "block" ? "none" : "block";
+      searchBox.value = "";
+      filterOptions("");
+    });
+
+    // Select option
+    options.forEach(option => {
+      option.addEventListener("click", () => {
+        if (option !== searchBox) {
+          selectInput.value = option.textContent;
+          optionsBox.style.display = "none";
+        }
+      });
+    });
+
+    // Search filter
+    searchBox.addEventListener("input", () => {
+      const value = searchBox.value.toLowerCase();
+      filterOptions(value);
+    });
+
+    function filterOptions(value) {
+      options.forEach(option => {
+        if (option !== searchBox) {
+          option.style.display = option.textContent.toLowerCase().includes(value) ? "block" : "none";
+        }
+      });
+    }
+
+    // Close dropdown if clicked outside
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest(".custom-select")) {
+        optionsBox.style.display = "none";
+      }
+    });
+</script>

@@ -2,6 +2,6 @@
 
 namespace LoyaltyConsole.Business.DTOs.TransactionDtos
 {
-    public record TransactionGetDto(int Id, string AppUserId, decimal AmountSpent, BusinessTypes Business,
+    public record TransactionGetDto(int Id, int CustomerId, decimal AmountSpent, BusinessTypes Business,
                                     decimal CashbackEarned, DateTime CreatedDate);
 }
