@@ -59,6 +59,8 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
 
         public async Task<IActionResult> Update(int id)
         {
+            ViewBag.Customers = await _crudService.GetAllAsync<List<CustomerGetVM>>("/customers");
+
             TransactionUpdateVM data = null;
 
             try

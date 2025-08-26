@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "LoyaltyConsole.API\\LoyaltyConsole.API.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

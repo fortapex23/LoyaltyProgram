@@ -15,7 +15,7 @@ namespace LoyaltyConsole.MVC.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Home", new { area = "Admin" });
         }
 
         public IActionResult Privacy()

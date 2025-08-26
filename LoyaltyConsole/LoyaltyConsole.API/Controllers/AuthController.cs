@@ -139,10 +139,8 @@ namespace LoyaltyConsole.API.Controllers
         //public async Task<IActionResult> CreateRole()
         //{
         //    IdentityRole role2 = new IdentityRole("Admin");
-        //    IdentityRole role3 = new IdentityRole("Client");
 
         //    await _roleManager.CreateAsync(role2);
-        //    await _roleManager.CreateAsync(role3);
 
         //    return Ok();
         //}
