@@ -29,6 +29,13 @@ namespace LoyaltyConsole.API
                     });
             });
 
+            //var firebaseKeyPath = Path.Combine(builder.Environment.ContentRootPath, "Configs", "firebase-adminsdk.json");
+
+            //FirebaseApp.Create(new AppOptions()
+            //{
+            //    Credential = GoogleCredential.FromFile(firebaseKeyPath)
+            //});
+
             builder.Services.AddControllers().AddFluentValidation(op =>
             {
                 op.RegisterValidatorsFromAssembly(typeof(TransactionCreateDtoValidator).Assembly);

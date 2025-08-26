@@ -7,6 +7,7 @@ namespace LoyaltyConsole.Core.Models
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
 
+        public DateTime TransactionDate { get; set; }
         public decimal AmountSpent { get; set; }
         public BusinessTypes Business { get; set; }
         public decimal CashbackEarned { get; set; }
