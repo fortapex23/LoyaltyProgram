@@ -22,6 +22,13 @@ namespace LoyaltyConsole.Business.Implementations
             _cashbackBalanceRepository = cashbackBalanceRepository;
         }
 
+        public async Task<ICollection<CustomerGetDto>> GetByExpression(bool asnotracking = false, Expression<Func<Customer, bool>>? expression = null, params string[] includes)
+        {
+            var customers = await _customerRepository.GetByExpression(asnotracking, expression, includes).ToListAsync();
+
+            return _mapper.Map<ICollection<CustomerGetDto>>(customers);
+        }
+
         public Task<bool> IsExist(Expression<Func<Customer, bool>> expression)
         {
             return _customerRepository.Table.AnyAsync(expression);
@@ -32,6 +39,9 @@ namespace LoyaltyConsole.Business.Implementations
             var customer = _mapper.Map<Customer>(dto);
             customer.CreatedDate = DateTime.Now;
             customer.UpdatedDate = DateTime.Now;
+
+            await _customerRepository.CreateAsync(customer);
+            await _customerRepository.CommitAsync();
 
             var cashbackBalance = new CashbackBalance()
             {
@@ -45,9 +55,6 @@ namespace LoyaltyConsole.Business.Implementations
             await _cashbackBalanceRepository.CreateAsync(cashbackBalance);
             await _cashbackBalanceRepository.CommitAsync();
 
-            await _customerRepository.CreateAsync(customer);
-            await _customerRepository.CommitAsync();
-
             return _mapper.Map<CustomerGetDto>(customer);
         }
 
@@ -60,14 +67,6 @@ namespace LoyaltyConsole.Business.Implementations
 
             _customerRepository.Delete(customer);
             await _customerRepository.CommitAsync();
-        }
-
-
-        public async Task<ICollection<CustomerGetDto>> GetByExpression(bool asnotracking = false, Expression<Func<Customer, bool>>? expression = null, params string[] includes)
-        {
-            var customers = await _customerRepository.GetByExpression(asnotracking, expression, includes).ToListAsync();
-
-            return _mapper.Map<ICollection<CustomerGetDto>>(customers);
         }
 
         public async Task<CustomerGetDto> GetById(int id)

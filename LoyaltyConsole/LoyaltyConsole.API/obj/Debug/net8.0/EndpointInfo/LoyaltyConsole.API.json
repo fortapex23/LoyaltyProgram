@@ -702,6 +702,10 @@
           },
           "business": {
             "$ref": "#/components/schemas/BusinessTypes"
+          },
+          "transactionDate": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "additionalProperties": false
@@ -723,6 +727,10 @@
           "cashbackEarned": {
             "type": "number",
             "format": "double"
+          },
+          "transactionDate": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "additionalProperties": false

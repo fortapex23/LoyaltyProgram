@@ -17,9 +17,17 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var datas = await _crudService.GetAllAsync<List<TransactionGetVM>>("/transactions");
-            return View(datas);
+            var transactions = await _crudService.GetAllAsync<List<TransactionGetVM>>("/transactions");
+            var customers = await _crudService.GetAllAsync<List<CustomerGetVM>>("/customers");
+
+            foreach (var tx in transactions)
+            {
+                tx.Customer = customers.FirstOrDefault(c => c.Id == tx.CustomerId);
+            }
+
+            return View(transactions);
         }
+
 
         public async Task<IActionResult> Create()
         {

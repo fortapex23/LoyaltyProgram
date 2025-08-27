@@ -5,7 +5,7 @@
 @{
     List<CustomerGetVM> customers = ViewBag.Customers;
 }
-
+@* 
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -60,7 +60,7 @@
         outline: none;
         box-sizing: border-box;
     }
-</style>
+</style> *@
 
 <!-- Content Start -->
 <div class="content">
@@ -75,29 +75,47 @@
                     <div class="bg-light rounded h-100 p-4">
                         <h6 class="mb-4">Create Transaction</h6>
 
-                        <div class="custom-select">
+                       @*  <div class="custom-select">
                             <input type="text" class="select-input" readonly placeholder="Select a customer">
                             <div class="options">
-                                <input type="text" class="search-box" placeholder="Search...">
+                                <input type="text" class="search-box" placeholder="search...">
                                 @foreach (var cus in customers)
                                 {
-                                    <div>@cus</div>
+                                    <div>@cus.FullName</div>
                                 }
                             </div>
+                        </div> *@
+
+                        <div class="form-group">
+                            <label for="CustomerId">Select Customer</label>
+                            <select id="CustomerId" name="CustomerId" class="form-control select2">
+                                <option value="">-- Select Customer --</option>
+                                @foreach (var customer in ViewBag.Customers)
+                                {
+                                    <option value="@customer.Id">@customer.FullName</option>
+                                }
+                            </select>
                         </div>
 
                         <div class="form-floating mb-3">
                             <input asp-for="AmountSpent" type="text" class="form-control" id="floatingInput"
                                    placeholder="amount">
                             <label for="floatingInput">Amount Spent</label>
+                            <span asp-validation-for="AmountSpent" class="text-danger"></span>
                         </div>
-                        <span asp-validation-for="AmountSpent" class="text-danger"></span>
                         <div class="form-floating mb-3">
-                            <select class="form-control" asp-for="Business">
-                                <option selected disabled>choose Business</option>
+                            <select asp-for="Business" class="form-control"
+                                    asp-items="Html.GetEnumSelectList<LoyaltyConsole.MVC.Enums.BusinessTypes>()">
+                                <option selected disabled>Choose Business</option>
                             </select>
+                            <label for="Business">Business</label>
+                            <span asp-validation-for="Business" class="text-danger"></span>
                         </div>
-                        <span asp-validation-for="Business" class="text-danger"></span>
+                        <div class="mb-3">
+                            <label class="form-label">TransactionDate</label>
+                            <input asp-for="TransactionDate" class="form-control" style="width: 40%" placeholder=Transaction Date">
+                            <span asp-validation-for="TransactionDate" class="text-danger"></span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -114,46 +132,54 @@
 <!-- Content End -->
 
 <script>
-    const selectInput = document.querySelector(".select-input");
-    const optionsBox = document.querySelector(".options");
-    const searchBox = document.querySelector(".search-box");
-    const options = optionsBox.querySelectorAll("div");
+    // const selectInput = document.querySelector(".select-input");
+    // const optionsBox = document.querySelector(".options");
+    // const searchBox = document.querySelector(".search-box");
+    // const options = optionsBox.querySelectorAll("div");
 
-    // Toggle dropdown
-    selectInput.addEventListener("click", () => {
-      optionsBox.style.display = optionsBox.style.display === "block" ? "none" : "block";
-      searchBox.value = "";
-      filterOptions("");
+    // // Toggle dropdown
+    // selectInput.addEventListener("click", () => {
+    //   optionsBox.style.display = optionsBox.style.display === "block" ? "none" : "block";
+    //   searchBox.value = "";
+    //   filterOptions("");
+    // });
+
+    // // Select option
+    // options.forEach(option => {
+    //   option.addEventListener("click", () => {
+    //     if (option !== searchBox) {
+    //       selectInput.value = option.textContent;
+    //       optionsBox.style.display = "none";
+    //     }
+    //   });
+    // });
+
+    // // Search filter
+    // searchBox.addEventListener("input", () => {
+    //   const value = searchBox.value.toLowerCase();
+    //   filterOptions(value);
+    // });
+
+    // function filterOptions(value) {
+    //   options.forEach(option => {
+    //     if (option !== searchBox) {
+    //       option.style.display = option.textContent.toLowerCase().includes(value) ? "block" : "none";
+    //     }
+    //   });
+    // }
+
+    // // Close dropdown if clicked outside
+    // document.addEventListener("click", (e) => {
+    //   if (!e.target.closest(".custom-select")) {
+    //     optionsBox.style.display = "none";
+    //   }
+    // });
+
+     $(document).ready(function () {
+        $('.select2').select2({
+            placeholder: "Search for a customer",
+            allowClear: true
+        });
     });
 
-    // Select option
-    options.forEach(option => {
-      option.addEventListener("click", () => {
-        if (option !== searchBox) {
-          selectInput.value = option.textContent;
-          optionsBox.style.display = "none";
-        }
-      });
-    });
-
-    // Search filter
-    searchBox.addEventListener("input", () => {
-      const value = searchBox.value.toLowerCase();
-      filterOptions(value);
-    });
-
-    function filterOptions(value) {
-      options.forEach(option => {
-        if (option !== searchBox) {
-          option.style.display = option.textContent.toLowerCase().includes(value) ? "block" : "none";
-        }
-      });
-    }
-
-    // Close dropdown if clicked outside
-    document.addEventListener("click", (e) => {
-      if (!e.target.closest(".custom-select")) {
-        optionsBox.style.display = "none";
-      }
-    });
 </script>
