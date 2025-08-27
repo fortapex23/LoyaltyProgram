@@ -34,14 +34,17 @@
                             <input asp-for="AmountSpent" type="text" class="form-control" id="floatingInput"
                                    placeholder="amount">
                             <label for="floatingInput">Amount Spent</label>
+                            <span asp-validation-for="AmountSpent" class="text-danger"></span>
                         </div>
-                        <span asp-validation-for="AmountSpent" class="text-danger"></span>
                         <div class="form-floating mb-3">
-                            <select class="form-control" asp-for="Business">
-                                <option selected disabled>choose Business</option>
+                            <select asp-for="Business" class="form-control"
+                                    asp-items="Html.GetEnumSelectList<LoyaltyConsole.MVC.Enums.BusinessTypes>()">
+                                <option selected disabled>Choose Business</option>
                             </select>
+                            <label for="Business">Business</label>
+                            <span asp-validation-for="Business" class="text-danger"></span>
                         </div>
-                        <span asp-validation-for="Business" class="text-danger"></span>
+
                     </div>
                 </div>
             </div>

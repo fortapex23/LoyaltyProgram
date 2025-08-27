@@ -47,7 +47,7 @@ namespace LoyaltyConsole.API.Controllers
         {
             return Ok(new ApiResponse<ICollection<CustomerGetDto>>
             {
-                Data = await _customerService.GetByExpression(true, null),
+                Data = await _customerService.GetByExpression(true, null, "CashbackBalance", "Transactions"),
                 ErrorMessage = null,
                 StatusCode = StatusCodes.Status200OK
             });
@@ -80,7 +80,7 @@ namespace LoyaltyConsole.API.Controllers
             CustomerGetDto dto = null;
             try
             {
-                dto = await _customerService.GetSingleByExpression(true, x => x.Id == id);
+                dto = await _customerService.GetSingleByExpression(true, x => x.Id == id, "CashbackBalance", "Transactions");
             }
             catch (Exception ex)
             {
