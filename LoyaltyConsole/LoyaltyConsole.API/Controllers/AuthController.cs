@@ -24,16 +24,16 @@ namespace LoyaltyConsole.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("")]
-        public async Task<IActionResult> GetAll()
-        {
-            return Ok(new ApiResponse<ICollection<UserGetDto>>
-            {
-                Data = await _authService.GetAllUsersAsync(),
-                ErrorMessage = null,
-                StatusCode = StatusCodes.Status200OK
-            });
-        }
+        //[HttpGet("")]
+        //public async Task<IActionResult> GetAll()
+        //{
+        //    return Ok(new ApiResponse<ICollection<UserGetDto>>
+        //    {
+        //        Data = await _authService.GetAllUsersAsync(),
+        //        ErrorMessage = null,
+        //        StatusCode = StatusCodes.Status200OK
+        //    });
+        //}
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
@@ -53,6 +53,25 @@ namespace LoyaltyConsole.API.Controllers
                 Data = dto,
                 StatusCode = StatusCodes.Status200OK
             });
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(string id, UserEditDto dto)
+        {
+            try
+            {
+                await _authService.UpdateUserAsync(id, dto);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ApiResponse<UserEditDto>
+                {
+                    StatusCode = StatusCodes.Status400BadRequest,
+                    ErrorMessage = ex.Message,
+                    Data = null
+                });
+            }
+            return NoContent();
         }
 
         [HttpPost("[action]")]
@@ -135,15 +154,15 @@ namespace LoyaltyConsole.API.Controllers
         //}
 
 
-        //[HttpGet("")]
-        //public async Task<IActionResult> CreateRole()
-        //{
-        //    IdentityRole role2 = new IdentityRole("Admin");
+        [HttpGet("")]
+        public async Task<IActionResult> CreateRole()
+        {
+            IdentityRole role = new IdentityRole("SuperAdmin");
 
-        //    await _roleManager.CreateAsync(role2);
+            await _roleManager.CreateAsync(role);
 
-        //    return Ok();
-        //}
+            return Ok();
+        }
 
     }
 }

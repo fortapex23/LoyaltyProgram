@@ -39,12 +39,42 @@ namespace LoyaltyConsole.Business.Implementations
                 user.FullName,
                 user.Email,
                 user.PhoneNumber,
+                user.Status,
                 user.Birthday,
                 user.Gender
             )).ToList();
 
             return userDtos;
         }
+        public async Task UpdateUserAsync(string id, UserEditDto dto)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+
+            if (user is null)
+            {
+                throw new NullReferenceException($"{id} not found.");
+            }
+
+            user.FullName = dto.FullName;
+            user.Email = dto.Email;
+            user.PhoneNumber = dto.PhoneNumber;
+            user.Status = dto.Status;
+            user.Birthday = dto.Birthday;
+            user.Gender = dto.Gender;
+
+            if (user.Birthday > DateTime.Now)
+            {
+                throw new Exception("Invalid Birthday");
+            }
+
+            var result = await _userManager.UpdateAsync(user);
+
+            if (!result.Succeeded)
+            {
+                throw new Exception($"Failed to update");
+            }
+        }
+
 
         public async Task<UserGetDto> GetById(string id)
         {
@@ -60,6 +90,7 @@ namespace LoyaltyConsole.Business.Implementations
                 user.FullName,
                 user.Email,
                 user.PhoneNumber,
+                user.Status,
                 user.Birthday,
                 user.Gender
             );

@@ -4,7 +4,7 @@ using LoyaltyConsole.Core.Enums;
 namespace LoyaltyConsole.Business.DTOs.UserDtos
 {
     public record UserRegisterDto(string FullName, string Email, string Password, string ConfirmPassword,
-					string PhoneNumber, DateTime Birthday, GenderType Gender);
+					string PhoneNumber, DateTime Birthday, GenderType Gender, AdminStatus Status);
 
 	public class UserRegisterDtoValidator : AbstractValidator<UserRegisterDto>
 	{
