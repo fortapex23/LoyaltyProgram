@@ -47,6 +47,24 @@ namespace LoyaltyConsole.Business.Implementations
 
             return userDtos;
         }
+
+        public async Task<ICollection<UserGetDto>> GetAllAdminsAsync()
+        {
+            var users = await _userManager.GetUsersInRoleAsync("Admin");
+
+            var userDtos = users.Select(user => new UserGetDto(
+                user.Id,
+                user.FullName,
+                user.Email,
+                user.PhoneNumber,
+                user.Status,
+                user.Birthday,
+                user.Gender
+            )).ToList();
+
+            return userDtos;
+        }
+
         public async Task UpdateUserAsync(string id, UserEditDto dto)
         {
             var user = await _userManager.FindByIdAsync(id);
@@ -99,6 +117,16 @@ namespace LoyaltyConsole.Business.Implementations
             return userDto;
         }
 
+        public async Task UpdateStatusAsync(string id, AdminStatus status)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null) throw new Exception("User not found");
+
+            user.Status = status;
+            await _userManager.UpdateAsync(user);
+        }
+
+
         public async Task<TokenResponseDto> AdminLogin(UserLoginDto dto)
         {
             AppUser appUser = null;
@@ -146,7 +174,7 @@ namespace LoyaltyConsole.Business.Implementations
             }
 
             claims.AddRange(roles.Select(x => new Claim(ClaimTypes.Role, x)));
-            DateTime expiredt = DateTime.UtcNow.AddMinutes(30);
+            DateTime expiredt = DateTime.UtcNow.AddHours(1);
             string secretkey = _configuration.GetSection("JWT:secretKey").Value;
 
             SymmetricSecurityKey symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretkey));

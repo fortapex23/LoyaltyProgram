@@ -3,6 +3,7 @@
     public class CustomerUpdateVM
     {
         public string FullName { get; set; }
+        public double Cashback { get; set; }
         public DateTime Birthday { get; set; }
     }
 }

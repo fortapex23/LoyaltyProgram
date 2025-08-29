@@ -63,7 +63,6 @@ namespace LoyaltyConsole.Business.Implementations
             await _transactionRepository.CommitAsync();
         }
 
-
         public async Task<ICollection<TransactionGetDto>> GetByExpression(bool asnotracking = false, Expression<Func<Transaction, bool>>? expression = null, params string[] includes)
         {
             var transactions = await _transactionRepository.GetByExpression(asnotracking, expression, includes).ToListAsync();
