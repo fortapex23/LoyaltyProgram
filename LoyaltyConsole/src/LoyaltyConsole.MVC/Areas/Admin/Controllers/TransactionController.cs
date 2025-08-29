@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class TransactionController : Controller
+    public class TransactionController : BaseController
     {
         private readonly ICrudService _crudService;
 
@@ -17,6 +17,13 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
+            SetFullName();
+
+            if (ViewBag.Role is null)
+            {
+                return RedirectToAction("AdminLogin", "Auth", new { area = "Admin" });
+            }
+
             var transactions = await _crudService.GetAllAsync<List<TransactionGetVM>>("/transactions");
             var customers = await _crudService.GetAllAsync<List<CustomerGetVM>>("/customers");
 
@@ -31,6 +38,13 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
 
         public async Task<IActionResult> Create()
         {
+            SetFullName();
+
+            if (ViewBag.Role is null)
+            {
+                return RedirectToAction("AdminLogin", "Auth", new { area = "Admin" });
+            }
+
             ViewBag.Customers = await _crudService.GetAllAsync<List<CustomerGetVM>>("/customers");
 
             return View();
@@ -53,6 +67,13 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
+            SetFullName();
+
+            if (ViewBag.Role is null)
+            {
+                return RedirectToAction("AdminLogin", "Auth", new { area = "Admin" });
+            }
+
             try
             {
                 await _crudService.Delete<object>($"/transactions/{id}", id);
@@ -67,6 +88,13 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
 
         public async Task<IActionResult> Update(int id)
         {
+            SetFullName();
+
+            if (ViewBag.Role is null)
+            {
+                return RedirectToAction("AdminLogin", "Auth", new { area = "Admin" });
+            }
+
             ViewBag.Customers = await _crudService.GetAllAsync<List<CustomerGetVM>>("/customers");
 
             TransactionUpdateVM data = null;
@@ -87,6 +115,8 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(int id, TransactionUpdateVM vm)
         {
+            ViewBag.Customers = await _crudService.GetAllAsync<List<CustomerGetVM>>("/customers");
+
             try
             {
                 await _crudService.Update($"/Transactions/{id}", vm);

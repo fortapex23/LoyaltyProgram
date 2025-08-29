@@ -24,16 +24,40 @@ namespace LoyaltyConsole.API.Controllers
             _userManager = userManager;
         }
 
-        //[HttpGet("")]
-        //public async Task<IActionResult> GetAll()
-        //{
-        //    return Ok(new ApiResponse<ICollection<UserGetDto>>
-        //    {
-        //        Data = await _authService.GetAllUsersAsync(),
-        //        ErrorMessage = null,
-        //        StatusCode = StatusCodes.Status200OK
-        //    });
-        //}
+        [HttpPost("[action]")]
+        public async Task<IActionResult> AdminLogin(UserLoginDto dto)
+        {
+            TokenResponseDto rDto = null;
+            try
+            {
+                rDto = await _authService.AdminLogin(dto);
+                return Ok(rDto);
+            }
+            catch (Exception ex) when (ex.Message == "Invalid credentials")
+            {
+                return BadRequest(new ApiResponse<string>
+                {
+                    Data = null,
+                    ErrorMessage = "Invalid email or password",
+                    StatusCode = StatusCodes.Status400BadRequest
+                });
+            }
+            catch (Exception)
+            {
+                return BadRequest("An error occurred");
+            }
+        }
+
+        [HttpGet("")]
+        public async Task<IActionResult> GetAll()
+        {
+            return Ok(new ApiResponse<ICollection<UserGetDto>>
+            {
+                Data = await _authService.GetAllUsersAsync(),
+                ErrorMessage = null,
+                StatusCode = StatusCodes.Status200OK
+            });
+        }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
@@ -93,30 +117,6 @@ namespace LoyaltyConsole.API.Controllers
             return Ok();
         }
 
-        [HttpPost("[action]")]
-        public async Task<IActionResult> AdminLogin(UserLoginDto dto)
-        {
-            TokenResponseDto rDto = null;
-            try
-            {
-                rDto = await _authService.AdminLogin(dto);
-                return Ok(rDto);
-            }
-            catch (Exception ex) when (ex.Message == "Invalid credentials")
-            {
-                return BadRequest(new ApiResponse<string>
-                {
-                    Data = null,
-                    ErrorMessage = "Invalid email or password",
-                    StatusCode = StatusCodes.Status400BadRequest
-                });
-            }
-            catch (Exception)
-            {
-                return BadRequest("An error occurred");
-            }
-        }
-
         //[HttpPost("[action]")]
         //public async Task<IActionResult> Login(UserLoginDto dto)
         //{
@@ -154,15 +154,15 @@ namespace LoyaltyConsole.API.Controllers
         //}
 
 
-        [HttpGet("")]
-        public async Task<IActionResult> CreateRole()
-        {
-            IdentityRole role = new IdentityRole("SuperAdmin");
+        //[HttpGet("")]
+        //public async Task<IActionResult> CreateRole()
+        //{
+        //    IdentityRole role = new IdentityRole("SuperAdmin");
 
-            await _roleManager.CreateAsync(role);
+        //    await _roleManager.CreateAsync(role);
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
 
     }
 }

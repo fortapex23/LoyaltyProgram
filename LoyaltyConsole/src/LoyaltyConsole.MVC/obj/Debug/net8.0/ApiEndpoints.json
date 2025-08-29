@@ -27,6 +27,27 @@
   },
   {
     "ContainingType": "LoyaltyConsole.API.Controllers.AuthController",
+    "Method": "Update",
+    "RelativePath": "api/Auth/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "LoyaltyConsole.Business.DTOs.UserDtos.UserEditDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LoyaltyConsole.API.Controllers.AuthController",
     "Method": "AdminLogin",
     "RelativePath": "api/Auth/AdminLogin",
     "HttpMethod": "POST",

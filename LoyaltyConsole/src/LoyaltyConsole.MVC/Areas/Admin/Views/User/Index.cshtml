@@ -1,0 +1,57 @@
+﻿@using LoyaltyConsole.MVC.Areas.Admin.ViewModels.AuthVMs
+
+@model List<AuthGetVM>
+@{
+    int count = 0;
+}
+
+<!-- Content Start -->
+<div class="content">
+    <!-- Navbar Start -->
+    <!-- Navbar End -->
+    <!-- Table Start -->
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="bg-light rounded h-100 p-4">
+                    <div style="display: flex; align-items: center;">
+                        <h6 class="mb-0">ADMINS</h6>
+                    </div>
+                    <div style="margin-top: 10px" class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Birthday</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var rew in Model)
+                                {
+                                    count++;
+                                    <tr>
+                                        <td>@count</td>
+                                        <td>@rew.FullName</td>
+                                        <td>@rew.Email</td>
+                                        <td>@rew.BirthDay</td>
+                                        <td>@rew.Status</td>
+                                        <td>
+                                            <a asp-action="ApproveAdmin" asp-route-id="@rew.AppUserId" class="btn btn-primary">approve</a>
+                                            <a asp-action="RejectAdmin" asp-route-id="@rew.AppUserId" class="btn btn-danger">reject</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Table End -->
+</div>
+<!-- Content End -->

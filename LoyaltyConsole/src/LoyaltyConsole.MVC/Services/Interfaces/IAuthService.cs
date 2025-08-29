@@ -1,4 +1,4 @@
-﻿using LoyaltyConsole.MVC.ViewModels.AuthVMs;
+﻿using LoyaltyConsole.MVC.Areas.Admin.ViewModels.AuthVMs;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 
 namespace LoyaltyConsole.MVC.Services.Interfaces
