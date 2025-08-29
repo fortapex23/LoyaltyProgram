@@ -11,11 +11,11 @@ namespace LoyaltyConsole.MVC
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddAuthentication("Cookies")
-            .AddCookie("Cookies", options =>
-            {
-                options.LoginPath = "/Auth/Login";
-            });
+            //builder.Services.AddAuthentication("Cookies")
+            //.AddCookie("Cookies", options =>
+            //{
+            //    options.LoginPath = "Admin/Auth/AdminLogin";
+            //});
 
             builder.Services.AddRegisterService();
             builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();

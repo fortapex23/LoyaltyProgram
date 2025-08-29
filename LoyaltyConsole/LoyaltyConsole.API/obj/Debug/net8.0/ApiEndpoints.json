@@ -1,7 +1,7 @@
 [
   {
     "ContainingType": "LoyaltyConsole.API.Controllers.AuthController",
-    "Method": "CreateRole",
+    "Method": "GetAll",
     "RelativePath": "api/Auth",
     "HttpMethod": "GET",
     "IsController": true,

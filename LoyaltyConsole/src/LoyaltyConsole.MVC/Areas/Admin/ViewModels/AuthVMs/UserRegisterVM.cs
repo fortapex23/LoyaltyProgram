@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using LoyaltyConsole.MVC.Enums;
 
-namespace LoyaltyConsole.MVC.ViewModels.AuthVMs
+namespace LoyaltyConsole.MVC.Areas.Admin.ViewModels.AuthVMs
 {
     public class UserRegisterVM
     {
@@ -24,5 +24,6 @@ namespace LoyaltyConsole.MVC.ViewModels.AuthVMs
         [Required]
         [Compare("Password", ErrorMessage = "The password and confirm password dont match.")]
         public string ConfirmPassword { get; set; }
+        public AdminStatus Status { get; set; }
     }
 }

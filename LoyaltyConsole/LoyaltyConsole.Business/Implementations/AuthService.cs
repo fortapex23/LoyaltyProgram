@@ -5,6 +5,7 @@ using LoyaltyConsole.Business.DTOs.CashbackBalanceDtos;
 using LoyaltyConsole.Business.DTOs.TokenDtos;
 using LoyaltyConsole.Business.DTOs.UserDtos;
 using LoyaltyConsole.Business.Interfaces;
+using LoyaltyConsole.Core.Enums;
 using LoyaltyConsole.Core.Models;
 using LoyaltyConsole.Core.Repositories;
 using Microsoft.AspNetCore.Identity;
@@ -98,53 +99,6 @@ namespace LoyaltyConsole.Business.Implementations
             return userDto;
         }
 
-        //public async Task<TokenResponseDto> Login(UserLoginDto dto)
-        //{
-        //    AppUser appUser = null;
-
-        //    appUser = await _userManager.FindByEmailAsync(dto.Email);
-
-        //    if (appUser == null)
-        //    {
-        //        throw new Exception("Invalid credentials");
-        //    }
-
-        //    var result = await _signInManager.CheckPasswordSignInAsync(appUser, dto.Password, dto.RememberMe);
-
-        //    if (!result.Succeeded)
-        //    {
-        //        throw new Exception("Invalid credentials");
-        //    }
-
-        //    var roles = await _userManager.GetRolesAsync(appUser);
-
-        //    List<Claim> claims = new List<Claim>()
-        //    {
-        //        new Claim(ClaimTypes.NameIdentifier, appUser.Id),
-        //        new Claim(ClaimTypes.Name, appUser.FullName),
-        //    };
-
-        //    claims.AddRange(roles.Select(x => new Claim(ClaimTypes.Role, x)));
-        //    DateTime expiredt = DateTime.UtcNow.AddHours(1);
-        //    string secretkey = _configuration.GetSection("JWT:secretKey").Value;
-
-        //    SymmetricSecurityKey symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretkey));
-        //    SigningCredentials signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
-
-        //    JwtSecurityToken jwtSecurityToken = new JwtSecurityToken(
-        //        signingCredentials: signingCredentials,
-        //        claims: claims,
-        //        audience: _configuration.GetSection("JWT:audience").Value,
-        //        issuer: _configuration.GetSection("JWT:issuer").Value,
-        //        expires: expiredt,
-        //        notBefore: DateTime.UtcNow
-        //        );
-
-        //    string token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
-
-        //    return new TokenResponseDto(token, expiredt);
-        //}
-
         public async Task<TokenResponseDto> AdminLogin(UserLoginDto dto)
         {
             AppUser appUser = null;
@@ -163,11 +117,16 @@ namespace LoyaltyConsole.Business.Implementations
                 throw new Exception("Invalid credentials");
             }
 
+            if (appUser.Status == AdminStatus.Pending || appUser.Status == AdminStatus.Rejected)
+            {
+                throw new Exception("you must be confirmed as an admin");
+            }
+
             var roles = await _userManager.GetRolesAsync(appUser);
 
-            if (!roles.Contains("Admin"))
+            if (!roles.Contains("Admin") && !roles.Contains("SuperAdmin"))
             {
-                throw new Exception("You need to be an Admin to log in");
+                throw new Exception("You must be an admin to log in");
             }
 
             List<Claim> claims = new List<Claim>()
@@ -179,6 +138,11 @@ namespace LoyaltyConsole.Business.Implementations
             if (roles.Contains("Admin"))
             {
                 claims.Add(new Claim(ClaimTypes.Role, "Admin"));
+            }
+
+            if (roles.Contains("SuperAdmin"))
+            {
+                claims.Add(new Claim(ClaimTypes.Role, "SuperAdmin"));
             }
 
             claims.AddRange(roles.Select(x => new Claim(ClaimTypes.Role, x)));

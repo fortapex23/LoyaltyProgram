@@ -1,6 +1,6 @@
 ﻿using LoyaltyConsole.MVC.ApiResponseMessages;
+using LoyaltyConsole.MVC.Areas.Admin.ViewModels.AuthVMs;
 using LoyaltyConsole.MVC.Services.Interfaces;
-using LoyaltyConsole.MVC.ViewModels.AuthVMs;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 using RestSharp;
 

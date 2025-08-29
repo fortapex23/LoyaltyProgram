@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class CustomerController : Controller
+    public class CustomerController : BaseController
     {
         private readonly ICrudService _crudService;
 
@@ -16,12 +16,26 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
+            SetFullName();
+
+            if (ViewBag.Role is null)
+            {
+                return RedirectToAction("AdminLogin", "Auth", new { area = "Admin" });
+            }
+
             var datas = await _crudService.GetAllAsync<List<CustomerGetVM>>("/customers");
             return View(datas);
         }
 
         public IActionResult Create()
         {
+            SetFullName();
+
+            if (ViewBag.Role is null)
+            {
+                return RedirectToAction("AdminLogin", "Auth", new { area = "Admin" });
+            }
+
             return View();
         }
 
@@ -42,6 +56,13 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
+            SetFullName();
+
+            if (ViewBag.Role is null)
+            {
+                return RedirectToAction("AdminLogin", "Auth", new { area = "Admin" });
+            }
+
             try
             {
                 await _crudService.Delete<object>($"/customers/{id}", id);
@@ -56,6 +77,13 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
 
         public async Task<IActionResult> Update(int id)
         {
+            SetFullName();
+
+            if (ViewBag.Role is null)
+            {
+                return RedirectToAction("AdminLogin", "Auth", new { area = "Admin" });
+            }
+
             CustomerUpdateVM data = null;
 
             try
