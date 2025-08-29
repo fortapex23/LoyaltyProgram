@@ -19,8 +19,8 @@
                     <div class="bg-light rounded h-100 p-4">
                         <h6 class="mb-4">Update Transaction</h6>
 
-                        <div class="form-group">
-                            @* <label for="CustomerId">Select Customer</label> *@
+                        @* <div class="form-group">
+                            <label for="CustomerId">Select Customer</label>
                             <select id="CustomerId" name="CustomerId" class="form-control select2">
                                 <option value="">-- Select Customer --</option>
                                 @foreach (var customer in ViewBag.Customers)
@@ -28,7 +28,17 @@
                                     <option value="@customer.Id">@customer.FullName</option>
                                 }
                             </select>
+                        </div> *@
+
+                        <div class="form-group">
+                            <label for="CustomerId">Customer</label>
+
+                            <input type="text" class="form-control" value="@customers.FirstOrDefault(c => c.Id == Model.CustomerId)?.FullName" readonly />
+
+                            <input type="hidden" asp-for="CustomerId" />
                         </div>
+
+
                         <div style="margin-top: 20px" class="form-floating mb-3">
                             <input asp-for="AmountSpent" type="text" class="form-control" id="floatingInput"
                                    placeholder="amount">

@@ -1,6 +1,7 @@
 ﻿@using LoyaltyConsole.MVC.Areas.Admin.ViewModels.AuthVMs
 
 @model List<AuthGetVM>
+
 @{
     int count = 0;
 }
@@ -37,10 +38,10 @@
                                         <td>@count</td>
                                         <td>@rew.FullName</td>
                                         <td>@rew.Email</td>
-                                        <td>@rew.BirthDay</td>
+                                        <td>@rew.BirthDay.ToString("dd/ MM/ yyyy")</td>
                                         <td>@rew.Status</td>
                                         <td>
-                                            <a asp-action="ApproveAdmin" asp-route-id="@rew.AppUserId" class="btn btn-primary">approve</a>
+                                            <a asp-action="ApproveAdmin" asp-route-id="@rew.AppUserId" class="btn btn-success">approve</a>
                                             <a asp-action="RejectAdmin" asp-route-id="@rew.AppUserId" class="btn btn-danger">reject</a>
                                         </td>
                                     </tr>

@@ -72,7 +72,7 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
 
                 if (data)
                 {
-                    return RedirectToAction("Login");
+                    return RedirectToAction("AdminLogin");
                 }
                 else
                 {

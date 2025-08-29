@@ -10,11 +10,9 @@ namespace LoyaltyConsole.MVC.Areas.Admin.ViewModels.AuthVMs
         [Required]
         public string PhoneNumber { get; set; }
         [Required]
-        public DateTime BirthDate { get; set; }
+        public DateTime Birthday { get; set; }
         [Required]
         public GenderType Gender { get; set; }
-        [Required]
-        public string PassportNumber { get; set; }
         [Required]
         [EmailAddress]
         public string Email { get; set; }
@@ -24,6 +22,6 @@ namespace LoyaltyConsole.MVC.Areas.Admin.ViewModels.AuthVMs
         [Required]
         [Compare("Password", ErrorMessage = "The password and confirm password dont match.")]
         public string ConfirmPassword { get; set; }
-        public AdminStatus Status { get; set; }
+        public AdminStatus Status { get; set; } = AdminStatus.Pending;
     }
 }

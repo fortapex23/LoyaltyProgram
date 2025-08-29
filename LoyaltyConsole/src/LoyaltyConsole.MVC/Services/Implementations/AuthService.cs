@@ -1,7 +1,5 @@
-﻿using LoyaltyConsole.MVC.ApiResponseMessages;
-using LoyaltyConsole.MVC.Areas.Admin.ViewModels.AuthVMs;
+﻿using LoyaltyConsole.MVC.Areas.Admin.ViewModels.AuthVMs;
 using LoyaltyConsole.MVC.Services.Interfaces;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 using RestSharp;
 
 namespace LoyaltyConsole.MVC.Services.Implementations
@@ -33,6 +31,26 @@ namespace LoyaltyConsole.MVC.Services.Implementations
 
             return response.Data;
         }
+
+        public async Task<bool> Update(string endpoint, object body = null)
+        {
+            var request = new RestRequest(endpoint, Method.Put);
+
+            if (body != null)
+            {
+                request.AddJsonBody(body);
+            }
+
+            var response = await _restClient.ExecuteAsync(request);
+
+            if (!response.IsSuccessful)
+            {
+                throw new Exception($"Update failed: {response.Content}");
+            }
+
+            return true;
+        }
+
 
         public async Task<LoginResponseVM> Login(UserLoginVM vm)
         {

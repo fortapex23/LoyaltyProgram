@@ -2,6 +2,7 @@
 using LoyaltyConsole.Business.DTOs.TokenDtos;
 using LoyaltyConsole.Business.DTOs.UserDtos;
 using LoyaltyConsole.Business.Interfaces;
+using LoyaltyConsole.Core.Enums;
 using LoyaltyConsole.Core.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -59,6 +60,17 @@ namespace LoyaltyConsole.API.Controllers
             });
         }
 
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetAllAdmins()
+        {
+            return Ok(new ApiResponse<ICollection<UserGetDto>>
+            {
+                Data = await _authService.GetAllAdminsAsync(),
+                ErrorMessage = null,
+                StatusCode = StatusCodes.Status200OK
+            });
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
@@ -77,6 +89,25 @@ namespace LoyaltyConsole.API.Controllers
                 Data = dto,
                 StatusCode = StatusCodes.Status200OK
             });
+        }
+
+        [HttpPatch("{id}/status")]
+        public async Task<IActionResult> UpdateStatus(string id, AdminStatus status)
+        {
+            try
+            {
+                await _authService.UpdateStatusAsync(id, status);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ApiResponse<string>
+                {
+                    StatusCode = StatusCodes.Status400BadRequest,
+                    ErrorMessage = ex.Message,
+                    Data = null
+                });
+            }
         }
 
         [HttpPut("{id}")]
