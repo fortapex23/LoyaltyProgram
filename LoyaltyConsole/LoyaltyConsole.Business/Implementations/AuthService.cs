@@ -174,7 +174,7 @@ namespace LoyaltyConsole.Business.Implementations
             }
 
             claims.AddRange(roles.Select(x => new Claim(ClaimTypes.Role, x)));
-            DateTime expiredt = DateTime.UtcNow.AddHours(1);
+            DateTime expiredt = DateTime.UtcNow.AddHours(6);
             string secretkey = _configuration.GetSection("JWT:secretKey").Value;
 
             SymmetricSecurityKey symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretkey));

@@ -23,10 +23,9 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
         {
             SetFullName();
 
-            if (ViewBag.Role is null)
-            {
-                return RedirectToAction("AdminLogin", "Auth", new { area = "Admin" });
-            }
+            if (ViewBag.Role is null) return RedirectToAction("AdminLogin", "Auth", new { area = "Admin" });
+
+            if (ViewBag.Role != "SuperAdmin") return RedirectToAction("home", "Index", new { area = "Admin" });
 
             var datas = await _crudService.GetAllAsync<List<AuthGetVM>>("/auth/GetAllAdmins");
             return View(datas);
@@ -36,6 +35,8 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
         {
             SetFullName();
             if (ViewBag.Role is null) return RedirectToAction("AdminLogin", "Auth", new { area = "Admin" });
+
+            if (ViewBag.Role != "SuperAdmin") return RedirectToAction("home", "Index", new { area = "Admin" });
 
             var user = await _crudService.GetByStringIdAsync<AuthGetVM>($"/auth/{id}", id);
             if (user == null) return NotFound();
@@ -61,12 +62,29 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-
         public async Task<IActionResult> RejectAdmin(string id)
         {
+            SetFullName();
+            if (ViewBag.Role is null) return RedirectToAction("AdminLogin", "Auth", new { area = "Admin" });
+
+            if (ViewBag.Role != "SuperAdmin") return RedirectToAction("home", "Index", new { area = "Admin" });
+
+            var user = await _crudService.GetByStringIdAsync<AuthGetVM>($"/auth/{id}", id);
+            if (user == null) return NotFound();
+
+            var vm = new AuthEditVM
+            {
+                Status = AdminStatus.Rejected,
+                FullName = user.FullName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                BirthDay = user.BirthDay,
+                Gender = user.Gender
+            };
+
             try
             {
-                await _crudService.Update($"/auth/{id}/status", new { status = AdminStatus.Rejected });
+                await _crudService.Update($"/auth/{id}", vm);
             }
             catch
             {
