@@ -27,7 +27,9 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Birthday</th>
-                                    <th scope="col">Available Cashback</th>
+                                    <th scope="col">Gained</th>
+                                    <th scope="col">Redeemed</th>
+                                    <th scope="col">Available</th>
                                     <th scope="col">Actions</th>
                                 </tr>
                             </thead>
@@ -40,7 +42,10 @@
                                         <td>@rew.FullName</td>
                                         <td>@rew.Birthday.ToString("dd/ MM/ yyyy")</td>
                                         <td>@rew.CashbackBalance.TotalCashback</td>
+                                        <td>@rew.CashbackBalance.CashbackRedeemed</td>
+                                        <td>@rew.CashbackBalance.CashbackAvailable</td>
                                         <td>
+                                            <a asp-controller="cashbackbalance" asp-action="update" asp-route-id="@rew.CashbackBalance.Id" class="btn btn-warning">balance</a>
                                             <a asp-action="Update" asp-route-id="@rew.Id" class="btn btn-primary">edit</a>
                                             <a asp-action="Delete" asp-route-id="@rew.Id" class="btn btn-danger">remove</a>
                                         </td>
@@ -56,3 +61,7 @@
     <!-- Table End -->
 </div>
 <!-- Content End -->
+<!-- Button trigger modal -->
+
+
+

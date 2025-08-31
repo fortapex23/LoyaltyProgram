@@ -1,4 +1,5 @@
-﻿using LoyaltyConsole.MVC.Areas.Admin.ViewModels.AuthVMs;
+﻿using LoyaltyConsole.Business.DTOs.UserDtos;
+using LoyaltyConsole.MVC.Areas.Admin.ViewModels.AuthVMs;
 using LoyaltyConsole.MVC.Areas.Admin.ViewModels.CustomerVMs;
 using LoyaltyConsole.MVC.Enums;
 using LoyaltyConsole.MVC.Services.Interfaces;
@@ -33,34 +34,46 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
 
         public async Task<IActionResult> ApproveAdmin(string id)
         {
+            SetFullName();
+            if (ViewBag.Role is null) return RedirectToAction("AdminLogin", "Auth", new { area = "Admin" });
+
+            var user = await _crudService.GetByStringIdAsync<AuthGetVM>($"/auth/{id}", id);
+            if (user == null) return NotFound();
+
+            var vm = new AuthEditVM
+            {
+                Status = AdminStatus.Approved,
+                FullName = user.FullName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                BirthDay = user.BirthDay,
+                Gender = user.Gender
+            };
+
             try
             {
-                await _authService.Update($"/auth/{id}/status", new AuthEditVM(AdminStatus.Approved));
+                await _crudService.Update($"/auth/{id}", vm);
             }
             catch
             {
                 ModelState.AddModelError("", "Error approving admin");
-                return RedirectToAction("Index");
             }
-
             return RedirectToAction("Index");
         }
+
 
         public async Task<IActionResult> RejectAdmin(string id)
         {
             try
             {
-                await _authService.Update($"/auth/{id}/status", new AuthEditVM(AdminStatus.Rejected));
+                await _crudService.Update($"/auth/{id}/status", new { status = AdminStatus.Rejected });
             }
             catch
             {
                 ModelState.AddModelError("", "Error rejecting admin");
-                return RedirectToAction("Index");
             }
-
             return RedirectToAction("Index");
         }
-
 
     }
 }

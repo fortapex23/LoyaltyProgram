@@ -2,8 +2,14 @@
 
 namespace LoyaltyConsole.MVC.Areas.Admin.ViewModels.AuthVMs
 {
-    public record AuthEditVM(AdminStatus Status); 
-    
-    //string FullName, string Email, string PassportNumber, string PhoneNumber,
-    //                        DateTime BirthDate, GenderType Gender);
+    public class AuthEditVM
+    {
+        public AdminStatus Status { get; set; }
+        public string FullName { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public DateTime BirthDay { get; set; }
+        public GenderType Gender { get; set; }
+    }
+
 }
