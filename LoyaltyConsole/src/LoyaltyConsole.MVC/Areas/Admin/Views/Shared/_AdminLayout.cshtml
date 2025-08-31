@@ -65,8 +65,8 @@
                 </div>
                 <div class="navbar-nav w-100">
                     <a asp-controller="home" asp-action="" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <a asp-controller="transaction" asp-action="" class="nav-item nav-link"><i class="fa-solid fa-money-check-dollar"></i> Transactions</a>
                     <a asp-controller="customer" asp-action="" class="nav-item nav-link"><i class="fa-solid fa-user"></i> Customers</a>
+                    <a asp-controller="transaction" asp-action="" class="nav-item nav-link"><i class="fa-solid fa-money-check-dollar"></i> Transactions</a>
                     @if (ViewBag.Role == "SuperAdmin")
                     {
                         <a asp-controller="user" asp-action="" class="nav-item nav-link"><i class="fa-solid fa-user-tie"></i> Admins</a>

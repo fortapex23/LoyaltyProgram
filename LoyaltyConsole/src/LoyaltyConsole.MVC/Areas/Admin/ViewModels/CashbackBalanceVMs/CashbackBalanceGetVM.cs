@@ -6,5 +6,6 @@
         public int CustomerId { get; set; }
         public decimal TotalCashback { get; set; }
         public decimal CashbackRedeemed { get; set; }
+        public decimal CashbackAvailable { get; set; }
     }
 }

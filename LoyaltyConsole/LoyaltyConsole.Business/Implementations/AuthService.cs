@@ -94,7 +94,6 @@ namespace LoyaltyConsole.Business.Implementations
             }
         }
 
-
         public async Task<UserGetDto> GetById(string id)
         {
             var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == id.ToString());
@@ -120,12 +119,13 @@ namespace LoyaltyConsole.Business.Implementations
         public async Task UpdateStatusAsync(string id, AdminStatus status)
         {
             var user = await _userManager.FindByIdAsync(id);
-            if (user == null) throw new Exception("User not found");
+            if (user is null) throw new NullReferenceException($"{id} not found.");
 
             user.Status = status;
-            await _userManager.UpdateAsync(user);
-        }
 
+            var result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded) throw new Exception("Failed to update status");
+        }
 
         public async Task<TokenResponseDto> AdminLogin(UserLoginDto dto)
         {
