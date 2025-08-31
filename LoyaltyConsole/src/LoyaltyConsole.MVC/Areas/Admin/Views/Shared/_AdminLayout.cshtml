@@ -51,7 +51,7 @@
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-light navbar-light">
                 <a href="~/admin/index.html" class="navbar-brand mx-4 mb-3">
-                    <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
+                    <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>WELCOME</h3>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
@@ -59,17 +59,32 @@
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0">Jhon Doe</h6>
-                        <span>Admin</span>
+                        <h5 class="mb-0">@ViewBag.FullName</h5>
+                        <span>@ViewBag.Role</span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a asp-controller="home" asp-action="" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <a asp-controller="customer" asp-action="" class="nav-item nav-link"><i class="fa-solid fa-user"></i> Customers</a>
-                    <a asp-controller="transaction" asp-action="" class="nav-item nav-link"><i class="fa-solid fa-money-check-dollar"></i> Transactions</a>
+                    <a asp-controller="home" asp-action="index"
+                       class="nav-item nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")">
+                        <i class="fa fa-tachometer-alt me-2"></i>Dashboard
+                    </a>
+
+                    <a asp-controller="customer" asp-action="index"
+                       class="nav-item nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Customer" ? "active" : "")">
+                        <i class="fa-solid fa-user"></i> Customers
+                    </a>
+
+                    <a asp-controller="transaction" asp-action="index"
+                       class="nav-item nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Transaction" ? "active" : "")">
+                        <i class="fa-solid fa-money-check-dollar"></i> Transactions
+                    </a>
+
                     @if (ViewBag.Role == "SuperAdmin")
                     {
-                        <a asp-controller="user" asp-action="" class="nav-item nav-link"><i class="fa-solid fa-user-tie"></i> Admins</a>
+                        <a asp-controller="user" asp-action="index"
+                           class="nav-item nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "User" ? "active" : "")">
+                            <i class="fa-solid fa-user-tie"></i> Admins
+                        </a>
                     }
 
                     @* <div class="nav-item dropdown">

@@ -1,7 +1,9 @@
-﻿using LoyaltyConsole.MVC.Areas.Admin.ViewModels.CustomerVMs;
+﻿using LoyaltyConsole.MVC.Areas.Admin.PaginatedLists;
+using LoyaltyConsole.MVC.Areas.Admin.ViewModels.CustomerVMs;
 using LoyaltyConsole.MVC.Areas.Admin.ViewModels.TransactionVMs;
 using LoyaltyConsole.MVC.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Mono.TextTemplating;
 
 namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
 {
@@ -15,7 +17,7 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
             _crudService = crudService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
             SetFullName();
 
@@ -32,7 +34,10 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
                 tx.Customer = customers.FirstOrDefault(c => c.Id == tx.CustomerId);
             }
 
-            return View(transactions);
+            int pageSize = 8;
+            var paginatedtrans = PaginatedList<TransactionGetVM>.Create(transactions.AsQueryable(), page, pageSize);
+
+            return View(paginatedtrans);
         }
 
 

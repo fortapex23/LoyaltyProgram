@@ -18,7 +18,12 @@
                 <div class="bg-light rounded h-100 p-4">
                     <div style="display: flex; align-items: center;">
                         <h6 class="mb-0">CUSTOMERS</h6>
-                        <a asp-action="create" class="btn btn-success ms-3">create</a>
+                        <div style="width: 100%">
+                            <a asp-action="create" class="btn btn-success ms-3">create</a>
+                            <input type="text" id="customerSearch" class="form-control d-inline-block"
+                                   placeholder="Search by name..." style="width: 250px; display: inline; border-color: black; margin-left: 33rem" />
+                        </div>
+
                     </div>
                     <div style="margin-top: 10px" class="table-responsive">
                         <table class="table">
@@ -63,5 +68,19 @@
 <!-- Content End -->
 <!-- Button trigger modal -->
 
+<script>
+    document.getElementById("customerSearch").addEventListener("keyup", function () {
+        let input = this.value.toLowerCase();
+        let rows = document.querySelectorAll("table tbody tr");
+
+        rows.forEach(row => {
+            let nameCell = row.querySelector("td:nth-child(2)");
+            if (nameCell) {
+                let name = nameCell.textContent.toLowerCase();
+                row.style.display = name.includes(input) ? "" : "none";
+            }
+        });
+    });
+</script>
 
 

@@ -1,4 +1,5 @@
 ﻿@using LoyaltyConsole.MVC.Areas.Admin.ViewModels.AuthVMs
+@using LoyaltyConsole.MVC.Enums
 
 @model List<AuthGetVM>
 
@@ -39,10 +40,23 @@
                                         <td>@rew.FullName</td>
                                         <td>@rew.Email</td>
                                         <td>@rew.BirthDay.ToString("dd/ MM/ yyyy")</td>
-                                        <td>@rew.Status</td>
+                                        @if (rew.Status == AdminStatus.Approved)
+                                        {
+                                            <td style="font-weight: bold; color: forestgreen">@rew.Status</td>
+                                        }
+                                        @if (rew.Status == AdminStatus.Rejected)
+                                        {
+                                            <td style="font-weight: bold; color: red">@rew.Status</td>
+                                        }
                                         <td>
-                                            <a asp-action="ApproveAdmin" asp-route-id="@rew.AppUserId" class="btn btn-success">approve</a>
-                                            <a asp-action="RejectAdmin" asp-route-id="@rew.AppUserId" class="btn btn-danger">reject</a>
+                                            @if (rew.Status != AdminStatus.Approved)
+                                            {
+                                                <a asp-action="ApproveAdmin" asp-route-id="@rew.AppUserId" class="btn btn-success">approve</a>
+                                            }
+                                            @if (rew.Status != AdminStatus.Rejected)
+                                            {
+                                                <a asp-action="RejectAdmin" asp-route-id="@rew.AppUserId" class="btn btn-danger">reject</a>
+                                            }
                                         </td>
                                     </tr>
                                 }

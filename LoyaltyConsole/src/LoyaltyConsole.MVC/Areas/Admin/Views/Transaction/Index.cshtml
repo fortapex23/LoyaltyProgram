@@ -1,6 +1,7 @@
-﻿@using LoyaltyConsole.MVC.Areas.Admin.ViewModels.TransactionVMs
+﻿@using LoyaltyConsole.MVC.Areas.Admin.PaginatedLists
+@using LoyaltyConsole.MVC.Areas.Admin.ViewModels.TransactionVMs
 
-@model List<TransactionGetVM>
+@model PaginatedList<TransactionGetVM>
 @{
     int count = 0;
 }
@@ -51,6 +52,27 @@
                                 }
                             </tbody>
                         </table>
+
+                        @if (Model.Count >= 8)
+                        {
+                            <div style="display: @(Model.TotalPage == 0 ? "none" : "flex"); justify-content: center">
+                                <nav aria-label="...">
+                                    <ul class="pagination">
+                                        <li class="page-item @(Model.Prev == false ? "disabled" : "")">
+                                            <a class="page-link" asp-action="index" asp-route-page="@(Model.ActivePage - 1)">Previous</a>
+                                        </li>
+                                        @for (int i = 1; i <= Model.TotalPage; i++)
+                                        {
+                                            <li class="page-item @(Model.ActivePage == i ? "active" : "")"><a class="page-link" asp-action="index" asp-route-page="@i">@i</a></li>
+                                        }
+                                        <li class="page-item @(Model.Next == false ? "disabled" : "")">
+                                            <a class="page-link" asp-action="index" asp-route-page="@(Model.ActivePage + 1)">Next</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        }
+
                     </div>
                 </div>
             </div>
