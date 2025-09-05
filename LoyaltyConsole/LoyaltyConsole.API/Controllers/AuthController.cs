@@ -132,47 +132,26 @@ namespace LoyaltyConsole.API.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> Register(UserRegisterDto dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             try
             {
                 await _authService.Register(dto);
             }
             catch (NullReferenceException)
             {
-                return BadRequest();
+                return BadRequest("User creation failed");
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
 
-            return Ok();
+            return Ok("Registration successful");
         }
-
-        //[HttpPost("[action]")]
-        //public async Task<IActionResult> Login(UserLoginDto dto)
-        //{
-        //    TokenResponseDto rDto = null;
-
-        //    try
-        //    {
-        //        rDto = await _authService.Login(dto);
-        //    }
-        //    catch (Exception ex) when (ex.Message == "Invalid credentials")
-        //    {
-        //        return BadRequest(new ApiResponse<string>
-        //        {
-        //            Data = null,
-        //            ErrorMessage = "Invalid email or password",
-        //            StatusCode = StatusCodes.Status400BadRequest
-        //        });
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return BadRequest("An error occurred");
-        //    }
-
-        //    return Ok(rDto);
-        //}
 
         //[HttpGet("")]
         //public async Task<IActionResult> CreateAdmin()

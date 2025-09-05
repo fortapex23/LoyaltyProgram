@@ -102,9 +102,9 @@
                                 </div>
                                 <a asp-area="admin" asp-action="forgotpassword">Forgot Password</a>
                             </div>
+                            <div class="validation-summary-errors" style="color: red" asp-validation-summary="ModelOnly"></div>
                             <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign Up</button>
                             <p class="text-center mb-0">Already have an Account? <a asp-area="admin" asp-action="adminlogin">Sign In</a></p>
-                            <div asp-validation-summary="ModelOnly"></div>
                         </form>
                     </div>
                 </div>
