@@ -40,6 +40,9 @@ namespace LoyaltyConsole.Business.Implementations
             customer.CreatedDate = DateTime.Now;
             customer.UpdatedDate = DateTime.Now;
 
+            if (customer.Birthday >= DateTime.Now)
+                throw new Exception("Invalid Birthday");
+
             await _customerRepository.CreateAsync(customer);
             await _customerRepository.CommitAsync();
 
@@ -105,6 +108,9 @@ namespace LoyaltyConsole.Business.Implementations
 
             var customer = await _customerRepository.GetByIdAsync((int)id);
             if (customer == null) throw new Exception("Customer not found");
+
+            if (customer.Birthday >= DateTime.Now)
+                throw new Exception("Invalid Birthday");
 
             _mapper.Map(dto, customer);
 

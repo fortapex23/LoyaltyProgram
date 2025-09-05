@@ -79,9 +79,13 @@ namespace LoyaltyConsole.API.Controllers
             {
                 dto = await _authService.GetById(id);
             }
-            catch (Exception ex)
+            catch (NullReferenceException ex)
             {
                 return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
 
             return Ok(new ApiResponse<UserGetDto>
@@ -91,24 +95,24 @@ namespace LoyaltyConsole.API.Controllers
             });
         }
 
-        [HttpPatch("{id}/status")]
-        public async Task<IActionResult> UpdateStatus(string id, AdminStatus status)
-        {
-            try
-            {
-                await _authService.UpdateStatusAsync(id, status);
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new ApiResponse<string>
-                {
-                    StatusCode = StatusCodes.Status400BadRequest,
-                    ErrorMessage = ex.Message,
-                    Data = null
-                });
-            }
-        }
+        //[HttpPatch("{id}/status")]
+        //public async Task<IActionResult> UpdateStatus(string id, AdminStatus status)
+        //{
+        //    try
+        //    {
+        //        await _authService.UpdateStatusAsync(id, status);
+        //        return NoContent();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(new ApiResponse<string>
+        //        {
+        //            StatusCode = StatusCodes.Status400BadRequest,
+        //            ErrorMessage = ex.Message,
+        //            Data = null
+        //        });
+        //    }
+        //}
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(string id, UserEditDto dto)
@@ -116,6 +120,10 @@ namespace LoyaltyConsole.API.Controllers
             try
             {
                 await _authService.UpdateUserAsync(id, dto);
+            }
+            catch (NullReferenceException ex)
+            {
+                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {
@@ -126,6 +134,7 @@ namespace LoyaltyConsole.API.Controllers
                     Data = null
                 });
             }
+            
             return NoContent();
         }
 

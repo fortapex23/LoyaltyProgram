@@ -10,7 +10,7 @@ namespace LoyaltyConsole.Business.Interfaces
         Task<TokenResponseDto> AdminLogin(UserLoginDto dto);
         Task<ICollection<UserGetDto>> GetAllUsersAsync();
         Task<ICollection<UserGetDto>> GetAllAdminsAsync();
-        Task UpdateStatusAsync(string id, AdminStatus status);
+        //Task UpdateStatusAsync(string id, AdminStatus status);
         Task<UserGetDto> GetById(string id);
         Task UpdateUserAsync(string id, UserEditDto dto);
 
