@@ -46,8 +46,9 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
             {
                 await _crudService.Create("/customers", vm);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
+                ModelState.AddModelError("", "Error creating customer");
                 return View();
             }
 
@@ -108,7 +109,8 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
             }
             catch (Exception)
             {
-                ModelState.AddModelError("", "Error updating");
+                ModelState.AddModelError("", "Error updating customer");
+                return View();
             }
 
             return RedirectToAction("Index");
