@@ -25,7 +25,7 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
 
             if (ViewBag.Role is null) return RedirectToAction("AdminLogin", "Auth", new { area = "Admin" });
 
-            if (ViewBag.Role != "SuperAdmin") return RedirectToAction("home", "Index", new { area = "Admin" });
+            if (ViewBag.Role != "SuperAdmin") return RedirectToAction("Index", "Home", new { area = "Admin" });
 
             var datas = await _crudService.GetAllAsync<List<AuthGetVM>>("/auth/GetAllAdmins");
             return View(datas);
@@ -57,7 +57,8 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
             }
             catch
             {
-                ModelState.AddModelError("", "Error approving admin");
+                TempData["Error"] = "Error approving admin";
+                //ModelState.AddModelError("", "Error approving admin");
             }
             return RedirectToAction("Index");
         }
@@ -88,7 +89,8 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
             }
             catch
             {
-                ModelState.AddModelError("", "Error rejecting admin");
+                TempData["Error"] = "Error rejecting admin";
+                //ModelState.AddModelError("", "Error rejecting admin");
             }
             return RedirectToAction("Index");
         }

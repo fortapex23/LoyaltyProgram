@@ -37,13 +37,13 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
             }
             catch (Exception)
             {
-                ModelState.AddModelError("", "only admins can login");
+                ModelState.AddModelError("", "Email or password is incorrect");
                 return View();
             }
 
             if (data == null)
             {
-                ModelState.AddModelError("", "couldnt login2 admin");
+                ModelState.AddModelError("", "Something went wrong");
                 return View();
             }
 
@@ -91,7 +91,7 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
         {
             _authService.Logout();
 
-            return RedirectToAction("login");
+            return RedirectToAction("adminlogin");
         }
     }
 }

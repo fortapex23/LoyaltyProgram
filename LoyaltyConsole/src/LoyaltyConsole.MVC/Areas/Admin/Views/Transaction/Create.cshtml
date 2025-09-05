@@ -78,7 +78,7 @@
                         <div class="form-group">
                             <label for="CustomerId">Select Customer</label>
                             <select id="CustomerId" name="CustomerId" class="form-control select2">
-                                <option value="">-- Select Customer --</option>
+                                <option selected disabled value="">-- Select Customer --</option>
                                 @foreach (var customer in ViewBag.Customers)
                                 {
                                     <option value="@customer.Id">@customer.FullName</option>

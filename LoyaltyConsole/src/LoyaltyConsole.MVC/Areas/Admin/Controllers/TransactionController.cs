@@ -85,7 +85,7 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
-                return View();
+                TempData["Error"] = "Customer Not Found";
             }
 
             return RedirectToAction(nameof(Index));

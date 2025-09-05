@@ -48,6 +48,10 @@
                                         {
                                             <td style="font-weight: bold; color: red">@rew.Status</td>
                                         }
+                                        @if (rew.Status == AdminStatus.Pending)
+                                        {
+                                            <td>@rew.Status</td>
+                                        }
                                         <td>
                                             @if (rew.Status != AdminStatus.Approved)
                                             {

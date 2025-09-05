@@ -1,17 +1,15 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using LoyaltyConsole.Business.DTOs.CashbackBalanceDtos;
-using LoyaltyConsole.Business.DTOs.TokenDtos;
+﻿using LoyaltyConsole.Business.DTOs.TokenDtos;
 using LoyaltyConsole.Business.DTOs.UserDtos;
 using LoyaltyConsole.Business.Interfaces;
 using LoyaltyConsole.Core.Enums;
 using LoyaltyConsole.Core.Models;
-using LoyaltyConsole.Core.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace LoyaltyConsole.Business.Implementations
 {
@@ -20,15 +18,12 @@ namespace LoyaltyConsole.Business.Implementations
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly IConfiguration _configuration;
-        private readonly ICashbackBalanceRepository _cashbackBalanceRepository;
 
-        public AuthService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IConfiguration configuration,
-                        ICashbackBalanceRepository cashbackBalanceRepository)
+        public AuthService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
-            _cashbackBalanceRepository = cashbackBalanceRepository;
         }
 
         public async Task<ICollection<UserGetDto>> GetAllUsersAsync()
@@ -207,7 +202,17 @@ namespace LoyaltyConsole.Business.Implementations
             };
 
             if (appUser.Birthday >= DateTime.Now)
-                throw new Exception("Invalid birth date");
+                throw new Exception("Invalid Birth Date");
+
+            var usedemail = await _userManager.FindByEmailAsync(appUser.Email);
+
+            if (usedemail != null)
+                throw new Exception("This email is already used");
+
+            var usedphone = await _userManager.Users.FirstOrDefaultAsync(x => x.PhoneNumber == dto.PhoneNumber);
+
+            if (usedphone != null)
+                throw new Exception("This phone number is already used");
 
             var result = await _userManager.CreateAsync(appUser, dto.Password);
 
