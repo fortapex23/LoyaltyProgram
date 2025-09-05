@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LoyaltyConsole.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+71f1112e2878903a579e19b5b42761cdf38f3027")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5fa85b2df155f9585a90da7f6b893d991d6a0794")]
 [assembly: System.Reflection.AssemblyProductAttribute("LoyaltyConsole.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LoyaltyConsole.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

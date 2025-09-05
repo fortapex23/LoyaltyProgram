@@ -106,9 +106,9 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
             {
                 await _crudService.Update($"/Customers/{id}", vm);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return View();
+                ModelState.AddModelError("", "Error updating");
             }
 
             return RedirectToAction("Index");

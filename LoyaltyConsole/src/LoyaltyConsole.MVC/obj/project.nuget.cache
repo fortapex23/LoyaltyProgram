@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "woYyKzZgxlw=",
+  "dgSpecHash": "+nvR5hy+gxM=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Lenovo\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj",
+  "projectFilePath": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Lenovo\\.nuget\\packages\\automapper\\14.0.0\\automapper.14.0.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",

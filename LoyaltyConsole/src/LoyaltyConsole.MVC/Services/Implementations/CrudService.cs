@@ -79,24 +79,32 @@ namespace LoyaltyConsole.MVC.Services.Implementations
 
         public async Task<T> GetByStringIdAsync<T>(string endpoint, string? id)
         {
-            //if (id < 1) throw new Exception();
             var request = new RestRequest(endpoint, Method.Get);
             var response = await _restClient.ExecuteAsync<ApiResponseMessage<T>>(request);
 
             if (!response.IsSuccessful)
             {
-                if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                string errorMessage = "An error occurred";
+
+                if (response.Data != null && !string.IsNullOrEmpty(response.Data.ErrorMessage))
                 {
-                    throw new Exception(response.Data.ErrorMessage);
+                    errorMessage = response.Data.ErrorMessage;
                 }
-                else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                else if (!string.IsNullOrEmpty(response.ErrorMessage))
                 {
-                    throw new Exception(response.Data.ErrorMessage);
+                    errorMessage = response.ErrorMessage;
                 }
+                else
+                {
+                    errorMessage = response.StatusDescription ?? response.StatusCode.ToString();
+                }
+
+                throw new Exception(errorMessage);
             }
 
             return response.Data.Data;
         }
+
 
         public async Task<T> GetByIdAsync<T>(string endpoint, int? id)
         {

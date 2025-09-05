@@ -23,3 +23,16 @@ C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.Core\obj\De
 C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.Core\obj\Debug\net8.0\refint\LoyaltyConsole.Core.dll
 C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.Core\obj\Debug\net8.0\LoyaltyConsole.Core.pdb
 C:\Users\Lenovo\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.Core\obj\Debug\net8.0\ref\LoyaltyConsole.Core.dll
+C:\Users\Lenovo\OneDrive\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.Core\bin\Debug\net8.0\LoyaltyConsole.Core.deps.json
+C:\Users\Lenovo\OneDrive\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.Core\bin\Debug\net8.0\LoyaltyConsole.Core.dll
+C:\Users\Lenovo\OneDrive\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.Core\bin\Debug\net8.0\LoyaltyConsole.Core.pdb
+C:\Users\Lenovo\OneDrive\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.Core\obj\Debug\net8.0\LoyaltyConsole.Core.csproj.AssemblyReference.cache
+C:\Users\Lenovo\OneDrive\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.Core\obj\Debug\net8.0\LoyaltyConsole.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Lenovo\OneDrive\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.Core\obj\Debug\net8.0\LoyaltyConsole.Core.AssemblyInfoInputs.cache
+C:\Users\Lenovo\OneDrive\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.Core\obj\Debug\net8.0\LoyaltyConsole.Core.AssemblyInfo.cs
+C:\Users\Lenovo\OneDrive\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.Core\obj\Debug\net8.0\LoyaltyConsole.Core.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\OneDrive\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.Core\obj\Debug\net8.0\LoyaltyConsole.Core.sourcelink.json
+C:\Users\Lenovo\OneDrive\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.Core\obj\Debug\net8.0\LoyaltyConsole.Core.dll
+C:\Users\Lenovo\OneDrive\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.Core\obj\Debug\net8.0\refint\LoyaltyConsole.Core.dll
+C:\Users\Lenovo\OneDrive\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.Core\obj\Debug\net8.0\LoyaltyConsole.Core.pdb
+C:\Users\Lenovo\OneDrive\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.Core\obj\Debug\net8.0\ref\LoyaltyConsole.Core.dll

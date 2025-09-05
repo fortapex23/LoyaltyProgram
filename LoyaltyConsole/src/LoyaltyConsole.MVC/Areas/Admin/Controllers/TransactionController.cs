@@ -83,9 +83,9 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
             {
                 await _crudService.Delete<object>($"/transactions/{id}", id);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                TempData["Error"] = "Customer Not Found";
+                TempData["Error"] = "Transaction Not Found";
             }
 
             return RedirectToAction(nameof(Index));
@@ -110,8 +110,8 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
             }
             catch (Exception)
             {
-                //TempData["Err"] = "Transaction not found";
-                return RedirectToAction("Index");
+                TempData["Err"] = "Transaction not found";
+                //return RedirectToAction("Index");
             }
 
             return View(data);

@@ -38,28 +38,28 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
 
             if (ViewBag.Role != "SuperAdmin") return RedirectToAction("home", "Index", new { area = "Admin" });
 
-            var user = await _crudService.GetByStringIdAsync<AuthGetVM>($"/auth/{id}", id);
-            if (user == null) return NotFound();
-
-            var vm = new AuthEditVM
-            {
-                Status = AdminStatus.Approved,
-                FullName = user.FullName,
-                Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
-                BirthDay = user.BirthDay,
-                Gender = user.Gender
-            };
-
             try
             {
+                var user = await _crudService.GetByStringIdAsync<AuthGetVM>($"/auth/{id}", id);
+                if (user == null) return NotFound();
+
+                var vm = new AuthEditVM
+                {
+                    Status = AdminStatus.Rejected,
+                    FullName = user.FullName,
+                    Email = user.Email,
+                    PhoneNumber = user.PhoneNumber,
+                    BirthDay = user.BirthDay,
+                    Gender = user.Gender
+                };
+
                 await _crudService.Update($"/auth/{id}", vm);
             }
-            catch
+            catch (Exception)
             {
                 TempData["Error"] = "Error approving admin";
-                //ModelState.AddModelError("", "Error approving admin");
             }
+
             return RedirectToAction("Index");
         }
 
@@ -70,28 +70,28 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
 
             if (ViewBag.Role != "SuperAdmin") return RedirectToAction("home", "Index", new { area = "Admin" });
 
-            var user = await _crudService.GetByStringIdAsync<AuthGetVM>($"/auth/{id}", id);
-            if (user == null) return NotFound();
-
-            var vm = new AuthEditVM
-            {
-                Status = AdminStatus.Rejected,
-                FullName = user.FullName,
-                Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
-                BirthDay = user.BirthDay,
-                Gender = user.Gender
-            };
-
             try
             {
+                var user = await _crudService.GetByStringIdAsync<AuthGetVM>($"/auth/{id}", id);
+                if (user == null) return NotFound();
+
+                var vm = new AuthEditVM
+                {
+                    Status = AdminStatus.Rejected,
+                    FullName = user.FullName,
+                    Email = user.Email,
+                    PhoneNumber = user.PhoneNumber,
+                    BirthDay = user.BirthDay,
+                    Gender = user.Gender
+                };
+
                 await _crudService.Update($"/auth/{id}", vm);
             }
-            catch
+            catch (Exception)
             {
                 TempData["Error"] = "Error rejecting admin";
-                //ModelState.AddModelError("", "Error rejecting admin");
             }
+
             return RedirectToAction("Index");
         }
 

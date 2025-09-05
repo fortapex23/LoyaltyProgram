@@ -66,7 +66,7 @@ namespace LoyaltyConsole.Business.Implementations
 
             if (user is null)
             {
-                throw new NullReferenceException($"{id} not found.");
+                throw new NullReferenceException($"User not found");
             }
 
             user.FullName = dto.FullName;
@@ -95,7 +95,7 @@ namespace LoyaltyConsole.Business.Implementations
 
             if (user == null)
             {
-                throw new NullReferenceException($"{id} not found");
+                throw new NullReferenceException($"User not found");
             }
 
             var userDto = new UserGetDto(
@@ -111,16 +111,16 @@ namespace LoyaltyConsole.Business.Implementations
             return userDto;
         }
 
-        public async Task UpdateStatusAsync(string id, AdminStatus status)
-        {
-            var user = await _userManager.FindByIdAsync(id);
-            if (user is null) throw new NullReferenceException($"{id} not found.");
+        //public async Task UpdateStatusAsync(string id, AdminStatus status)
+        //{
+        //    var user = await _userManager.FindByIdAsync(id);
+        //    if (user is null) throw new NullReferenceException($"{id} not found.");
 
-            user.Status = status;
+        //    user.Status = status;
 
-            var result = await _userManager.UpdateAsync(user);
-            if (!result.Succeeded) throw new Exception("Failed to update status");
-        }
+        //    var result = await _userManager.UpdateAsync(user);
+        //    if (!result.Succeeded) throw new Exception("Failed to update status");
+        //}
 
         public async Task<TokenResponseDto> AdminLogin(UserLoginDto dto)
         {
