@@ -12,6 +12,7 @@ namespace LoyaltyConsole.Data
             services.AddScoped<ICashbackBalanceRepository, CashbackBalanceRepository>();
             services.AddScoped<ITransactionRepository, TransactionRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<ICustomerImageRepository, CustomerImageRepository>();
 
             services.AddDbContext<AppDbContext>(op =>
             {

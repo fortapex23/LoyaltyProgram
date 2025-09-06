@@ -3559,7 +3559,10 @@
         },
         "runtime": {
           "bin/placeholder/LoyaltyConsole.Business.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       },
       "LoyaltyConsole.Core/1.0.0": {
         "type": "project",
