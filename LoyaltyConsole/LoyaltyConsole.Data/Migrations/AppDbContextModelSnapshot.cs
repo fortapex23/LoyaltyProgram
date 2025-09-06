@@ -85,6 +85,38 @@ namespace LoyaltyConsole.Data.Migrations
                     b.ToTable("Customers");
                 });
 
+            modelBuilder.Entity("LoyaltyConsole.Core.Models.CustomerImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId")
+                        .IsUnique();
+
+                    b.ToTable("CustomerImages");
+                });
+
             modelBuilder.Entity("LoyaltyConsole.Core.Models.Transaction", b =>
                 {
                     b.Property<int>("Id")
@@ -363,6 +395,17 @@ namespace LoyaltyConsole.Data.Migrations
                     b.Navigation("Customer");
                 });
 
+            modelBuilder.Entity("LoyaltyConsole.Core.Models.CustomerImage", b =>
+                {
+                    b.HasOne("LoyaltyConsole.Core.Models.Customer", "Customer")
+                        .WithOne("CustomerImage")
+                        .HasForeignKey("LoyaltyConsole.Core.Models.CustomerImage", "CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
             modelBuilder.Entity("LoyaltyConsole.Core.Models.Transaction", b =>
                 {
                     b.HasOne("LoyaltyConsole.Core.Models.Customer", "Customer")
@@ -428,6 +471,9 @@ namespace LoyaltyConsole.Data.Migrations
             modelBuilder.Entity("LoyaltyConsole.Core.Models.Customer", b =>
                 {
                     b.Navigation("CashbackBalance")
+                        .IsRequired();
+
+                    b.Navigation("CustomerImage")
                         .IsRequired();
 
                     b.Navigation("Transactions");
