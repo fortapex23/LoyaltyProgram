@@ -37,6 +37,44 @@ namespace LoyaltyConsole.MVC.Services.Implementations
             }
         }
 
+        public async Task CreateWithImage<T>(string endpoint, T entity, IFormFile file = null) where T : class
+        {
+            var request = new RestRequest(endpoint, Method.Post);
+
+            if (file != null)
+            {
+                request.AlwaysMultipartFormData = true;
+
+                // Add normal properties
+                foreach (var prop in entity.GetType().GetProperties())
+                {
+                    var value = prop.GetValue(entity);
+                    if (value != null && !(value is IFormFile))
+                        request.AddParameter(prop.Name, value.ToString());
+                }
+
+                // Add file as byte[]
+                using (var ms = new MemoryStream())
+                {
+                    await file.CopyToAsync(ms);
+                    var fileBytes = ms.ToArray();
+                    request.AddFile("Image", fileBytes, file.FileName, file.ContentType);
+                }
+            }
+            else
+            {
+                request.AddJsonBody(entity);
+            }
+
+            var response = await _restClient.ExecuteAsync<ApiResponseMessage<T>>(request);
+
+            if (!response.IsSuccessful)
+            {
+                var errorMessage = $"Error: {response.StatusCode} Content: {response.Content}";
+                throw new Exception(errorMessage);
+            }
+        }
+
         public async Task Delete<T>(string endpoint, int id)
         {
             var request = new RestRequest(endpoint, Method.Delete);

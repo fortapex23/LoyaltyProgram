@@ -55,27 +55,27 @@ namespace LoyaltyConsole.Business.Implementations
             if (customer.Birthday >= DateTime.Now)
                 throw new Exception("Invalid Birthday");
 
-            if (dto.Image != null)
-            {
-                string ext = Path.GetExtension(dto.Image.FileName).ToLower();
-                if (ext != ".jpg" && ext != ".jpeg" && ext != ".png")
-                    throw new Exception("Only .jpg, .jpeg, .png files are allowed");
+            //if (dto.Image != null)
+            //{
+            //    string ext = Path.GetExtension(dto.Image.FileName).ToLower();
+            //    if (ext != ".jpg" && ext != ".jpeg" && ext != ".png")
+            //        throw new Exception("Only .jpg, .jpeg, .png files are allowed");
 
-                if (dto.Image.Length > 3 * 1024 * 1024)
-                    throw new Exception("Image size must be less than 3 MB");
+            //    if (dto.Image.Length > 3 * 1024 * 1024)
+            //        throw new Exception("Image size must be less than 3 MB");
 
-                string fileName = dto.Image.CreateFileAsync(_env.WebRootPath, "uploads/customers");
+            //    string fileName = dto.Image.CreateFileAsync(_env.WebRootPath, "uploads/customers");
 
-                CustomerImage cusImage = new CustomerImage
-                {
-                    ImageUrl = fileName,
-                    CreatedDate = DateTime.Now,
-                    UpdatedDate = DateTime.Now,
-                    Customer = customer
-                };
+            //    CustomerImage cusImage = new CustomerImage
+            //    {
+            //        ImageUrl = fileName,
+            //        CreatedDate = DateTime.Now,
+            //        UpdatedDate = DateTime.Now,
+            //        Customer = customer
+            //    };
 
-                await _customerimageRepository.CreateAsync(cusImage);
-            }
+            //    await _customerimageRepository.CreateAsync(cusImage);
+            //}
 
             await _customerRepository.CreateAsync(customer);
             await _customerRepository.CommitAsync();
