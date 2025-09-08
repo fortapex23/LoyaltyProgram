@@ -8,10 +8,12 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
     public class CustomerController : BaseController
     {
         private readonly ICrudService _crudService;
+        private readonly IWebHostEnvironment _env;
 
-        public CustomerController(ICrudService crudService)
+        public CustomerController(ICrudService crudService, IWebHostEnvironment env)
         {
             _crudService = crudService;
+            _env = env;
         }
 
         public async Task<IActionResult> Index()
@@ -42,14 +44,24 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CustomerCreateVM vm)
         {
+            if (!ModelState.IsValid) return View(vm);
+
             try
             {
-                await _crudService.Create("/customers", vm);
+                // Build DTO without image (only simple props)
+                var createDto = new
+                {
+                    vm.FullName,
+                    vm.Birthday
+                };
+
+                // Call service and pass the IFormFile along
+                await _crudService.CreateWithImage("/customers", createDto, vm.Image);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                ModelState.AddModelError("", "Error creating customer");
-                return View();
+                ModelState.AddModelError("", $"Error creating customer: {ex.Message}");
+                return View(vm);
             }
 
             return RedirectToAction(nameof(Index));
@@ -68,7 +80,7 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
             {
                 await _crudService.Delete<object>($"/customers/{id}", id);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 TempData["Error"] = "Customer Not Found";
             }
@@ -89,11 +101,10 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
 
             try
             {
-                data = await _crudService.GetByIdAsync<CustomerUpdateVM>($"/Customers/{id}", id);
+                data = await _crudService.GetByIdAsync<CustomerUpdateVM>($"/customers/{id}", id);
             }
             catch (Exception)
             {
-                //TempData["Err"] = "Customer not found";
                 return RedirectToAction("Index");
             }
 
@@ -103,17 +114,40 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(int id, CustomerUpdateVM vm)
         {
+            if (!ModelState.IsValid) return View(vm);
+
             try
             {
-                await _crudService.Update($"/Customers/{id}", vm);
+                string fileName = null;
+
+                if (vm.Image != null)
+                {
+                    fileName = Guid.NewGuid().ToString() + Path.GetExtension(vm.Image.FileName);
+                    string path = Path.Combine(_env.WebRootPath, "uploads/customers", fileName);
+
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await vm.Image.CopyToAsync(stream);
+                    }
+                }
+
+                var updateDto = new
+                {
+                    vm.FullName,
+                    vm.Birthday,
+                    vm.Cashback,
+                    Image = fileName // replace or keep old one depending on your API logic
+                };
+
+                await _crudService.Update($"/customers/{id}", updateDto);
             }
             catch (Exception)
             {
                 ModelState.AddModelError("", "Error updating customer");
-                return View();
+                return View(vm);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
     }
 }

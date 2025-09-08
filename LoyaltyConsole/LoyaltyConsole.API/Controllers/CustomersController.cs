@@ -54,7 +54,7 @@ namespace LoyaltyConsole.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CustomerCreateDto dto)
+        public async Task<IActionResult> Create([FromForm] CustomerCreateDto dto)
         {
             CustomerGetDto customer = null;
             try

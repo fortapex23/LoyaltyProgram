@@ -7,6 +7,7 @@
         Task<T> GetAllAsync<T>(string endpoint);
         Task Delete<T>(string endpoint, int id);
         Task DeleteItem<T>(string endpoint);
+        Task CreateWithImage<T>(string endpoint, T entity, IFormFile file = null) where T : class;
         Task Create<T>(string endpoint, T entity) where T : class;
         Task Update<T>(string endpoint, T entity) where T : class;
         Task<bool> IsExist(string endpoint, int? id);

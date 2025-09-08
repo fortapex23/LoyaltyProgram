@@ -1,0 +1,4 @@
+C:\Users\Lenovo\OneDrive\Desktop\LoyaltyProgram\LoyaltyConsole\src\LoyaltyConsole.MVC\wwwroot\uploads\customers\b73dd197-0bfe-41b1-81ab-e668fdcc9211.jpg
+C:\Users\Lenovo\OneDrive\Desktop\LoyaltyProgram\LoyaltyConsole\src\LoyaltyConsole.MVC\wwwroot\uploads\customers\a123f636-b760-4ec8-8d5a-17e5a10918c5.jpg
+C:\Users\Lenovo\OneDrive\Desktop\LoyaltyProgram\LoyaltyConsole\src\LoyaltyConsole.MVC\wwwroot\uploads\customers\9a646b22-78ff-4b59-9c12-a38e0e327544.jpg
+C:\Users\Lenovo\OneDrive\Desktop\LoyaltyProgram\LoyaltyConsole\src\LoyaltyConsole.MVC\wwwroot\uploads\customers\42a9dd2f-c328-4f67-8d35-4f832c5ae29d.jpg
