@@ -470,3 +470,5 @@ C:\Users\Lenovo\OneDrive\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.AP
 C:\Users\Lenovo\OneDrive\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\obj\Debug\net8.0\LoyaltyConsole.API.pdb
 C:\Users\Lenovo\OneDrive\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\obj\Debug\net8.0\LoyaltyConsole.API.genruntimeconfig.cache
 C:\Users\Lenovo\OneDrive\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\obj\Debug\net8.0\ref\LoyaltyConsole.API.dll
+C:\Users\Lenovo\OneDrive\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\bin\Debug\net8.0\LoyaltyConsole.API.staticwebassets.runtime.json
+C:\Users\Lenovo\OneDrive\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\bin\Debug\net8.0\CloudinaryDotNet.dll

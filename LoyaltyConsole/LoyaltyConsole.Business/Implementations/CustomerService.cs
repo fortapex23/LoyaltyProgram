@@ -7,6 +7,7 @@ using LoyaltyConsole.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using Microsoft.AspNetCore.Hosting;
+using LoyaltyConsole.Business.ExternalServices.Interfaces;
 
 namespace LoyaltyConsole.Business.Implementations
 {
@@ -17,19 +18,22 @@ namespace LoyaltyConsole.Business.Implementations
         private readonly ICashbackBalanceRepository _cashbackBalanceRepository;
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _env;
+        private readonly IPhotoService _photoService;
 
         public CustomerService(
             ICustomerRepository customerRepository,
             IMapper mapper,
             ICashbackBalanceRepository cashbackBalanceRepository,
             ICustomerImageRepository customerimageRepository,
-            IWebHostEnvironment env)
+            IWebHostEnvironment env,
+            IPhotoService photoService)
         {
             _customerRepository = customerRepository;
             _mapper = mapper;
             _cashbackBalanceRepository = cashbackBalanceRepository;
             _customerimageRepository = customerimageRepository;
             _env = env;
+            _photoService = photoService;
         }
 
         public async Task<ICollection<CustomerGetDto>> GetByExpression(
@@ -55,20 +59,17 @@ namespace LoyaltyConsole.Business.Implementations
             if (customer.Birthday >= DateTime.Now)
                 throw new Exception("Invalid Birthday");
 
-            if (dto.Image != null)
+            if (dto.ImageFile != null && dto.ImageFile.Length > 0)
             {
-                string ext = Path.GetExtension(dto.Image.FileName).ToLower();
-                if (ext != ".jpg" && ext != ".jpeg" && ext != ".png")
-                    throw new Exception("Only .jpg, .jpeg, .png files are allowed");
+                var uploadResult = await _photoService.AddPhotoAsync(dto.ImageFile);
 
-                if (dto.Image.Length > 3 * 1024 * 1024)
-                    throw new Exception("Image size must be less than 3 MB");
-
-                string fileName = dto.Image.CreateFileAsync(_env.WebRootPath, "uploads/customers");
+                if (uploadResult.Error != null)
+                    throw new Exception(uploadResult.Error.Message);
 
                 CustomerImage cusImage = new CustomerImage
                 {
-                    ImageUrl = fileName,
+                    ImageUrl = uploadResult.SecureUrl.ToString(),
+                    PublicId = uploadResult.PublicId,
                     CreatedDate = DateTime.Now,
                     UpdatedDate = DateTime.Now,
                     Customer = customer
@@ -104,7 +105,11 @@ namespace LoyaltyConsole.Business.Implementations
 
             if (customer.CustomerImage != null)
             {
-                customer.CustomerImage.ImageUrl.DeleteFile(_env.WebRootPath, "uploads/customers");
+                if (!string.IsNullOrEmpty(customer.CustomerImage.PublicId))
+                {
+                    await _photoService.DeletePhotoAsync(customer.CustomerImage.PublicId);
+                }
+
                 _customerimageRepository.Delete(customer.CustomerImage);
             }
 
@@ -157,43 +162,27 @@ namespace LoyaltyConsole.Business.Implementations
             _mapper.Map(dto, customer);
             customer.UpdatedDate = DateTime.Now;
 
-            if (dto.Image != null)
+            if (dto.ImageFile != null && dto.ImageFile.Length > 0)
             {
-                string ext = Path.GetExtension(dto.Image.FileName).ToLower();
-                if (ext != ".jpg" && ext != ".jpeg" && ext != ".png")
-                    throw new Exception("Only .jpg, .jpeg, .png files are allowed");
+                var uploadResult = await _photoService.AddPhotoAsync(dto.ImageFile);
 
-                if (dto.Image.Length > 3 * 1024 * 1024)
-                    throw new Exception("Image size must be less than 3 MB");
+                if (uploadResult.Error != null)
+                    throw new Exception(uploadResult.Error.Message);
 
-                if (customer.CustomerImage != null)
+                CustomerImage cusImage = new CustomerImage
                 {
-                    customer.CustomerImage.ImageUrl.DeleteFile(_env.WebRootPath, "uploads/customers");
-                }
+                    ImageUrl = uploadResult.SecureUrl.ToString(),
+                    PublicId = uploadResult.PublicId,
+                    CreatedDate = DateTime.Now,
+                    UpdatedDate = DateTime.Now,
+                    Customer = customer
+                };
 
-                string fileName = dto.Image.CreateFileAsync(_env.WebRootPath, "uploads/customers");
-
-                if (customer.CustomerImage == null)
-                {
-                    CustomerImage cusImage = new CustomerImage
-                    {
-                        CustomerId = customer.Id,
-                        ImageUrl = fileName,
-                        Customer = customer,
-                        CreatedDate = DateTime.Now,
-                        UpdatedDate = DateTime.Now
-                    };
-
-                    await _customerimageRepository.CreateAsync(cusImage);
-                }
-                else
-                {
-                    customer.CustomerImage.ImageUrl = fileName;
-                    customer.CustomerImage.UpdatedDate = DateTime.Now;
-                }
+                await _customerimageRepository.CreateAsync(cusImage);
             }
 
             await _customerRepository.CommitAsync();
         }
+
     }
 }

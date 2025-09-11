@@ -30,6 +30,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
+                                    <th scope="col">Img</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Birthday</th>
                                     <th scope="col">Gained</th>
@@ -44,6 +45,16 @@
                                     count++;
                                     <tr>
                                         <td>@count</td>
+                                        <td>
+                                            @if (!string.IsNullOrEmpty(rew.CustomerImage?.ImageUrl))
+                                            {
+                                                <img src="@rew.CustomerImage.ImageUrl" alt="Customer Image" style="width:30px;height:30px;border-radius:50%;" />
+                                            }
+                                            else
+                                            {
+                                                <span> <i class="fa-solid fa-user"></i></span>
+                                            }
+                                        </td>
                                         <td>@rew.FullName</td>
                                         <td>@rew.Birthday.ToString("dd/ MM/ yyyy")</td>
                                         <td>@rew.CashbackBalance.TotalCashback</td>

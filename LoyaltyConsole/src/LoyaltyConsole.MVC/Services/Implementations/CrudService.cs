@@ -100,7 +100,6 @@ namespace LoyaltyConsole.MVC.Services.Implementations
             }
         }
 
-
         public async Task<T> GetAllAsync<T>(string endpoint)
         {
             var request = new RestRequest(endpoint, Method.Get);
