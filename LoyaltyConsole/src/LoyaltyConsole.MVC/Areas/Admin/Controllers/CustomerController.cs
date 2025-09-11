@@ -1,4 +1,5 @@
-﻿using LoyaltyConsole.MVC.Areas.Admin.ViewModels.CustomerVMs;
+﻿using LoyaltyConsole.Business.DTOs.CustomerDtos;
+using LoyaltyConsole.MVC.Areas.Admin.ViewModels.CustomerVMs;
 using LoyaltyConsole.MVC.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -48,15 +49,31 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
 
             try
             {
-                // Build DTO without image (only simple props)
-                var createDto = new
-                {
-                    vm.FullName,
-                    vm.Birthday
-                };
+                string fileName = null;
 
-                // Call service and pass the IFormFile along
-                await _crudService.CreateWithImage("/customers", createDto, vm.Image);
+                if (vm.Image != null)
+                {
+                    // Ensure folder exists
+                    var uploadPath = Path.Combine(_env.WebRootPath, "uploads/customers");
+                    if (!Directory.Exists(uploadPath))
+                        Directory.CreateDirectory(uploadPath);
+
+                    fileName = Guid.NewGuid() + Path.GetExtension(vm.Image.FileName);
+                    var filePath = Path.Combine(uploadPath, fileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await vm.Image.CopyToAsync(stream);
+                    }
+                }
+
+                //var createDto = new CustomerCreateDto(
+                //    vm.FullName,
+                //    vm.Birthday,
+                //    fileName // send only file name
+                //);
+
+                //await _crudService.Create("/customers", createDto);
             }
             catch (Exception ex)
             {

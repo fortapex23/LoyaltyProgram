@@ -376,7 +376,7 @@
                     "type": "string",
                     "format": "date-time"
                   },
-                  "Image": {
+                  "ImageFile": {
                     "type": "string",
                     "format": "binary"
                   }
@@ -389,7 +389,7 @@
                 "Birthday": {
                   "style": "form"
                 },
-                "Image": {
+                "ImageFile": {
                   "style": "form"
                 }
               }
@@ -738,7 +738,7 @@
             "type": "string",
             "format": "date-time"
           },
-          "image": {
+          "imageFile": {
             "type": "string",
             "format": "binary",
             "nullable": true

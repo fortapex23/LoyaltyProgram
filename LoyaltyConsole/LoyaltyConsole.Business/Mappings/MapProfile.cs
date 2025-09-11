@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using LoyaltyConsole.Business.DTOs.CashbackBalanceDtos;
 using LoyaltyConsole.Business.DTOs.CustomerDtos;
+using LoyaltyConsole.Business.DTOs.CustomerImageDtos;
 using LoyaltyConsole.Business.DTOs.TransactionDtos;
 using LoyaltyConsole.Business.DTOs.UserDtos;
 using LoyaltyConsole.Core.Models;
@@ -22,8 +23,14 @@ namespace LoyaltyConsole.Business.Mappings
             CreateMap<CashbackBalanceUpdateDto, CashbackBalance>().ReverseMap();
 
             CreateMap<CustomerCreateDto, Customer>().ReverseMap();
-            CreateMap<CustomerGetDto, Customer>().ReverseMap();
             CreateMap<CustomerUpdateDto, Customer>().ReverseMap();
+            CreateMap<Customer, CustomerGetDto>()
+                .ForMember(dest => dest.CustomerImage, opt =>
+                opt.MapFrom(src => src.CustomerImage != null
+                ? new CustomerImageGetDto(src.CustomerImage.ImageUrl)
+                : null));
+
+            CreateMap<CustomerImageGetDto, CustomerImage>().ReverseMap();
         }
     }
 }

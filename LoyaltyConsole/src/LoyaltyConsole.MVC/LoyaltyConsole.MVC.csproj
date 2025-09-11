@@ -15,8 +15,4 @@
     <ProjectReference Include="..\..\LoyaltyConsole.API\LoyaltyConsole.API.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\uploads\customers\" />
-  </ItemGroup>
-
 </Project>

@@ -2,5 +2,6 @@
 {
     public class CustomerImageGetVM
     {
+        public string ImageUrl { get; set; }
     }
 }

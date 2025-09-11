@@ -1,14 +1,15 @@
-using System.Text;
 using FluentValidation.AspNetCore;
 using LoyaltyConsole.Business;
 using LoyaltyConsole.Business.DTOs.TransactionDtos;
 using LoyaltyConsole.Business.DTOs.UserDtos;
 using LoyaltyConsole.Business.Mappings;
 using LoyaltyConsole.Core.Models;
+using LoyaltyConsole.Core.Settings;
 using LoyaltyConsole.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace LoyaltyConsole.API
 {
@@ -46,6 +47,9 @@ namespace LoyaltyConsole.API
             {
                 op.AddProfile<MapProfile>();
             });
+
+            builder.Services.Configure<CloudinarySettings>(
+                builder.Configuration.GetSection("CloudinarySettings"));
 
             builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
             {
@@ -85,12 +89,12 @@ namespace LoyaltyConsole.API
 
             var app = builder.Build();
 
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseExceptionHandler("/Admin/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+            //if (!app.Environment.IsDevelopment())
+            //{
+            //    app.UseExceptionHandler("/Admin/Home/Error");
+            //    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+            //    app.UseHsts();
+            //}
 
             if (app.Environment.IsDevelopment())
             {
