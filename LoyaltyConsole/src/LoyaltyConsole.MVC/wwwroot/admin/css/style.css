@@ -120,6 +120,23 @@
     }
 }
 
+/*.table-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+    .table-container .table-responsive {
+        flex: 1;
+        overflow-y: auto;
+    }
+
+    .table-container .pagination-wrapper {
+        margin-top: auto;
+        display: flex;
+        justify-content: center;
+    }*/
+
 
 /*** Navbar ***/
 .sidebar .navbar .navbar-nav .nav-link {
