@@ -1,4 +1,4 @@
-﻿using LoyaltyConsole.Business.DTOs.CustomerDtos;
+﻿using LoyaltyConsole.MVC.Areas.Admin.PaginatedLists;
 using LoyaltyConsole.MVC.Areas.Admin.ViewModels.CustomerVMs;
 using LoyaltyConsole.MVC.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +17,7 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
             _env = env;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1, string? search = null)
         {
             SetFullName();
 
@@ -27,7 +27,20 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
             }
 
             var datas = await _crudService.GetAllAsync<List<CustomerGetVM>>("/customers");
-            return View(datas);
+
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                datas = datas
+                    .Where(c => c.FullName.Contains(search, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+            }
+
+            int pageSize = 5;
+            var pagCustomers = PaginatedList<CustomerGetVM>.Create(datas.AsQueryable(), page, pageSize);
+
+            ViewBag.Search = search;
+
+            return View(pagCustomers);
         }
 
         public IActionResult Create()
