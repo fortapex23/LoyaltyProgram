@@ -325,6 +325,27 @@
         }
       }
     },
+    "/api/Customers/Search": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "parameters": [
+          {
+            "name": "input",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/Customers/isexist/{id}": {
       "get": {
         "tags": [

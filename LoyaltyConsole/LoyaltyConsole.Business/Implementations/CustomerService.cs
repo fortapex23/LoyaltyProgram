@@ -184,5 +184,19 @@ namespace LoyaltyConsole.Business.Implementations
             await _customerRepository.CommitAsync();
         }
 
+        public async Task<ICollection<CustomerGetDto>> SearchCustomer(string input)
+        {
+            var query = _customerRepository.GetByExpression(true, null, "CustomerImage");
+
+            query = query.Where(x => x.FullName.Contains(input.Trim().ToLower()));
+            var customerExists = await _customerRepository.Table.AnyAsync(x => x.FullName.Contains(input.Trim().ToLower()));
+
+            var customers = await query.ToListAsync();
+
+            if (!customerExists)
+                throw new Exception("No customer found");
+
+            return _mapper.Map<ICollection<CustomerGetDto>>(customers);
+        }
     }
 }

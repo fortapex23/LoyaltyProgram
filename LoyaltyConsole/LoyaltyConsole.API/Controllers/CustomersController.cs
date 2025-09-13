@@ -17,6 +17,40 @@ namespace LoyaltyConsole.API.Controllers
             _customerService = customerService;
         }
 
+        [HttpGet("[action]")]
+        public async Task<IActionResult> Search(string input)
+        {
+            try
+            {
+                var customers = await _customerService.SearchCustomer(input);
+
+                if (customers == null)
+                {
+                    return NotFound(new ApiResponse<string>
+                    {
+                        StatusCode = StatusCodes.Status404NotFound,
+                        ErrorMessage = "No customers found",
+                        Data = null
+                    });
+                }
+
+                return Ok(new ApiResponse<ICollection<CustomerGetDto>>
+                {
+                    Data = customers,
+                    StatusCode = StatusCodes.Status200OK
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ApiResponse<string>
+                {
+                    StatusCode = StatusCodes.Status400BadRequest,
+                    ErrorMessage = ex.Message,
+                    Data = null
+                });
+            }
+        }
+
         [HttpGet("isexist/{id}")]
         public async Task<IActionResult> IsExist(int id)
         {

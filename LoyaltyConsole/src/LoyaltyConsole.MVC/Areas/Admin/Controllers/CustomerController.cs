@@ -26,13 +26,15 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
                 return RedirectToAction("AdminLogin", "Auth", new { area = "Admin" });
             }
 
-            var datas = await _crudService.GetAllAsync<List<CustomerGetVM>>("/customers");
+            List<CustomerGetVM> datas;
 
             if (!string.IsNullOrWhiteSpace(search))
             {
-                datas = datas
-                    .Where(c => c.FullName.Contains(search, StringComparison.OrdinalIgnoreCase))
-                    .ToList();
+                datas = await _crudService.GetAllAsync<List<CustomerGetVM>>($"/customers/search?input={search}");
+            }
+            else
+            {
+                datas = await _crudService.GetAllAsync<List<CustomerGetVM>>("/customers");
             }
 
             int pageSize = 5;
@@ -42,6 +44,7 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
 
             return View(pagCustomers);
         }
+
 
         public IActionResult Create()
         {
