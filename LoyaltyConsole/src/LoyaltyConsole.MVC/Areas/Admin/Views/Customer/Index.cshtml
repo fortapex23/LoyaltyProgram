@@ -103,9 +103,9 @@
 
 <script>
 
-    function searchCustomer() {
+        function searchCustomer() {
         let search = document.getElementById("customerSearch").value;
-        window.location.href = '@Url.Action("Index", "Customers", new { area = "Admin" })' + '?search=' + encodeURIComponent(search);
+        window.location.href = '@Url.Action("Index", "Customer", new { area = "Admin" })' + '?search=' + encodeURIComponent(search);
     }
 
     // document.getElementById("customerSearch").addEventListener("keyup", function () {

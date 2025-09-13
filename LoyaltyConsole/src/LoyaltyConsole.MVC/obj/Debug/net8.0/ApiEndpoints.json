@@ -289,6 +289,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "LoyaltyConsole.API.Controllers.CustomersController",
+    "Method": "Search",
+    "RelativePath": "api/Customers/Search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "input",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "LoyaltyConsole.API.Controllers.TransactionsController",
     "Method": "GetAll",
     "RelativePath": "api/Transactions",

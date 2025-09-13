@@ -7,6 +7,7 @@ namespace LoyaltyConsole.Business.Interfaces
     public interface ICustomerService
     {
         Task<bool> IsExist(Expression<Func<Customer, bool>> expression);
+        Task<ICollection<CustomerGetDto>> SearchCustomer(string fullName);
         Task<CustomerGetDto> CreateAsync(CustomerCreateDto dto);
         Task UpdateAsync(int? id, CustomerUpdateDto dto);
         Task DeleteAsync(int id);
