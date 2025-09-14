@@ -45,7 +45,6 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
             return View(pagCustomers);
         }
 
-
         public IActionResult Create()
         {
             SetFullName();

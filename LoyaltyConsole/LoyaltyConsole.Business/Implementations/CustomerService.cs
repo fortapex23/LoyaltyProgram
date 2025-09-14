@@ -186,7 +186,7 @@ namespace LoyaltyConsole.Business.Implementations
 
         public async Task<ICollection<CustomerGetDto>> SearchCustomer(string input)
         {
-            var query = _customerRepository.GetByExpression(true, null, "CustomerImage");
+            var query = _customerRepository.GetByExpression(true, null, "CustomerImage", "CashbackBalance");
 
             query = query.Where(x => x.FullName.Contains(input.Trim().ToLower()));
             var customerExists = await _customerRepository.Table.AnyAsync(x => x.FullName.Contains(input.Trim().ToLower()));
