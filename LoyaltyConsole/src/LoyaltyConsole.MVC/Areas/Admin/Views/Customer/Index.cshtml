@@ -3,7 +3,7 @@
 
 @model PaginatedList<CustomerGetVM>
 @{
-    int count = 0;
+    int count = (Model.ActivePage - 1) * 5;
 }
 
 <!-- Content Start -->
@@ -44,37 +44,51 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var rew in Model)
+                                @foreach (var cst in Model)
                                 {
                                     count++;
                                     <tr>
                                         <td>@count</td>
                                         <td>
-                                            @if (!string.IsNullOrEmpty(rew.CustomerImage?.ImageUrl))
+                                            @if (!string.IsNullOrEmpty(cst.CustomerImage?.ImageUrl))
                                             {
-                                                <img src="@rew.CustomerImage.ImageUrl" alt="Customer Image" style="width:30px;height:30px;border-radius:50%;" />
+                                                <img src="@cst.CustomerImage.ImageUrl"
+                                                     alt="Customer Image"
+                                                     style="width:30px;height:30px;border-radius:50%;cursor:pointer"
+                                                     onclick="showImageModal('@cst.CustomerImage.ImageUrl')" />
                                             }
                                             else
                                             {
-                                                <span> <i class="fa-solid fa-user"></i></span>
+                                                <span><i class="fa-solid fa-user"></i></span>
                                             }
                                         </td>
-                                        <td>@rew.FullName</td>
-                                        <td>@rew.Birthday.ToString("dd/ MM/ yyyy")</td>
-                                        <td>@rew.CashbackBalance.TotalCashback</td>
-                                        <td>@rew.CashbackBalance.CashbackRedeemed</td>
-                                        <td>@rew.CashbackBalance.CashbackAvailable</td>
+                                        <td>@cst.FullName</td>
+                                        <td>@cst.Birthday.ToString("dd/ MM/ yyyy")</td>
+                                        <td>@cst.CashbackBalance.TotalCashback</td>
+                                        <td>@cst.CashbackBalance.CashbackRedeemed</td>
+                                        <td>@cst.CashbackBalance.CashbackAvailable</td>
                                         <td>
-                                            <a asp-controller="cashbackbalance" asp-action="update" asp-route-id="@rew.CashbackBalance.Id" class="btn btn-warning">balance</a>
-                                            <a asp-action="Update" asp-route-id="@rew.Id" class="btn btn-primary">edit</a>
-                                            <a asp-action="Delete" asp-route-id="@rew.Id" class="btn btn-danger">remove</a>
+                                            <a asp-controller="cashbackbalance" asp-action="update" asp-route-id="@cst.CashbackBalance.Id" class="btn btn-warning">balance</a>
+                                            <a asp-action="Update" asp-route-id="@cst.Id" class="btn btn-primary">edit</a>
+                                            <a asp-action="Delete" asp-route-id="@cst.Id" class="btn btn-danger">remove</a>
                                         </td>
                                     </tr>
                                 }
                             </tbody>
                         </table>
 
-                        <div style="display: @(Model.TotalPage == 0 ? "none" : "flex"); justify-content: center">
+                        <!-- Image Modal -->
+                        <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content bg-transparent border-0 shadow-none">
+                                    <div class="modal-body text-center">
+                                        <img id="modalImage" src="" class="img-fluid rounded" style="max-height:80vh" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: @(Model.TotalPage <= 1 ? "none" : "flex"); justify-content: center">
                             <nav aria-label="...">
                                 <ul class="pagination">
                                     <li class="page-item @(Model.Prev == false ? "disabled" : "")">
@@ -82,7 +96,9 @@
                                     </li>
                                     @for (int i = 1; i <= Model.TotalPage; i++)
                                     {
-                                        <li class="page-item @(Model.ActivePage == i ? "active" : "")"><a class="page-link" asp-action="index" asp-route-page="@i">@i</a></li>
+                                        <li class="page-item @(Model.ActivePage == i ? "active" : "")">
+                                            <a class="page-link" asp-action="index" asp-route-page="@i">@i</a>
+                                        </li>
                                     }
                                     <li class="page-item @(Model.Next == false ? "disabled" : "")">
                                         <a class="page-link" asp-action="index" asp-route-page="@(Model.ActivePage + 1)">Next</a>
@@ -108,18 +124,11 @@
         window.location.href = '@Url.Action("Index", "Customer", new { area = "Admin" })' + '?search=' + encodeURIComponent(search);
     }
 
-    // document.getElementById("customerSearch").addEventListener("keyup", function () {
-    //     let input = this.value.toLowerCase();
-    //     let rows = document.querySelectorAll("table tbody tr");
-
-    //     rows.forEach(row => {
-    //         let nameCell = row.querySelector("td:nth-child(2)");
-    //         if (nameCell) {
-    //             let name = nameCell.textContent.toLowerCase();
-    //             row.style.display = name.includes(input) ? "" : "none";
-    //         }
-    //     });
-    // });
+     function showImageModal(imageUrl) {
+        document.getElementById("modalImage").src = imageUrl;
+        var myModal = new bootstrap.Modal(document.getElementById('imageModal'));
+        myModal.show();
+    }
 </script>
 
 

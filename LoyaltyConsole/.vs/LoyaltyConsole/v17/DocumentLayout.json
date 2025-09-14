@@ -3,12 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|c:\\users\\lenovo\\onedrive\\desktop\\loyaltyprogram\\loyaltyconsole\\src\\loyaltyconsole.mvc\\services\\implementations\\crudservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|solutionrelative:src\\loyaltyconsole.mvc\\services\\implementations\\crudservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|c:\\users\\lenovo\\onedrive\\desktop\\loyaltyprogram\\loyaltyconsole\\src\\loyaltyconsole.mvc\\areas\\admin\\views\\customer\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|solutionrelative:src\\loyaltyconsole.mvc\\areas\\admin\\views\\customer\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|c:\\users\\lenovo\\onedrive\\desktop\\loyaltyprogram\\loyaltyconsole\\src\\loyaltyconsole.mvc\\areas\\admin\\controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|solutionrelative:src\\loyaltyconsole.mvc\\areas\\admin\\controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|c:\\users\\lenovo\\onedrive\\desktop\\loyaltyprogram\\loyaltyconsole\\src\\loyaltyconsole.mvc\\areas\\admin\\controllers\\transactioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|solutionrelative:src\\loyaltyconsole.mvc\\areas\\admin\\controllers\\transactioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|c:\\users\\lenovo\\onedrive\\desktop\\loyaltyprogram\\loyaltyconsole\\src\\loyaltyconsole.mvc\\areas\\admin\\views\\transaction\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|solutionrelative:src\\loyaltyconsole.mvc\\areas\\admin\\views\\transaction\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CE041A1D-231A-4336-8998-DCA9A3527AD9}|LoyaltyConsole.Business\\LoyaltyConsole.Business.csproj|c:\\users\\lenovo\\onedrive\\desktop\\loyaltyprogram\\loyaltyconsole\\loyaltyconsole.business\\implementations\\customerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CE041A1D-231A-4336-8998-DCA9A3527AD9}|LoyaltyConsole.Business\\LoyaltyConsole.Business.csproj|solutionrelative:loyaltyconsole.business\\implementations\\customerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8AB460DC-9181-440E-800D-B352A9E18CB4}|LoyaltyConsole.API\\LoyaltyConsole.API.csproj|c:\\users\\lenovo\\onedrive\\desktop\\loyaltyprogram\\loyaltyconsole\\loyaltyconsole.api\\controllers\\customerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8AB460DC-9181-440E-800D-B352A9E18CB4}|LoyaltyConsole.API\\LoyaltyConsole.API.csproj|solutionrelative:loyaltyconsole.api\\controllers\\customerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|c:\\users\\lenovo\\onedrive\\desktop\\loyaltyprogram\\loyaltyconsole\\src\\loyaltyconsole.mvc\\services\\implementations\\crudservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|solutionrelative:src\\loyaltyconsole.mvc\\services\\implementations\\crudservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8AB460DC-9181-440E-800D-B352A9E18CB4}|LoyaltyConsole.API\\LoyaltyConsole.API.csproj|c:\\users\\lenovo\\onedrive\\desktop\\loyaltyprogram\\loyaltyconsole\\loyaltyconsole.api\\apiresponses\\apiresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -19,32 +39,12 @@
       "RelativeMoniker": "D:0:0:{CE041A1D-231A-4336-8998-DCA9A3527AD9}|LoyaltyConsole.Business\\LoyaltyConsole.Business.csproj|solutionrelative:loyaltyconsole.business\\dtos\\customerdtos\\customergetdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8AB460DC-9181-440E-800D-B352A9E18CB4}|LoyaltyConsole.API\\LoyaltyConsole.API.csproj|c:\\users\\lenovo\\onedrive\\desktop\\loyaltyprogram\\loyaltyconsole\\loyaltyconsole.api\\controllers\\customerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8AB460DC-9181-440E-800D-B352A9E18CB4}|LoyaltyConsole.API\\LoyaltyConsole.API.csproj|solutionrelative:loyaltyconsole.api\\controllers\\customerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CE041A1D-231A-4336-8998-DCA9A3527AD9}|LoyaltyConsole.Business\\LoyaltyConsole.Business.csproj|c:\\users\\lenovo\\onedrive\\desktop\\loyaltyprogram\\loyaltyconsole\\loyaltyconsole.business\\implementations\\customerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CE041A1D-231A-4336-8998-DCA9A3527AD9}|LoyaltyConsole.Business\\LoyaltyConsole.Business.csproj|solutionrelative:loyaltyconsole.business\\implementations\\customerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|c:\\users\\lenovo\\onedrive\\desktop\\loyaltyprogram\\loyaltyconsole\\src\\loyaltyconsole.mvc\\areas\\admin\\views\\customer\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|solutionrelative:src\\loyaltyconsole.mvc\\areas\\admin\\views\\customer\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CE041A1D-231A-4336-8998-DCA9A3527AD9}|LoyaltyConsole.Business\\LoyaltyConsole.Business.csproj|c:\\users\\lenovo\\onedrive\\desktop\\loyaltyprogram\\loyaltyconsole\\loyaltyconsole.business\\interfaces\\icustomerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CE041A1D-231A-4336-8998-DCA9A3527AD9}|LoyaltyConsole.Business\\LoyaltyConsole.Business.csproj|solutionrelative:loyaltyconsole.business\\interfaces\\icustomerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|c:\\users\\lenovo\\onedrive\\desktop\\loyaltyprogram\\loyaltyconsole\\src\\loyaltyconsole.mvc\\wwwroot\\admin\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|solutionrelative:src\\loyaltyconsole.mvc\\wwwroot\\admin\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|c:\\users\\lenovo\\onedrive\\desktop\\loyaltyprogram\\loyaltyconsole\\src\\loyaltyconsole.mvc\\areas\\admin\\views\\transaction\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|solutionrelative:src\\loyaltyconsole.mvc\\areas\\admin\\views\\transaction\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|c:\\users\\lenovo\\onedrive\\desktop\\loyaltyprogram\\loyaltyconsole\\src\\loyaltyconsole.mvc\\areas\\admin\\controllers\\transactioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|solutionrelative:src\\loyaltyconsole.mvc\\areas\\admin\\controllers\\transactioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|c:\\users\\lenovo\\onedrive\\desktop\\loyaltyprogram\\loyaltyconsole\\src\\loyaltyconsole.mvc\\areas\\admin\\viewmodels\\customervms\\customergetvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -518,32 +518,122 @@
       "DocumentGroups": [
         {
           "DockedHeight": 308,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 3,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\Transaction\\Index.cshtml",
+              "RelativeDocumentMoniker": "src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\Transaction\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\Transaction\\Index.cshtml",
+              "RelativeToolTip": "src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\Transaction\\Index.cshtml",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAADEAAABVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-19T09:18:05.999Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CustomerController.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.MVC\\Areas\\Admin\\Controllers\\CustomerController.cs",
+              "RelativeDocumentMoniker": "src\\LoyaltyConsole.MVC\\Areas\\Admin\\Controllers\\CustomerController.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.MVC\\Areas\\Admin\\Controllers\\CustomerController.cs",
+              "RelativeToolTip": "src\\LoyaltyConsole.MVC\\Areas\\Admin\\Controllers\\CustomerController.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T22:42:51.887Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CrudService.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.MVC\\Services\\Implementations\\CrudService.cs",
+              "RelativeDocumentMoniker": "src\\LoyaltyConsole.MVC\\Services\\Implementations\\CrudService.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.MVC\\Services\\Implementations\\CrudService.cs",
+              "RelativeToolTip": "src\\LoyaltyConsole.MVC\\Services\\Implementations\\CrudService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-05T07:21:01.405Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\Customer\\Index.cshtml",
+              "RelativeDocumentMoniker": "src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\Customer\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\Customer\\Index.cshtml",
+              "RelativeToolTip": "src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\Customer\\Index.cshtml",
+              "ViewState": "AgIAACsAAAAAAAAAAAAuwEIAAABTAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-17T22:44:57.26Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CustomersController.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\LoyaltyConsole.API\\Controllers\\CustomersController.cs",
+              "RelativeDocumentMoniker": "LoyaltyConsole.API\\Controllers\\CustomersController.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\LoyaltyConsole.API\\Controllers\\CustomersController.cs",
+              "RelativeToolTip": "LoyaltyConsole.API\\Controllers\\CustomersController.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAxwDMAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T22:27:22.639Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CustomerService.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\LoyaltyConsole.Business\\Implementations\\CustomerService.cs",
+              "RelativeDocumentMoniker": "LoyaltyConsole.Business\\Implementations\\CustomerService.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\LoyaltyConsole.Business\\Implementations\\CustomerService.cs",
+              "RelativeToolTip": "LoyaltyConsole.Business\\Implementations\\CustomerService.cs",
+              "ViewState": "AgIAAK0AAAAAAAAAAAAIwLwAAABsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-16T13:56:17.454Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "TransactionController.cs",
               "DocumentMoniker": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.MVC\\Areas\\Admin\\Controllers\\TransactionController.cs",
               "RelativeDocumentMoniker": "src\\LoyaltyConsole.MVC\\Areas\\Admin\\Controllers\\TransactionController.cs",
               "ToolTip": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.MVC\\Areas\\Admin\\Controllers\\TransactionController.cs",
               "RelativeToolTip": "src\\LoyaltyConsole.MVC\\Areas\\Admin\\Controllers\\TransactionController.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAuwCUAAAB0AAAAAAAAAA==",
+              "ViewState": "AgIAAA4AAAAAAAAAAAA+wCUAAAB0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-19T09:15:55.875Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\LoyaltyConsole.API\\Program.cs",
-              "RelativeDocumentMoniker": "LoyaltyConsole.API\\Program.cs",
-              "ToolTip": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\LoyaltyConsole.API\\Program.cs",
-              "RelativeToolTip": "LoyaltyConsole.API\\Program.cs",
-              "ViewState": "AgIAAEoAAAAAAAAAAAAuwF4AAABxAAAAAAAAAA==",
+              "DocumentIndex": 8,
+              "Title": "CustomerGetDto.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\LoyaltyConsole.Business\\DTOs\\CustomerDtos\\CustomerGetDto.cs",
+              "RelativeDocumentMoniker": "LoyaltyConsole.Business\\DTOs\\CustomerDtos\\CustomerGetDto.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\LoyaltyConsole.Business\\DTOs\\CustomerDtos\\CustomerGetDto.cs",
+              "RelativeToolTip": "LoyaltyConsole.Business\\DTOs\\CustomerDtos\\CustomerGetDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-05T09:54:29.936Z"
+              "WhenOpened": "2025-08-15T08:32:08.407Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ApiResponse.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\LoyaltyConsole.API\\ApiResponses\\ApiResponse.cs",
+              "RelativeDocumentMoniker": "LoyaltyConsole.API\\ApiResponses\\ApiResponse.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\LoyaltyConsole.API\\ApiResponses\\ApiResponse.cs",
+              "RelativeToolTip": "LoyaltyConsole.API\\ApiResponses\\ApiResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-04T21:46:39.531Z"
             },
             {
               "$type": "Document",
@@ -559,97 +649,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ApiResponse.cs",
-              "DocumentMoniker": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\LoyaltyConsole.API\\ApiResponses\\ApiResponse.cs",
-              "RelativeDocumentMoniker": "LoyaltyConsole.API\\ApiResponses\\ApiResponse.cs",
-              "ToolTip": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\LoyaltyConsole.API\\ApiResponses\\ApiResponse.cs",
-              "RelativeToolTip": "LoyaltyConsole.API\\ApiResponses\\ApiResponse.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAlAAAAAAAAAA==",
+              "DocumentIndex": 13,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\LoyaltyConsole.API\\Program.cs",
+              "RelativeDocumentMoniker": "LoyaltyConsole.API\\Program.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\LoyaltyConsole.API\\Program.cs",
+              "RelativeToolTip": "LoyaltyConsole.API\\Program.cs",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAuwF4AAABxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-04T21:46:39.531Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-05T09:54:29.936Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\Transaction\\Index.cshtml",
-              "RelativeDocumentMoniker": "src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\Transaction\\Index.cshtml",
-              "ToolTip": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\Transaction\\Index.cshtml",
-              "RelativeToolTip": "src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\Transaction\\Index.cshtml",
-              "ViewState": "AgIAACoAAAAAAAAAAAAAADgAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-08-19T09:18:05.999Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CustomerGetDto.cs",
-              "DocumentMoniker": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\LoyaltyConsole.Business\\DTOs\\CustomerDtos\\CustomerGetDto.cs",
-              "RelativeDocumentMoniker": "LoyaltyConsole.Business\\DTOs\\CustomerDtos\\CustomerGetDto.cs",
-              "ToolTip": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\LoyaltyConsole.Business\\DTOs\\CustomerDtos\\CustomerGetDto.cs",
-              "RelativeToolTip": "LoyaltyConsole.Business\\DTOs\\CustomerDtos\\CustomerGetDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-15T08:32:08.407Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CustomerController.cs",
-              "DocumentMoniker": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.MVC\\Areas\\Admin\\Controllers\\CustomerController.cs",
-              "RelativeDocumentMoniker": "src\\LoyaltyConsole.MVC\\Areas\\Admin\\Controllers\\CustomerController.cs",
-              "ToolTip": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.MVC\\Areas\\Admin\\Controllers\\CustomerController.cs",
-              "RelativeToolTip": "src\\LoyaltyConsole.MVC\\Areas\\Admin\\Controllers\\CustomerController.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAAwC0AAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-17T22:42:51.887Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CrudService.cs",
-              "DocumentMoniker": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.MVC\\Services\\Implementations\\CrudService.cs",
-              "RelativeDocumentMoniker": "src\\LoyaltyConsole.MVC\\Services\\Implementations\\CrudService.cs",
-              "ToolTip": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.MVC\\Services\\Implementations\\CrudService.cs",
-              "RelativeToolTip": "src\\LoyaltyConsole.MVC\\Services\\Implementations\\CrudService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-05T07:21:01.405Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "CustomersController.cs",
-              "DocumentMoniker": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\LoyaltyConsole.API\\Controllers\\CustomersController.cs",
-              "RelativeDocumentMoniker": "LoyaltyConsole.API\\Controllers\\CustomersController.cs",
-              "ToolTip": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\LoyaltyConsole.API\\Controllers\\CustomersController.cs",
-              "RelativeToolTip": "LoyaltyConsole.API\\Controllers\\CustomersController.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAAwDMAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-17T22:27:22.639Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "CustomerService.cs",
-              "DocumentMoniker": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\LoyaltyConsole.Business\\Implementations\\CustomerService.cs",
-              "RelativeDocumentMoniker": "LoyaltyConsole.Business\\Implementations\\CustomerService.cs",
-              "ToolTip": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\LoyaltyConsole.Business\\Implementations\\CustomerService.cs",
-              "RelativeToolTip": "LoyaltyConsole.Business\\Implementations\\CustomerService.cs",
-              "ViewState": "AgIAAK0AAAAAAAAAAAAIwMcAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-16T13:56:17.454Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
               "Title": "ICustomerService.cs",
               "DocumentMoniker": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\LoyaltyConsole.Business\\Interfaces\\ICustomerService.cs",
               "RelativeDocumentMoniker": "LoyaltyConsole.Business\\Interfaces\\ICustomerService.cs",
@@ -657,12 +669,11 @@
               "RelativeToolTip": "LoyaltyConsole.Business\\Interfaces\\ICustomerService.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAAoAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-16T13:56:10.163Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-16T13:56:10.163Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "style.css",
               "DocumentMoniker": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.MVC\\wwwroot\\admin\\css\\style.css",
               "RelativeDocumentMoniker": "src\\LoyaltyConsole.MVC\\wwwroot\\admin\\css\\style.css",
@@ -671,19 +682,6 @@
               "ViewState": "AgIAAHEAAAAAAAAAAAAAAIQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
               "WhenOpened": "2025-09-02T18:51:11.431Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\Customer\\Index.cshtml",
-              "RelativeDocumentMoniker": "src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\Customer\\Index.cshtml",
-              "ToolTip": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\Customer\\Index.cshtml",
-              "RelativeToolTip": "src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\Customer\\Index.cshtml",
-              "ViewState": "AgIAAFQAAAAAAAAAAAAuwDsAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-08-17T22:44:57.26Z",
-              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -1091,8 +1089,7 @@
               "RelativeToolTip": "LoyaltyConsole.API\\Controllers\\AuthController.cs",
               "ViewState": "AgIAAB0AAAAAAAAAAAAiwFMAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-29T16:45:48.961Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-29T16:45:48.961Z"
             },
             {
               "$type": "Document",
@@ -1104,8 +1101,7 @@
               "RelativeToolTip": "LoyaltyConsole.Business\\Implementations\\AuthService.cs",
               "ViewState": "AgIAAL0AAAAAAAAAAEBdwMwAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-04T19:11:09.267Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-04T19:11:09.267Z"
             },
             {
               "$type": "Document",
@@ -1117,8 +1113,7 @@
               "RelativeToolTip": "src\\LoyaltyConsole.MVC\\Areas\\Admin\\Controllers\\UserController.cs",
               "ViewState": "AgIAACsAAAAAAAAAAIBZwDsAAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-29T12:30:02.072Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-29T12:30:02.072Z"
             },
             {
               "$type": "Document",
@@ -1154,8 +1149,7 @@
               "RelativeToolTip": "src\\LoyaltyConsole.MVC\\Services\\Implementations\\AuthService.cs",
               "ViewState": "AgIAABYAAAAAAAAAAAAuwCYAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-08T09:06:25.034Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-08T09:06:25.034Z"
             },
             {
               "$type": "Document",
@@ -1203,8 +1197,7 @@
               "RelativeToolTip": "src\\LoyaltyConsole.MVC\\Areas\\Admin\\Controllers\\CashbackBalanceController.cs",
               "ViewState": "AgIAACsAAAAAAAAAAAAYwBgAAABiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-30T09:32:54.357Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-30T09:32:54.357Z"
             },
             {
               "$type": "Document",
@@ -1312,8 +1305,7 @@
               "RelativeToolTip": "LoyaltyConsole.API\\Controllers\\TransactionsController.cs",
               "ViewState": "AgIAAFkAAAAAAAAAAAAuwGsAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-06T11:59:14.209Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-06T11:59:14.209Z"
             },
             {
               "$type": "Document",
@@ -1361,8 +1353,7 @@
               "RelativeToolTip": "LoyaltyConsole.Business\\Implementations\\CashbackBalanceService.cs",
               "ViewState": "AgIAAEcAAAAAAAAAAAAMwFcAAABHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-07T15:54:54.354Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-07T15:54:54.354Z"
             },
             {
               "$type": "Document",
@@ -1374,8 +1365,7 @@
               "RelativeToolTip": "LoyaltyConsole.API\\Controllers\\CashbackBalancesController.cs",
               "ViewState": "AgIAAFEAAAAAAAAAAAAowIgAAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-07T15:59:00.955Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-07T15:59:00.955Z"
             },
             {
               "$type": "Document",
@@ -1423,8 +1413,7 @@
               "RelativeToolTip": "LoyaltyConsole.Business\\Implementations\\TransactionService.cs",
               "ViewState": "AgIAACkAAAAAAAAAAAAiwDIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-05T15:22:11.624Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-05T15:22:11.624Z"
             },
             {
               "$type": "Document",
