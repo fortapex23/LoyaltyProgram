@@ -44,35 +44,44 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var cst in Model)
+                                @if (!Model.Any())
                                 {
-                                    count++;
                                     <tr>
-                                        <td>@count</td>
-                                        <td>
-                                            @if (!string.IsNullOrEmpty(cst.CustomerImage?.ImageUrl))
-                                            {
-                                                <img src="@cst.CustomerImage.ImageUrl"
-                                                     alt="Customer Image"
-                                                     style="width:30px;height:30px;border-radius:50%;cursor:pointer"
-                                                     onclick="showImageModal('@cst.CustomerImage.ImageUrl')" />
-                                            }
-                                            else
-                                            {
-                                                <span><i class="fa-solid fa-user"></i></span>
-                                            }
-                                        </td>
-                                        <td>@cst.FullName</td>
-                                        <td>@cst.Birthday.ToString("dd/ MM/ yyyy")</td>
-                                        <td>@cst.CashbackBalance.TotalCashback</td>
-                                        <td>@cst.CashbackBalance.CashbackRedeemed</td>
-                                        <td>@cst.CashbackBalance.CashbackAvailable</td>
-                                        <td>
-                                            <a asp-controller="cashbackbalance" asp-action="update" asp-route-id="@cst.CashbackBalance.Id" class="btn btn-warning">balance</a>
-                                            <a asp-action="Update" asp-route-id="@cst.Id" class="btn btn-primary">edit</a>
-                                            <a asp-action="Delete" asp-route-id="@cst.Id" class="btn btn-danger">remove</a>
-                                        </td>
+                                        <td colspan="10" class="text-center fw-bold">No Customers</td>
                                     </tr>
+                                }
+                                else
+                                {
+                                    @foreach (var cst in Model)
+                                    {
+                                        count++;
+                                        <tr>
+                                            <td>@count</td>
+                                            <td>
+                                                @if (!string.IsNullOrEmpty(cst.CustomerImage?.ImageUrl))
+                                                {
+                                                    <img src="@cst.CustomerImage.ImageUrl"
+                                                         alt="Customer Image"
+                                                         style="width:30px;height:30px;border-radius:50%;cursor:pointer"
+                                                         onclick="showImageModal('@cst.CustomerImage.ImageUrl')" />
+                                                }
+                                                else
+                                                {
+                                                    <span><i class="fa-solid fa-user"></i></span>
+                                                }
+                                            </td>
+                                            <td>@cst.FullName</td>
+                                            <td>@cst.Birthday.ToString("dd/ MM/ yyyy")</td>
+                                            <td>@cst.CashbackBalance.TotalCashback</td>
+                                            <td>@cst.CashbackBalance.CashbackRedeemed</td>
+                                            <td>@cst.CashbackBalance.CashbackAvailable</td>
+                                            <td>
+                                                <a asp-controller="cashbackbalance" asp-action="update" asp-route-id="@cst.CashbackBalance.Id" class="btn btn-warning">balance</a>
+                                                <a asp-action="Update" asp-route-id="@cst.Id" class="btn btn-primary">edit</a>
+                                                <a asp-action="Delete" asp-route-id="@cst.Id" class="btn btn-danger">remove</a>
+                                            </td>
+                                        </tr>
+                                    }
                                 }
                             </tbody>
                         </table>
@@ -88,24 +97,27 @@
                             </div>
                         </div>
 
-                        <div style="display: @(Model.TotalPage <= 1 ? "none" : "flex"); justify-content: center">
-                            <nav aria-label="...">
-                                <ul class="pagination">
-                                    <li class="page-item @(Model.Prev == false ? "disabled" : "")">
-                                        <a class="page-link" asp-action="index" asp-route-page="@(Model.ActivePage - 1)">Previous</a>
-                                    </li>
-                                    @for (int i = 1; i <= Model.TotalPage; i++)
-                                    {
-                                        <li class="page-item @(Model.ActivePage == i ? "active" : "")">
-                                            <a class="page-link" asp-action="index" asp-route-page="@i">@i</a>
+                        @if (Model.Any() && Model.TotalPage > 1)
+                        {
+                            <div style="display: flex; justify-content: center">
+                                <nav aria-label="...">
+                                    <ul class="pagination">
+                                        <li class="page-item @(Model.Prev == false ? "disabled" : "")">
+                                            <a class="page-link" asp-action="index" asp-route-page="@(Model.ActivePage - 1)">Previous</a>
                                         </li>
-                                    }
-                                    <li class="page-item @(Model.Next == false ? "disabled" : "")">
-                                        <a class="page-link" asp-action="index" asp-route-page="@(Model.ActivePage + 1)">Next</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
+                                        @for (int i = 1; i <= Model.TotalPage; i++)
+                                        {
+                                            <li class="page-item @(Model.ActivePage == i ? "active" : "")">
+                                                <a class="page-link" asp-action="index" asp-route-page="@i">@i</a>
+                                            </li>
+                                        }
+                                        <li class="page-item @(Model.Next == false ? "disabled" : "")">
+                                            <a class="page-link" asp-action="index" asp-route-page="@(Model.ActivePage + 1)">Next</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        }
 
                     </div>
                 </div>
