@@ -43,8 +43,8 @@
                                         <td>@trs.Customer.FullName</td>
                                         <td>@trs.Business.ToString()</td>
                                         <td>@trs.TransactionDate</td>
-                                        <td>@trs.AmountSpent</td>
-                                        <td>@trs.CashbackEarned</td>
+                                        <td>@trs.AmountSpent ₼</td>
+                                        <td>@trs.CashbackEarned ₼</td>
                                         <td>
                                             <a asp-action="Update" asp-route-id="@trs.Id" class="btn btn-primary">edit</a>
                                             <a asp-action="Delete" asp-route-id="@trs.Id" class="btn btn-danger">remove</a>
