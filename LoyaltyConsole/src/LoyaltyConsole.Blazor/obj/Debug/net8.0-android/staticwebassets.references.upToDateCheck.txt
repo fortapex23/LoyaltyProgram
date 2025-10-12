@@ -1,0 +1,3 @@
+C:\Users\Lenovo\OneDrive\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Lenovo\OneDrive\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Lenovo\OneDrive\Desktop\LoyaltyProgram\LoyaltyConsole\LoyaltyConsole.API\obj\Debug\net8.0\staticwebassets.build.json

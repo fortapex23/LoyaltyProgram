@@ -7,7 +7,7 @@
         "Action": "Start"
       },
       {
-        "Path": "src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj",
+        "Path": "src\\LoyaltyConsole.Blazor\\LoyaltyConsole.Blazor.csproj",
         "Action": "Start"
       }
     ]

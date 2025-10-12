@@ -1,0 +1,49 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.Blazor\\obj\\Debug\\net8.0-maccatalyst\\maccatalyst-x64\\scopedcss\\bundle\\LoyaltyConsole.Blazor.styles.css",
+      "PackagePath": "staticwebassets\\LoyaltyConsole.Blazor.styles.css"
+    },
+    {
+      "Id": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.Blazor\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.Blazor\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.Blazor\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.Blazor\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.Blazor\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0-maccatalyst\\maccatalyst-x64\\staticwebassets\\msbuild.LoyaltyConsole.Blazor.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0-maccatalyst\\maccatalyst-x64\\staticwebassets\\msbuild.LoyaltyConsole.Blazor.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0-maccatalyst\\maccatalyst-x64\\staticwebassets\\msbuild.build.LoyaltyConsole.Blazor.props",
+      "PackagePath": "build\\LoyaltyConsole.Blazor.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0-maccatalyst\\maccatalyst-x64\\staticwebassets\\msbuild.buildMultiTargeting.LoyaltyConsole.Blazor.props",
+      "PackagePath": "buildMultiTargeting\\LoyaltyConsole.Blazor.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0-maccatalyst\\maccatalyst-x64\\staticwebassets\\msbuild.buildTransitive.LoyaltyConsole.Blazor.props",
+      "PackagePath": "buildTransitive\\LoyaltyConsole.Blazor.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
