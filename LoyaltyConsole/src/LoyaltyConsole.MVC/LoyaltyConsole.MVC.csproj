@@ -6,6 +6,36 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+	<!--<PropertyGroup>
+		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+	</PropertyGroup>-->
+
+	<!--<ItemGroup>
+		<Content Include="appsettings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+		</Content>
+	</ItemGroup>-->
+	
+	<ItemGroup>
+		<!-- Keep only the MVC config files -->
+		<Content Update="appsettings.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="appsettings.Development.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+
+		<!-- Exclude API or other appsettings files -->
+		<Content Remove="..\LoyaltyConsole.API\appsettings*.json" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+		<Content Update="path\to\duplicate.file" CopyToPublishDirectory="Never" />
+	</ItemGroup>
+	
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
     <PackageReference Include="RestSharp" Version="112.1.0" />

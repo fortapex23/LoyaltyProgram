@@ -37,28 +37,29 @@ namespace LoyaltyConsole.MVC.Services.Implementations
             }
         }
 
-        public async Task CreateWithImage<T>(string endpoint, T entity, IFormFile file = null) where T : class
+        public async Task CreateWithImage<T>(string endpoint, T entity) where T : class
         {
             var request = new RestRequest(endpoint, Method.Post);
 
-            if (file != null)
-            {
-                request.AlwaysMultipartFormData = true;
+            var formProperties = typeof(T).GetProperties();
 
-                // Add normal properties
-                foreach (var prop in entity.GetType().GetProperties())
+            bool hasFile = formProperties.Any(p => typeof(IFormFile).IsAssignableFrom(p.PropertyType));
+
+            if (hasFile)
+            {
+                foreach (var prop in formProperties)
                 {
                     var value = prop.GetValue(entity);
-                    if (value != null && !(value is IFormFile))
+                    if (value is IFormFile file)
+                    {
+                        using var ms = new MemoryStream();
+                        await file.CopyToAsync(ms);
+                        request.AddFile(prop.Name, ms.ToArray(), file.FileName, file.ContentType);
+                    }
+                    else if (value != null)
+                    {
                         request.AddParameter(prop.Name, value.ToString());
-                }
-
-                // Add file as byte[]
-                using (var ms = new MemoryStream())
-                {
-                    await file.CopyToAsync(ms);
-                    var fileBytes = ms.ToArray();
-                    request.AddFile("Image", fileBytes, file.FileName, file.ContentType);
+                    }
                 }
             }
             else

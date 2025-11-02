@@ -1,4 +1,7 @@
+using FirebaseAdmin;
+using Google.Cloud.Firestore;
 using FluentValidation.AspNetCore;
+using Google.Apis.Auth.OAuth2;
 using LoyaltyConsole.Business;
 using LoyaltyConsole.Business.DTOs.TransactionDtos;
 using LoyaltyConsole.Business.DTOs.UserDtos;
@@ -29,13 +32,6 @@ namespace LoyaltyConsole.API
                                .AllowAnyHeader();
                     });
             });
-
-            //var firebaseKeyPath = Path.Combine(builder.Environment.ContentRootPath, "Configs", "firebase-adminsdk.json");
-
-            //FirebaseApp.Create(new AppOptions()
-            //{
-            //    Credential = GoogleCredential.FromFile(firebaseKeyPath)
-            //});
 
             builder.Services.AddControllers().AddFluentValidation(op =>
             {
@@ -74,18 +70,19 @@ namespace LoyaltyConsole.API
                 {
                     ValidateIssuer = true,
                     ValidateAudience = true,
-                    ValidIssuer = builder.Configuration.GetSection("JWT:audience").Value,
-                    ValidAudience = builder.Configuration.GetSection("JWT:issuer").Value,
+                    ValidIssuer = builder.Configuration.GetSection("JWT:issuer").Value,
+                    ValidAudience = builder.Configuration.GetSection("JWT:audience").Value,
                     ValidateLifetime = true,
                     ClockSkew = TimeSpan.Zero,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("JWT:secretKey").Value))
                 };
             });
 
-            builder.Services.AddRepositories(builder.Configuration.GetConnectionString("default"));
+            builder.Services.AddRepositories(builder.Configuration.GetConnectionString("DefaultConnection"));
             builder.Services.AddServices();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            //builder.Services.AddSingleton(db);
 
             var app = builder.Build();
 
@@ -108,6 +105,10 @@ namespace LoyaltyConsole.API
             app.UseAuthorization();
 
             app.MapControllers();
+
+            Console.WriteLine("JWT Secret: " + builder.Configuration["JWT:secretKey"]);
+            Console.WriteLine("JWT Issuer: " + builder.Configuration["JWT:issuer"]);
+            Console.WriteLine("JWT Audience: " + builder.Configuration["JWT:audience"]);
 
             app.Run();
         }

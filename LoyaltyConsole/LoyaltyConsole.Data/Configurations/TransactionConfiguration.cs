@@ -16,6 +16,9 @@ namespace LoyaltyConsole.Data.Configurations
 
             builder.Property(t => t.Business)
                 .IsRequired();
+
+            builder.Property(t => t.Currency)
+                .IsRequired();
         }
     }
 }

@@ -17,7 +17,6 @@ namespace LoyaltyConsole.Business.Implementations
         private readonly ICustomerImageRepository _customerimageRepository;
         private readonly ICashbackBalanceRepository _cashbackBalanceRepository;
         private readonly IMapper _mapper;
-        private readonly IWebHostEnvironment _env;
         private readonly IPhotoService _photoService;
 
         public CustomerService(
@@ -25,14 +24,12 @@ namespace LoyaltyConsole.Business.Implementations
             IMapper mapper,
             ICashbackBalanceRepository cashbackBalanceRepository,
             ICustomerImageRepository customerimageRepository,
-            IWebHostEnvironment env,
             IPhotoService photoService)
         {
             _customerRepository = customerRepository;
             _mapper = mapper;
             _cashbackBalanceRepository = cashbackBalanceRepository;
             _customerimageRepository = customerimageRepository;
-            _env = env;
             _photoService = photoService;
         }
 

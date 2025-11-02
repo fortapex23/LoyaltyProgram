@@ -54,6 +54,9 @@ namespace LoyaltyConsole.MVC
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
+            var conn = builder.Configuration.GetConnectionString("DefaultConnection");
+            Console.WriteLine($"[DEBUG] Using connection string: {conn}");
+
             app.Run();
         }
     }

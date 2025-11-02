@@ -33,37 +33,46 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var rew in Model)
+                                @if (!Model.Any())
                                 {
-                                    count++;
                                     <tr>
-                                        <td>@count</td>
-                                        <td>@rew.FullName</td>
-                                        <td>@rew.Email</td>
-                                        <td>@rew.BirthDay.ToString("dd/ MM/ yyyy")</td>
-                                        @if (rew.Status == AdminStatus.Approved)
-                                        {
-                                            <td style="font-weight: bold; color: forestgreen">@rew.Status</td>
-                                        }
-                                        @if (rew.Status == AdminStatus.Rejected)
-                                        {
-                                            <td style="font-weight: bold; color: red">@rew.Status</td>
-                                        }
-                                        @if (rew.Status == AdminStatus.Pending)
-                                        {
-                                            <td>@rew.Status</td>
-                                        }
-                                        <td>
-                                            @if (rew.Status != AdminStatus.Approved)
-                                            {
-                                                <a asp-action="ApproveAdmin" asp-route-id="@rew.AppUserId" class="btn btn-success">approve</a>
-                                            }
-                                            @if (rew.Status != AdminStatus.Rejected)
-                                            {
-                                                <a asp-action="RejectAdmin" asp-route-id="@rew.AppUserId" class="btn btn-danger">reject</a>
-                                            }
-                                        </td>
+                                        <td colspan="10" class="text-center fw-bold">No Admins</td>
                                     </tr>
+                                }
+                                else
+                                {
+                                    @foreach (var rew in Model)
+                                    {
+                                        count++;
+                                        <tr>
+                                            <td>@count</td>
+                                            <td>@rew.FullName</td>
+                                            <td>@rew.Email</td>
+                                            <td>@rew.BirthDay.ToString("dd/ MM/ yyyy")</td>
+                                            @if (rew.Status == AdminStatus.Approved)
+                                            {
+                                                <td style="font-weight: bold; color: forestgreen">@rew.Status</td>
+                                            }
+                                            @if (rew.Status == AdminStatus.Rejected)
+                                            {
+                                                <td style="font-weight: bold; color: red">@rew.Status</td>
+                                            }
+                                            @if (rew.Status == AdminStatus.Pending)
+                                            {
+                                                <td>@rew.Status</td>
+                                            }
+                                            <td>
+                                                @if (rew.Status != AdminStatus.Approved)
+                                                {
+                                                    <a asp-action="ApproveAdmin" asp-route-id="@rew.AppUserId" class="btn btn-success">approve</a>
+                                                }
+                                                @if (rew.Status != AdminStatus.Rejected)
+                                                {
+                                                    <a asp-action="RejectAdmin" asp-route-id="@rew.AppUserId" class="btn btn-danger">reject</a>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
                                 }
                             </tbody>
                         </table>

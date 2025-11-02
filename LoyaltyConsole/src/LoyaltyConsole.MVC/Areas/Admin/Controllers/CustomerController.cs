@@ -60,35 +60,12 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CustomerCreateVM vm)
         {
-            if (!ModelState.IsValid) return View(vm);
+            if (!ModelState.IsValid)
+                return View(vm);
 
             try
             {
-                string fileName = null;
-
-                if (vm.Image != null)
-                {
-                    // Ensure folder exists
-                    var uploadPath = Path.Combine(_env.WebRootPath, "uploads/customers");
-                    if (!Directory.Exists(uploadPath))
-                        Directory.CreateDirectory(uploadPath);
-
-                    fileName = Guid.NewGuid() + Path.GetExtension(vm.Image.FileName);
-                    var filePath = Path.Combine(uploadPath, fileName);
-
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await vm.Image.CopyToAsync(stream);
-                    }
-                }
-
-                //var createDto = new CustomerCreateDto(
-                //    vm.FullName,
-                //    vm.Birthday,
-                //    fileName // send only file name
-                //);
-
-                //await _crudService.Create("/customers", createDto);
+                await _crudService.CreateWithImage("/customers", vm);
             }
             catch (Exception ex)
             {

@@ -35,8 +35,9 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
             {
                 data = await _authService.AdminLogin(vm);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 ModelState.AddModelError("", "Email or password is incorrect");
                 return View();
             }

@@ -11,6 +11,7 @@ namespace LoyaltyConsole.Core.Models
         public decimal AmountSpent { get; set; }
         public BusinessTypes Business { get; set; }
         public decimal CashbackEarned { get; set; }
+        public Currency Currency { get; set; }
 
     }
 }
