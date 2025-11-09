@@ -64,11 +64,21 @@
                                             <td>
                                                 @if (rew.Status != AdminStatus.Approved)
                                                 {
-                                                    <a asp-action="ApproveAdmin" asp-route-id="@rew.AppUserId" class="btn btn-success">approve</a>
+                                                    <div class="hover-tip">
+                                                        <a asp-action="ApproveAdmin" asp-route-id="@rew.AppUserId" class="btn btn-outline-success">
+                                                            <i style="color:black" class="fa-solid fa-square-check"></i>
+                                                        </a>
+                                                        <span class="hover-text">approve</span>
+                                                    </div>
                                                 }
                                                 @if (rew.Status != AdminStatus.Rejected)
                                                 {
-                                                    <a asp-action="RejectAdmin" asp-route-id="@rew.AppUserId" class="btn btn-danger">reject</a>
+                                                    <div class="hover-tip">
+                                                        <a asp-action="RejectAdmin" asp-route-id="@rew.AppUserId" class="btn btn-outline-danger">
+                                                            <i style="color:black" class="fa-solid fa-square-xmark"></i>
+                                                        </a>
+                                                        <span class="hover-text">reject</span>
+                                                    </div>
                                                 }
                                             </td>
                                         </tr>

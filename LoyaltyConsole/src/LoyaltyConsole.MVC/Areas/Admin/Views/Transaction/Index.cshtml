@@ -1,5 +1,6 @@
 ﻿@using LoyaltyConsole.MVC.Areas.Admin.PaginatedLists
 @using LoyaltyConsole.MVC.Areas.Admin.ViewModels.TransactionVMs
+@using LoyaltyConsole.MVC.Enums
 
 @model PaginatedList<TransactionGetVM>
 @{
@@ -50,12 +51,23 @@
                                             <td>@count</td>
                                             <td>@trs.Customer.FullName</td>
                                             <td>@trs.Business.ToString()</td>
-                                            <td>@trs.TransactionDate</td>
-                                            <td>@trs.AmountSpent ₼</td>
-                                            <td>@trs.CashbackEarned ₼</td>
+                                            <td>@trs.TransactionDate.ToShortDateString()</td>
+                                            <td>@trs.AmountSpent @trs.Currency.GetSymbol()</td>
+                                            <td>@trs.CashbackEarned @trs.Currency.GetSymbol()</td>
                                             <td>
-                                                <a asp-action="Update" asp-route-id="@trs.Id" class="btn btn-primary">edit</a>
-                                                <a asp-action="Delete" asp-route-id="@trs.Id" class="btn btn-danger">remove</a>
+                                                <div class="hover-tip">
+                                                    <a asp-action="Update" asp-route-id="@trs.Id" class="btn btn-outline-primary">
+                                                        <i style="color: black" class="fa-solid fa-pen-to-square"></i>
+                                                    </a>
+                                                    <span class="hover-text">edit</span>
+                                                </div>
+
+                                                <div class="hover-tip">
+                                                    <a asp-action="Delete" asp-route-id="@trs.Id" class="btn btn-outline-danger">
+                                                        <i style="color: black" class="fa-solid fa-trash"></i>
+                                                    </a>
+                                                    <span class="hover-text">remove</span>
+                                                </div>
                                             </td>
                                         </tr>
                                     }

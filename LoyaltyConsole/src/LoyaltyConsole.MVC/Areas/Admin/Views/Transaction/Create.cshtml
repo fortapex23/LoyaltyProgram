@@ -30,10 +30,9 @@
                         <div style="margin-top: 15px" class="form-floating mb-3">
                             <div class="input-group">
                                 <input asp-for="AmountSpent" type="number" step="0.01" class="form-control" id="amountInput" placeholder="Amount">
-                                <select class="form-select" id="currencySelect" style="max-width: 100px;">
-                                    <option value="AZN" selected>₼ AZN</option>
-                                    <option value="EUR">€ EUR</option>
-                                    <option value="USD">$ USD</option>
+                                <select asp-for="Currency" class="form-control"
+                                        asp-items="Html.GetEnumSelectList<LoyaltyConsole.MVC.Enums.Currencies>()">
+                                    <option selected disabled>select currency</option>
                                 </select>
                             </div>
                             @* <label for="amountInput">Amount Spent</label> *@

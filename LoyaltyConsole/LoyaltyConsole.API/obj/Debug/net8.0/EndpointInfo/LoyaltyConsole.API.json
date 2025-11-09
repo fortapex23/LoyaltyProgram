@@ -748,6 +748,15 @@
         },
         "additionalProperties": false
       },
+      "Currency": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
       "CustomerUpdateDto": {
         "type": "object",
         "properties": {
@@ -789,6 +798,9 @@
           "business": {
             "$ref": "#/components/schemas/BusinessTypes"
           },
+          "currency": {
+            "$ref": "#/components/schemas/Currency"
+          },
           "transactionDate": {
             "type": "string",
             "format": "date-time"
@@ -809,6 +821,9 @@
           },
           "business": {
             "$ref": "#/components/schemas/BusinessTypes"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/Currency"
           },
           "cashbackEarned": {
             "type": "number",

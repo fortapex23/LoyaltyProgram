@@ -34,6 +34,37 @@
 
     <!-- Template Stylesheet -->
     <link href="~/admin/css/style.css" rel="stylesheet">
+
+    <style>
+        .hover-tip {
+            position: relative;
+            display: inline-block;
+        }
+
+            .hover-tip .hover-text {
+                visibility: hidden;
+                width: 80px;
+                background-color: #333;
+                color: #fff;
+                text-align: center;
+                padding: 5px;
+                border-radius: 6px;
+                position: absolute;
+                bottom: 125%;
+                left: 50%;
+                transform: translateX(-50%);
+                opacity: 0;
+                transition: opacity 0.3s;
+                font-size: 12px;
+                z-index: 10;
+            }
+
+            .hover-tip:hover .hover-text {
+                visibility: visible;
+                opacity: 1;
+            }
+    </style>
+
 </head>
 
 <body>
@@ -50,7 +81,7 @@
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-light navbar-light">
-                <a href="~/admin/index.html" class="navbar-brand mx-4 mb-3">
+                <a href="" class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>WELCOME</h3>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">

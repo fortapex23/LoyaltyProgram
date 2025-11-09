@@ -38,12 +38,18 @@
                             <input type="hidden" asp-for="CustomerId" />
                         </div>
 
-                        <div style="margin-top: 20px" class="form-floating mb-3">
-                            <input asp-for="AmountSpent" type="text" class="form-control" id="floatingInput"
-                                   placeholder="amount">
-                            <label for="floatingInput">Amount Spent(₼)</label>
+                        <div style="margin-top: 15px" class="form-floating mb-3">
+                            <div class="input-group">
+                                <input asp-for="AmountSpent" type="number" step="0.01" class="form-control" id="amountInput" placeholder="Amount">
+                                <select asp-for="Currency" class="form-control"
+                                        asp-items="Html.GetEnumSelectList<LoyaltyConsole.MVC.Enums.Currencies>()">
+                                    <option selected disabled></option>
+                                </select>
+                            </div>
+                            @* <label for="amountInput">Amount Spent</label> *@
                             <span asp-validation-for="AmountSpent" class="text-danger"></span>
                         </div>
+
                         <div class="form-floating mb-3">
                             <select asp-for="Business" class="form-control"
                                     asp-items="Html.GetEnumSelectList<LoyaltyConsole.MVC.Enums.BusinessTypes>()">
