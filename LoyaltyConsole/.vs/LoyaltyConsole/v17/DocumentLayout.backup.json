@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|c:\\users\\lenovo\\onedrive\\desktop\\loyaltyprogram\\loyaltyconsole\\src\\loyaltyconsole.mvc\\areas\\admin\\views\\customer\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|solutionrelative:src\\loyaltyconsole.mvc\\areas\\admin\\views\\customer\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|c:\\users\\lenovo\\onedrive\\desktop\\loyaltyprogram\\loyaltyconsole\\src\\loyaltyconsole.mvc\\areas\\admin\\views\\user\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|solutionrelative:src\\loyaltyconsole.mvc\\areas\\admin\\views\\user\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|c:\\users\\lenovo\\onedrive\\desktop\\loyaltyprogram\\loyaltyconsole\\src\\loyaltyconsole.mvc\\areas\\admin\\views\\transaction\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|solutionrelative:src\\loyaltyconsole.mvc\\areas\\admin\\views\\transaction\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|c:\\users\\lenovo\\onedrive\\desktop\\loyaltyprogram\\loyaltyconsole\\src\\loyaltyconsole.mvc\\areas\\admin\\views\\customer\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|solutionrelative:src\\loyaltyconsole.mvc\\areas\\admin\\views\\customer\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|c:\\users\\lenovo\\onedrive\\desktop\\loyaltyprogram\\loyaltyconsole\\src\\loyaltyconsole.mvc\\areas\\admin\\views\\transaction\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -21,10 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|c:\\users\\lenovo\\onedrive\\desktop\\loyaltyprogram\\loyaltyconsole\\src\\loyaltyconsole.mvc\\areas\\admin\\views\\customer\\update.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|solutionrelative:src\\loyaltyconsole.mvc\\areas\\admin\\views\\customer\\update.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|c:\\users\\lenovo\\onedrive\\desktop\\loyaltyprogram\\loyaltyconsole\\src\\loyaltyconsole.mvc\\areas\\admin\\views\\user\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|solutionrelative:src\\loyaltyconsole.mvc\\areas\\admin\\views\\user\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{216493D3-51FD-459B-A79C-C7673B21AE0D}|src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj|c:\\users\\lenovo\\onedrive\\desktop\\loyaltyprogram\\loyaltyconsole\\src\\loyaltyconsole.mvc\\areas\\admin\\views\\shared\\_adminlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -542,7 +542,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 308,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
@@ -571,7 +571,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\Customer\\Create.cshtml",
               "RelativeDocumentMoniker": "src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\Customer\\Create.cshtml",
@@ -597,33 +597,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\Customer\\Index.cshtml",
               "RelativeDocumentMoniker": "src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\Customer\\Index.cshtml",
-              "ToolTip": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\Customer\\Index.cshtml*",
-              "RelativeToolTip": "src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\Customer\\Index.cshtml*",
-              "ViewState": "AgIAAD4AAAAAAAAAAAAuwFAAAAB0AAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\Customer\\Index.cshtml",
+              "RelativeToolTip": "src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\Customer\\Index.cshtml",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAuwFEAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-08-17T22:44:57.26Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\User\\Index.cshtml",
               "RelativeDocumentMoniker": "src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\User\\Index.cshtml",
               "ToolTip": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\User\\Index.cshtml",
               "RelativeToolTip": "src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\User\\Index.cshtml",
-              "ViewState": "AgIAAD0AAAAAAAAAAAAAAE0AAABhAAAAAAAAAA==",
+              "ViewState": "AgIAADcAAAAAAAAAAAAAAEYAAABfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-08-29T12:39:56.539Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Update.cshtml",
               "DocumentMoniker": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\Customer\\Update.cshtml",
               "RelativeDocumentMoniker": "src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\Customer\\Update.cshtml",
@@ -636,7 +636,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\Transaction\\Create.cshtml",
               "RelativeDocumentMoniker": "src\\LoyaltyConsole.MVC\\Areas\\Admin\\Views\\Transaction\\Create.cshtml",
