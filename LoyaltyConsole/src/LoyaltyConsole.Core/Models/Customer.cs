@@ -10,6 +10,6 @@ namespace LoyaltyConsole.Core.Models
         public List<Transaction> Transactions { get; set; }
         public CashbackBalance CashbackBalance { get; set; }
 
-        public CustomerImage CustomerImage { get; set; }
+        public CustomerImage? CustomerImage { get; set; }
     }
 }
