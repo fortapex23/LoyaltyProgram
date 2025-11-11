@@ -3,11 +3,11 @@
     "Name": "New Profile",
     "Projects": [
       {
-        "Path": "LoyaltyConsole.API\\LoyaltyConsole.API.csproj",
+        "Path": "src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj",
         "Action": "Start"
       },
       {
-        "Path": "src\\LoyaltyConsole.MVC\\LoyaltyConsole.MVC.csproj",
+        "Path": "src\\LoyaltyConsole.API\\LoyaltyConsole.API.csproj",
         "Action": "Start"
       }
     ]

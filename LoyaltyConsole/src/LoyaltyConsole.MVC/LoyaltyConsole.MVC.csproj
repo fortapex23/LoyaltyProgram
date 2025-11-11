@@ -40,9 +40,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
     <PackageReference Include="RestSharp" Version="112.1.0" />
   </ItemGroup>
-
+	
   <ItemGroup>
-    <ProjectReference Include="..\..\LoyaltyConsole.API\LoyaltyConsole.API.csproj" />
+    <ProjectReference Include="..\LoyaltyConsole.API\LoyaltyConsole.API.csproj" />
   </ItemGroup>
 
 </Project>

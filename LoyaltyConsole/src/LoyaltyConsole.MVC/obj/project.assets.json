@@ -12853,23 +12853,23 @@
     },
     "LoyaltyConsole.API/1.0.0": {
       "type": "project",
-      "path": "../../LoyaltyConsole.API/LoyaltyConsole.API.csproj",
-      "msbuildProject": "../../LoyaltyConsole.API/LoyaltyConsole.API.csproj"
+      "path": "../LoyaltyConsole.API/LoyaltyConsole.API.csproj",
+      "msbuildProject": "../LoyaltyConsole.API/LoyaltyConsole.API.csproj"
     },
     "LoyaltyConsole.Business/1.0.0": {
       "type": "project",
-      "path": "../../LoyaltyConsole.Business/LoyaltyConsole.Business.csproj",
-      "msbuildProject": "../../LoyaltyConsole.Business/LoyaltyConsole.Business.csproj"
+      "path": "../LoyaltyConsole.Business/LoyaltyConsole.Business.csproj",
+      "msbuildProject": "../LoyaltyConsole.Business/LoyaltyConsole.Business.csproj"
     },
     "LoyaltyConsole.Core/1.0.0": {
       "type": "project",
-      "path": "../../LoyaltyConsole.Core/LoyaltyConsole.Core.csproj",
-      "msbuildProject": "../../LoyaltyConsole.Core/LoyaltyConsole.Core.csproj"
+      "path": "../LoyaltyConsole.Core/LoyaltyConsole.Core.csproj",
+      "msbuildProject": "../LoyaltyConsole.Core/LoyaltyConsole.Core.csproj"
     },
     "LoyaltyConsole.Data/1.0.0": {
       "type": "project",
-      "path": "../../LoyaltyConsole.Data/LoyaltyConsole.Data.csproj",
-      "msbuildProject": "../../LoyaltyConsole.Data/LoyaltyConsole.Data.csproj"
+      "path": "../LoyaltyConsole.Data/LoyaltyConsole.Data.csproj",
+      "msbuildProject": "../LoyaltyConsole.Data/LoyaltyConsole.Data.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -12912,8 +12912,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\LoyaltyConsole.API\\LoyaltyConsole.API.csproj": {
-              "projectPath": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\LoyaltyConsole.API\\LoyaltyConsole.API.csproj"
+            "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.API\\LoyaltyConsole.API.csproj": {
+              "projectPath": "C:\\Users\\Lenovo\\OneDrive\\Desktop\\LoyaltyProgram\\LoyaltyConsole\\src\\LoyaltyConsole.API\\LoyaltyConsole.API.csproj"
             }
           }
         }

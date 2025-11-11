@@ -1,5 +1,4 @@
-﻿using LoyaltyConsole.Business.DTOs.UserDtos;
-using LoyaltyConsole.MVC.Areas.Admin.ViewModels.AuthVMs;
+﻿using LoyaltyConsole.MVC.Areas.Admin.ViewModels.AuthVMs;
 using LoyaltyConsole.MVC.Areas.Admin.ViewModels.CustomerVMs;
 using LoyaltyConsole.MVC.Enums;
 using LoyaltyConsole.MVC.Services.Interfaces;
