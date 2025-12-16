@@ -5,6 +5,7 @@ namespace LoyaltyConsole.Core.Models
     public class Customer : BaseModel
     {
         public string FullName { get; set; }
+        public string PhoneNumber { get; set; }
         public DateTime Birthday { get; set; }
 
         public List<Transaction> Transactions { get; set; }

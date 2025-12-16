@@ -1,11 +1,13 @@
 ﻿using System.Linq.Expressions;
 using AutoMapper;
 using LoyaltyConsole.Business.DTOs.TransactionDtos;
+using LoyaltyConsole.Business.Exceptions;
 using LoyaltyConsole.Business.ExternalServices.Interfaces;
 using LoyaltyConsole.Business.Interfaces;
 using LoyaltyConsole.Core.Models;
 using LoyaltyConsole.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
+using InvalidDataException = LoyaltyConsole.Business.Exceptions.InvalidDataException;
 
 namespace LoyaltyConsole.Business.Implementations
 {
@@ -43,7 +45,7 @@ namespace LoyaltyConsole.Business.Implementations
             await _transactionRepository.CommitAsync();
 
             var balance = _cashbackBalanceRepository.GetByExpression(false, x => x.CustomerId == dto.CustomerId).FirstOrDefault();
-            if (balance == null) throw new Exception("CashbackBalance not found");
+            if (balance == null) throw new NotFoundException("CashbackBalance not found");
 
             balance.TotalCashback += transaction.CashbackEarned;
 
@@ -54,10 +56,10 @@ namespace LoyaltyConsole.Business.Implementations
 
         public async Task DeleteAsync(int id)
         {
-            if (id < 1) throw new ArgumentException("Invalid ID");
+            if (id < 1) throw new InvalidDataException("Invalid Id");
 
             var transaction = await _transactionRepository.GetByIdAsync(id);
-            if (transaction == null) throw new Exception("Transaction not found.");
+            if (transaction == null) throw new NotFoundException("Transaction not found.");
 
             _transactionRepository.Delete(transaction);
             await _transactionRepository.CommitAsync();
@@ -72,10 +74,10 @@ namespace LoyaltyConsole.Business.Implementations
 
         public async Task<TransactionGetDto> GetById(int id)
         {
-            if (id < 1) throw new Exception();
+            if (id < 1) throw new InvalidDataException("Invalid Id");
 
             var transaction = await _transactionRepository.GetByIdAsync(id);
-            if (transaction == null) throw new Exception("Transaction not found");
+            if (transaction == null) throw new NotFoundException("Transaction not found");
 
             return _mapper.Map<TransactionGetDto>(transaction);
         }
@@ -83,17 +85,17 @@ namespace LoyaltyConsole.Business.Implementations
         public async Task<TransactionGetDto> GetSingleByExpression(bool asnotracking = false, Expression<Func<Transaction, bool>>? expression = null, params string[] includes)
         {
             var transaction = await _transactionRepository.GetByExpression(asnotracking, expression, includes).FirstOrDefaultAsync();
-            if (transaction == null) throw new Exception("Transaction not found");
+            if (transaction == null) throw new NotFoundException("Transaction not found");
 
             return _mapper.Map<TransactionGetDto>(transaction);
         }
 
         public async Task SoftDeleteAsync(int id)
         {
-            if (id < 1) throw new Exception();
+            if (id < 1) throw new InvalidDataException("Invalid Id");
 
             var transaction = await _transactionRepository.GetByIdAsync(id);
-            if (transaction == null) throw new Exception("Transaction not found.");
+            if (transaction == null) throw new NotFoundException("Transaction not found.");
 
             transaction.IsDeleted = true;
 
@@ -102,10 +104,10 @@ namespace LoyaltyConsole.Business.Implementations
 
         public async Task UpdateAsync(int? id, TransactionUpdateDto dto)
         {
-            if (id < 1 || id is null) throw new NullReferenceException("id is invalid");
+            if (id < 1 || id is null) throw new InvalidDataException("Invalid Id");
 
             var transaction = await _transactionRepository.GetByIdAsync((int)id);
-            if (transaction == null) throw new Exception("Transaction not found");
+            if (transaction == null) throw new NotFoundException("Transaction not found");
 
             _mapper.Map(dto, transaction);
 

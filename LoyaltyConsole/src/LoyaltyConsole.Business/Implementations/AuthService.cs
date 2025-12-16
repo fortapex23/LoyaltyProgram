@@ -1,5 +1,6 @@
 ﻿using LoyaltyConsole.Business.DTOs.TokenDtos;
 using LoyaltyConsole.Business.DTOs.UserDtos;
+using LoyaltyConsole.Business.Exceptions;
 using LoyaltyConsole.Business.Interfaces;
 using LoyaltyConsole.Core.Enums;
 using LoyaltyConsole.Core.Models;
@@ -66,7 +67,7 @@ namespace LoyaltyConsole.Business.Implementations
 
             if (user is null)
             {
-                throw new NullReferenceException($"User not found");
+                throw new NotFoundException($"User not found");
             }
 
             user.FullName = dto.FullName;
@@ -78,14 +79,14 @@ namespace LoyaltyConsole.Business.Implementations
 
             if (user.Birthday > DateTime.Now)
             {
-                throw new Exception("Invalid Birthday");
+                throw new Exceptions.InvalidDataException("Invalid Birthday");
             }
 
             var result = await _userManager.UpdateAsync(user);
 
             if (!result.Succeeded)
             {
-                throw new Exception($"Failed to update");
+                throw new ValidationException($"Failed to update");
             }
         }
 
@@ -95,7 +96,7 @@ namespace LoyaltyConsole.Business.Implementations
 
             if (user == null)
             {
-                throw new NullReferenceException($"User not found");
+                throw new NotFoundException($"User not found");
             }
 
             var userDto = new UserGetDto(
@@ -111,17 +112,6 @@ namespace LoyaltyConsole.Business.Implementations
             return userDto;
         }
 
-        //public async Task UpdateStatusAsync(string id, AdminStatus status)
-        //{
-        //    var user = await _userManager.FindByIdAsync(id);
-        //    if (user is null) throw new NullReferenceException($"{id} not found.");
-
-        //    user.Status = status;
-
-        //    var result = await _userManager.UpdateAsync(user);
-        //    if (!result.Succeeded) throw new Exception("Failed to update status");
-        //}
-
         public async Task<TokenResponseDto> AdminLogin(UserLoginDto dto)
         {
             AppUser appUser = null;
@@ -130,26 +120,26 @@ namespace LoyaltyConsole.Business.Implementations
 
             if (appUser == null)
             {
-                throw new Exception("Invalid credentials");
+                throw new NotFoundException("Invalid credentials");
             }
 
             var result = await _signInManager.CheckPasswordSignInAsync(appUser, dto.Password, dto.RememberMe);
 
             if (!result.Succeeded)
             {
-                throw new Exception("Invalid credentials");
+                throw new UnauthorizedException("Invalid credentials");
             }
 
             if (appUser.Status == AdminStatus.Pending || appUser.Status == AdminStatus.Rejected)
             {
-                throw new Exception("you must be confirmed as an admin");
+                throw new UnauthorizedException("you must be confirmed as an admin");
             }
 
             var roles = await _userManager.GetRolesAsync(appUser);
 
             if (!roles.Contains("Admin") && !roles.Contains("SuperAdmin"))
             {
-                throw new Exception("You must be an admin to log in");
+                throw new UnauthorizedException("You must be an admin to log in");
             }
 
             List<Claim> claims = new List<Claim>()
@@ -202,23 +192,23 @@ namespace LoyaltyConsole.Business.Implementations
             };
 
             if (appUser.Birthday >= DateTime.Now)
-                throw new Exception("Invalid Birth Date");
+                throw new Exceptions.InvalidDataException("Invalid Birth Date");
 
             var usedemail = await _userManager.FindByEmailAsync(appUser.Email);
 
             if (usedemail != null)
-                throw new Exception("This email is already used");
+                throw new ValidationException("This email is already used");
 
             var usedphone = await _userManager.Users.FirstOrDefaultAsync(x => x.PhoneNumber == dto.PhoneNumber);
 
             if (usedphone != null)
-                throw new Exception("This phone number is already used");
+                throw new ValidationException("This phone number is already used");
 
             var result = await _userManager.CreateAsync(appUser, dto.Password);
 
             if (!result.Succeeded)
             {
-                throw new NullReferenceException();
+                throw new ValidationException("Something went wrong");
             }
 
             var member = await _userManager.FindByEmailAsync(dto.Email);

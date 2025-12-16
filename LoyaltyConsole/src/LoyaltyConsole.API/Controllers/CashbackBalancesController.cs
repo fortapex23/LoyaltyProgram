@@ -1,7 +1,6 @@
 ﻿using LoyaltyConsole.API.ApiResponses;
 using LoyaltyConsole.Business.DTOs.CashbackBalanceDtos;
 using LoyaltyConsole.Business.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LoyaltyConsole.API.Controllers
@@ -20,20 +19,7 @@ namespace LoyaltyConsole.API.Controllers
         [HttpGet("isexist/{id}")]
         public async Task<IActionResult> IsExist(int id)
         {
-            bool exists = false;
-            try
-            {
-                exists = await _cashbackBalanceService.IsExist(f => f.Id == id);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new ApiResponse<object>
-                {
-                    StatusCode = StatusCodes.Status400BadRequest,
-                    ErrorMessage = ex.Message,
-                    Data = null
-                });
-            }
+            var exists = await _cashbackBalanceService.IsExist(x => x.Id == id);
 
             return Ok(new ApiResponse<bool>
             {
@@ -42,13 +28,14 @@ namespace LoyaltyConsole.API.Controllers
             });
         }
 
-        [HttpGet("")]
+        [HttpGet]
         public async Task<IActionResult> GetAll()
         {
+            var data = await _cashbackBalanceService.GetByExpression(true, null);
+
             return Ok(new ApiResponse<ICollection<CashbackBalanceGetDto>>
             {
-                Data = await _cashbackBalanceService.GetByExpression(true, null),
-                ErrorMessage = null,
+                Data = data,
                 StatusCode = StatusCodes.Status200OK
             });
         }
@@ -56,40 +43,28 @@ namespace LoyaltyConsole.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CashbackBalanceCreateDto dto)
         {
-            CashbackBalanceGetDto cashbackBalance = null;
-            try
-            {
-                cashbackBalance = await _cashbackBalanceService.CreateAsync(dto);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new ApiResponse<object>
-                {
-                    StatusCode = StatusCodes.Status400BadRequest,
-                    ErrorMessage = ex.Message,
-                    Data = null
-                });
-            }
+            var cashbackBalance = await _cashbackBalanceService.CreateAsync(dto);
 
-            return Created();
+            return CreatedAtAction(
+                nameof(GetById),
+                new { id = cashbackBalance.Id },
+                new ApiResponse<CashbackBalanceGetDto>
+                {
+                    Data = cashbackBalance,
+                    StatusCode = StatusCodes.Status201Created
+                }
+            );
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            CashbackBalanceGetDto dto = null;
-            try
-            {
-                dto = await _cashbackBalanceService.GetSingleByExpression(true, x => x.Id == id);
-            }
-            catch (Exception ex)
-            {
-                return NotFound(ex.Message);
-            }
+            var cashbackBalance = await _cashbackBalanceService
+                .GetSingleByExpression(true, x => x.Id == id);
 
             return Ok(new ApiResponse<CashbackBalanceGetDto>
             {
-                Data = dto,
+                Data = cashbackBalance,
                 StatusCode = StatusCodes.Status200OK
             });
         }
@@ -97,49 +72,15 @@ namespace LoyaltyConsole.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, CashbackBalanceUpdateDto dto)
         {
-
-            try
-            {
-                await _cashbackBalanceService.UpdateAsync(id, dto);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new ApiResponse<CashbackBalanceUpdateDto>
-                {
-                    StatusCode = StatusCodes.Status400BadRequest,
-                    ErrorMessage = ex.Message,
-                    Data = null
-                });
-            }
+            await _cashbackBalanceService.UpdateAsync(id, dto);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            try
-            {
-                await _cashbackBalanceService.DeleteAsync(id);
-            }
-            catch (InvalidOperationException ex)
-            {
-                return BadRequest(new ApiResponse<object>
-                {
-                    StatusCode = StatusCodes.Status400BadRequest,
-                    ErrorMessage = ex.Message,
-                    Data = null
-                });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new ApiResponse<object>
-                {
-                    StatusCode = StatusCodes.Status400BadRequest,
-                    ErrorMessage = ex.Message,
-                    Data = null
-                });
-            }
-            return Ok();
+            await _cashbackBalanceService.DeleteAsync(id);
+            return NoContent();
         }
     }
 }

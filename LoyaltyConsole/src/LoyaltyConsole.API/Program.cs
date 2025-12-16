@@ -1,7 +1,8 @@
 using FirebaseAdmin;
-using Google.Cloud.Firestore;
 using FluentValidation.AspNetCore;
 using Google.Apis.Auth.OAuth2;
+using Google.Cloud.Firestore;
+using LoyaltyConsole.API.ExceptionHandler;
 using LoyaltyConsole.Business;
 using LoyaltyConsole.Business.DTOs.TransactionDtos;
 using LoyaltyConsole.Business.DTOs.UserDtos;
@@ -98,6 +99,8 @@ namespace LoyaltyConsole.API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseCors("AllowAll");
             app.UseHttpsRedirection();

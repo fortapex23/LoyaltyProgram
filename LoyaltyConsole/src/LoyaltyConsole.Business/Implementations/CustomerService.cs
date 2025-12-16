@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using Microsoft.AspNetCore.Hosting;
 using LoyaltyConsole.Business.ExternalServices.Interfaces;
+using LoyaltyConsole.Business.Exceptions;
+using InvalidDataException = LoyaltyConsole.Business.Exceptions.InvalidDataException;
 
 namespace LoyaltyConsole.Business.Implementations
 {
@@ -54,14 +56,14 @@ namespace LoyaltyConsole.Business.Implementations
             customer.UpdatedDate = DateTime.Now;
 
             if (customer.Birthday >= DateTime.Now)
-                throw new Exception("Invalid Birthday");
+                throw new Exceptions.InvalidDataException("Invalid Birthday");
 
             if (dto.ImageFile != null && dto.ImageFile.Length > 0)
             {
                 var uploadResult = await _photoService.AddPhotoAsync(dto.ImageFile);
 
                 if (uploadResult.Error != null)
-                    throw new Exception(uploadResult.Error.Message);
+                    throw new ValidationException(uploadResult.Error.Message);
 
                 CustomerImage cusImage = new CustomerImage
                 {
@@ -95,10 +97,10 @@ namespace LoyaltyConsole.Business.Implementations
 
         public async Task DeleteAsync(int id)
         {
-            if (id < 1) throw new ArgumentException("Invalid ID");
+            if (id < 1) throw new InvalidDataException("Invalid ID");
 
             var customer = await _customerRepository.GetByIdAsync(id);
-            if (customer == null) throw new Exception("Customer not found.");
+            if (customer == null) throw new NotFoundException("Customer not found.");
 
             if (customer.CustomerImage != null)
             {
@@ -116,10 +118,10 @@ namespace LoyaltyConsole.Business.Implementations
 
         public async Task<CustomerGetDto> GetById(int id)
         {
-            if (id < 1) throw new Exception();
+            if (id < 1) throw new InvalidDataException("Invalid Id");
 
             var customer = await _customerRepository.GetByIdAsync(id);
-            if (customer == null) throw new Exception("Customer not found");
+            if (customer == null) throw new NotFoundException("Customer not found");
 
             return _mapper.Map<CustomerGetDto>(customer);
         }
@@ -130,31 +132,31 @@ namespace LoyaltyConsole.Business.Implementations
             params string[] includes)
         {
             var customer = await _customerRepository.GetByExpression(asnotracking, expression, includes).FirstOrDefaultAsync();
-            if (customer == null) throw new Exception("Customer not found");
+            if (customer == null) throw new NotFoundException("Customer not found");
 
             return _mapper.Map<CustomerGetDto>(customer);
         }
 
         public async Task SoftDeleteAsync(int id)
         {
-            if (id < 1) throw new Exception();
+            if (id < 1) throw new InvalidDataException("Invalid Id");
 
             var customer = await _customerRepository.GetByIdAsync(id);
-            if (customer == null) throw new Exception("Customer not found.");
-
+            if (customer == null) throw new NotFoundException("Customer not found.");
+            
             customer.IsDeleted = true;
             await _customerRepository.CommitAsync();
         }
 
         public async Task UpdateAsync(int? id, CustomerUpdateDto dto)
         {
-            if (id < 1 || id is null) throw new NullReferenceException("id is invalid");
+            if (id < 1 || id is null) throw new InvalidDataException("Invalid Id");
 
             var customer = await _customerRepository.GetByIdAsync((int)id);
-            if (customer == null) throw new Exception("Customer not found");
+            if (customer == null) throw new NotFoundException("Customer not found");
 
             if (customer.Birthday >= DateTime.Now)
-                throw new Exception("Invalid Birthday");
+                throw new InvalidDataException("Invalid Birthday");
 
             _mapper.Map(dto, customer);
             customer.UpdatedDate = DateTime.Now;
@@ -181,19 +183,36 @@ namespace LoyaltyConsole.Business.Implementations
             await _customerRepository.CommitAsync();
         }
 
-        public async Task<ICollection<CustomerGetDto>> SearchCustomer(string input)
+        public async Task<ICollection<CustomerListDto>> SearchCustomer(string input)
         {
-            var query = _customerRepository.GetByExpression(true, null, "CustomerImage", "CashbackBalance");
-
-            query = query.Where(x => x.FullName.Contains(input.Trim().ToLower()));
-            var customerExists = await _customerRepository.Table.AnyAsync(x => x.FullName.Contains(input.Trim().ToLower()));
-
-            var customers = await query.ToListAsync();
-
-            if (!customerExists)
-                throw new Exception("No customer found");
-
-            return _mapper.Map<ICollection<CustomerGetDto>>(customers);
+            return await _customerRepository.Table
+                .AsNoTracking()
+                .Where(x => x.FullName.Contains(input))
+                .Select(x => new CustomerListDto
+                {
+                    Id = x.Id,
+                    FullName = x.FullName,
+                    PhoneNumber = x.PhoneNumber
+                })
+                .ToListAsync();
         }
+
+        public async Task<ICollection<CustomerListDto>> GetListAsync()
+        {
+            return await _customerRepository.Table
+                .AsNoTracking()
+                .Include(x => x.CustomerImage)
+                .Include(x => x.CashbackBalance)
+                .Select(x => new CustomerListDto
+                {
+                    Id = x.Id,
+                    FullName = x.FullName,
+                    PhoneNumber = x.PhoneNumber,
+                    TotalCashback = x.CashbackBalance.TotalCashback,
+                    ImageUrl = x.CustomerImage.ImageUrl
+                })
+                .ToListAsync();
+        }
+
     }
 }

@@ -5,6 +5,8 @@ using LoyaltyConsole.Business.Interfaces;
 using LoyaltyConsole.Core.Models;
 using LoyaltyConsole.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
+using LoyaltyConsole.Business.Exceptions;
+using InvalidDataException = LoyaltyConsole.Business.Exceptions.InvalidDataException;
 
 namespace LoyaltyConsole.Business.Implementations
 {
@@ -38,10 +40,10 @@ namespace LoyaltyConsole.Business.Implementations
 
         public async Task DeleteAsync(int id)
         {
-            if (id < 1) throw new ArgumentException("Invalid ID");
+            if (id < 1) throw new InvalidDataException("Invalid ID");
 
             var cashbackBalance = await _cashbackBalanceRepository.GetByIdAsync(id);
-            if (cashbackBalance == null) throw new Exception("CashbackBalance not found.");
+            if (cashbackBalance == null) throw new NotFoundException("CashbackBalance not found.");
 
             _cashbackBalanceRepository.Delete(cashbackBalance);
             await _cashbackBalanceRepository.CommitAsync();
@@ -57,10 +59,10 @@ namespace LoyaltyConsole.Business.Implementations
 
         public async Task<CashbackBalanceGetDto> GetById(int id)
         {
-            if (id < 1) throw new Exception();
+            if (id < 1) throw new InvalidDataException("Invalid Id");
 
             var cashbackBalance = await _cashbackBalanceRepository.GetByIdAsync(id);
-            if (cashbackBalance == null) throw new Exception("CashbackBalance not found");
+            if (cashbackBalance == null) throw new NotFoundException("CashbackBalance not found");
 
             return _mapper.Map<CashbackBalanceGetDto>(cashbackBalance);
         }
@@ -68,17 +70,17 @@ namespace LoyaltyConsole.Business.Implementations
         public async Task<CashbackBalanceGetDto> GetSingleByExpression(bool asnotracking = false, Expression<Func<CashbackBalance, bool>>? expression = null, params string[] includes)
         {
             var cashbackBalance = await _cashbackBalanceRepository.GetByExpression(asnotracking, expression, includes).FirstOrDefaultAsync();
-            if (cashbackBalance == null) throw new Exception("CashbackBalance not found");
+            if (cashbackBalance == null) throw new NotFoundException("CashbackBalance not found");
 
             return _mapper.Map<CashbackBalanceGetDto>(cashbackBalance);
         }
 
         public async Task SoftDeleteAsync(int id)
         {
-            if (id < 1) throw new Exception();
+            if (id < 1) throw new InvalidDataException("Invalid Id");
 
             var cashbackBalance = await _cashbackBalanceRepository.GetByIdAsync(id);
-            if (cashbackBalance == null) throw new Exception("CashbackBalance not found.");
+            if (cashbackBalance == null) throw new NotFoundException("CashbackBalance not found.");
 
             cashbackBalance.IsDeleted = true;
 
@@ -87,10 +89,10 @@ namespace LoyaltyConsole.Business.Implementations
 
         public async Task UpdateAsync(int? id, CashbackBalanceUpdateDto dto)
         {
-            if (id < 1 || id is null) throw new NullReferenceException("id is invalid");
+            if (id < 1 || id is null) throw new InvalidDataException("Invalid Id");
 
             var cashbackBalance = await _cashbackBalanceRepository.GetByIdAsync((int)id);
-            if (cashbackBalance == null) throw new Exception("CashbackBalance not found");
+            if (cashbackBalance == null) throw new NotFoundException("CashbackBalance not found");
 
             _mapper.Map(dto, cashbackBalance);
 

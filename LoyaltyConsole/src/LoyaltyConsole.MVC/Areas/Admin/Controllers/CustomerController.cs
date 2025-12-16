@@ -145,7 +145,7 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
                     vm.FullName,
                     vm.Birthday,
                     vm.Cashback,
-                    Image = fileName // replace or keep old one depending on your API logic
+                    Image = fileName 
                 };
 
                 await _crudService.Update($"/customers/{id}", updateDto);

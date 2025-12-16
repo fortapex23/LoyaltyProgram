@@ -5,6 +5,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace LoyaltyConsole.Business.DTOs.CustomerDtos
 {
-    public record CustomerGetDto(int Id, string FullName, DateTime Birthday, CashbackBalanceGetDto CashbackBalance, CustomerImageGetDto? CustomerImage,
-                            ICollection<TransactionGetDto> Transactions, DateTime CreatedDate);
+    public record CustomerGetDto(int Id, string FullName, DateTime Birthday, CashbackBalanceGetDto CashbackBalance, string PhoneNumber
+                       , CustomerImageGetDto? CustomerImage, ICollection<TransactionGetDto> Transactions, DateTime CreatedDate);
 }

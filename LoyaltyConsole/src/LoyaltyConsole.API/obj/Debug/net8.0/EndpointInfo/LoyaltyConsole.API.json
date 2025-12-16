@@ -53,7 +53,7 @@
         }
       }
     },
-    "/api/Auth/GetAllAdmins": {
+    "/api/Auth/Admins": {
       "get": {
         "tags": [
           "Auth"
@@ -325,7 +325,7 @@
         }
       }
     },
-    "/api/Customers/Search": {
+    "/api/Customers/search": {
       "get": {
         "tags": [
           "Customers"
@@ -400,6 +400,9 @@
                   "ImageFile": {
                     "type": "string",
                     "format": "binary"
+                  },
+                  "PhoneNumber": {
+                    "type": "string"
                   }
                 }
               },
@@ -411,6 +414,9 @@
                   "style": "form"
                 },
                 "ImageFile": {
+                  "style": "form"
+                },
+                "PhoneNumber": {
                   "style": "form"
                 }
               }
@@ -760,6 +766,10 @@
       "CustomerUpdateDto": {
         "type": "object",
         "properties": {
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
           "fullName": {
             "type": "string",
             "nullable": true

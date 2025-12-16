@@ -1,7 +1,6 @@
 ﻿using LoyaltyConsole.API.ApiResponses;
 using LoyaltyConsole.Business.DTOs.CustomerDtos;
 using LoyaltyConsole.Business.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LoyaltyConsole.API.Controllers
@@ -17,57 +16,22 @@ namespace LoyaltyConsole.API.Controllers
             _customerService = customerService;
         }
 
-        [HttpGet("[action]")]
+        [HttpGet("search")]
         public async Task<IActionResult> Search(string input)
         {
-            try
-            {
-                var customers = await _customerService.SearchCustomer(input);
+            var customers = await _customerService.SearchCustomer(input);
 
-                if (customers == null)
-                {
-                    return NotFound(new ApiResponse<string>
-                    {
-                        StatusCode = StatusCodes.Status404NotFound,
-                        ErrorMessage = "No customers found",
-                        Data = null
-                    });
-                }
-
-                return Ok(new ApiResponse<ICollection<CustomerGetDto>>
-                {
-                    Data = customers,
-                    StatusCode = StatusCodes.Status200OK
-                });
-            }
-            catch (Exception ex)
+            return Ok(new ApiResponse<ICollection<CustomerListDto>>
             {
-                return BadRequest(new ApiResponse<string>
-                {
-                    StatusCode = StatusCodes.Status400BadRequest,
-                    ErrorMessage = ex.Message,
-                    Data = null
-                });
-            }
+                Data = customers,
+                StatusCode = StatusCodes.Status200OK
+            });
         }
 
         [HttpGet("isexist/{id}")]
         public async Task<IActionResult> IsExist(int id)
         {
-            bool exists = false;
-            try
-            {
-                exists = await _customerService.IsExist(f => f.Id == id);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new ApiResponse<object>
-                {
-                    StatusCode = StatusCodes.Status400BadRequest,
-                    ErrorMessage = ex.Message,
-                    Data = null
-                });
-            }
+            bool exists = await _customerService.IsExist(x => x.Id == id);
 
             return Ok(new ApiResponse<bool>
             {
@@ -76,13 +40,14 @@ namespace LoyaltyConsole.API.Controllers
             });
         }
 
-        [HttpGet("")]
+        [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Ok(new ApiResponse<ICollection<CustomerGetDto>>
+            var customers = await _customerService.GetListAsync();
+
+            return Ok(new ApiResponse<ICollection<CustomerListDto>>
             {
-                Data = await _customerService.GetByExpression(true, null, "CashbackBalance", "Transactions", "CustomerImage"),
-                ErrorMessage = null,
+                Data = customers,
                 StatusCode = StatusCodes.Status200OK
             });
         }
@@ -90,40 +55,33 @@ namespace LoyaltyConsole.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] CustomerCreateDto dto)
         {
-            CustomerGetDto customer = null;
-            try
-            {
-                customer = await _customerService.CreateAsync(dto);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new ApiResponse<object>
-                {
-                    StatusCode = StatusCodes.Status400BadRequest,
-                    ErrorMessage = ex.Message,
-                    Data = null
-                });
-            }
+            var customer = await _customerService.CreateAsync(dto);
 
-            return Created();
+            return CreatedAtAction(
+                nameof(GetById),
+                new { id = customer.Id },
+                new ApiResponse<CustomerGetDto>
+                {
+                    Data = customer,
+                    StatusCode = StatusCodes.Status201Created
+                }
+            );
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            CustomerGetDto dto = null;
-            try
-            {
-                dto = await _customerService.GetSingleByExpression(true, x => x.Id == id, "CashbackBalance", "Transactions", "CustomerImage");
-            }
-            catch (Exception ex)
-            {
-                return NotFound(ex.Message);
-            }
+            var customer = await _customerService.GetSingleByExpression(
+                true,
+                x => x.Id == id,
+                "CashbackBalance",
+                "Transactions",
+                "CustomerImage"
+            );
 
             return Ok(new ApiResponse<CustomerGetDto>
             {
-                Data = dto,
+                Data = customer,
                 StatusCode = StatusCodes.Status200OK
             });
         }
@@ -131,49 +89,15 @@ namespace LoyaltyConsole.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, CustomerUpdateDto dto)
         {
-
-            try
-            {
-                await _customerService.UpdateAsync(id, dto);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new ApiResponse<CustomerUpdateDto>
-                {
-                    StatusCode = StatusCodes.Status400BadRequest,
-                    ErrorMessage = ex.Message,
-                    Data = null
-                });
-            }
+            await _customerService.UpdateAsync(id, dto);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            try
-            {
-                await _customerService.DeleteAsync(id);
-            }
-            catch (InvalidOperationException ex)
-            {
-                return BadRequest(new ApiResponse<object>
-                {
-                    StatusCode = StatusCodes.Status400BadRequest,
-                    ErrorMessage = ex.Message,
-                    Data = null
-                });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new ApiResponse<object>
-                {
-                    StatusCode = StatusCodes.Status400BadRequest,
-                    ErrorMessage = ex.Message,
-                    Data = null
-                });
-            }
-            return Ok();
+            await _customerService.DeleteAsync(id);
+            return NoContent();
         }
     }
 }

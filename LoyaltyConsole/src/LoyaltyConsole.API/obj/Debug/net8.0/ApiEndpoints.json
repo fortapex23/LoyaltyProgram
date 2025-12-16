@@ -65,7 +65,7 @@
   {
     "ContainingType": "LoyaltyConsole.API.Controllers.AuthController",
     "Method": "GetAllAdmins",
-    "RelativePath": "api/Auth/GetAllAdmins",
+    "RelativePath": "api/Auth/Admins",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -215,6 +215,11 @@
         "Name": "ImageFile",
         "Type": "Microsoft.AspNetCore.Http.IFormFile",
         "IsRequired": false
+      },
+      {
+        "Name": "PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -291,7 +296,7 @@
   {
     "ContainingType": "LoyaltyConsole.API.Controllers.CustomersController",
     "Method": "Search",
-    "RelativePath": "api/Customers/Search",
+    "RelativePath": "api/Customers/search",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
