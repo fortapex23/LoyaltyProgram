@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Hosting;
 using LoyaltyConsole.Business.ExternalServices.Interfaces;
 using LoyaltyConsole.Business.Exceptions;
 using InvalidDataException = LoyaltyConsole.Business.Exceptions.InvalidDataException;
+using LoyaltyConsole.Business.PaginatedLists;
 
 namespace LoyaltyConsole.Business.Implementations
 {
@@ -183,26 +184,24 @@ namespace LoyaltyConsole.Business.Implementations
             await _customerRepository.CommitAsync();
         }
 
-        public async Task<ICollection<CustomerListDto>> SearchCustomer(string input)
+        public async Task<PagedResult<CustomerListDto>> GetPagedListAsync(int page, int pageSize, string? search)
         {
-            return await _customerRepository.Table
-                .AsNoTracking()
-                .Where(x => x.FullName.Contains(input))
-                .Select(x => new CustomerListDto
-                {
-                    Id = x.Id,
-                    FullName = x.FullName,
-                    PhoneNumber = x.PhoneNumber
-                })
-                .ToListAsync();
-        }
-
-        public async Task<ICollection<CustomerListDto>> GetListAsync()
-        {
-            return await _customerRepository.Table
+            IQueryable<Customer> query = _customerRepository.Table
                 .AsNoTracking()
                 .Include(x => x.CustomerImage)
-                .Include(x => x.CashbackBalance)
+                .Include(x => x.CashbackBalance);
+
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                query = query.Where(x => x.FullName.Contains(search));
+            }
+
+            var totalCount = await query.CountAsync();
+
+            var items = await query
+                .OrderByDescending(x => x.Id)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
                 .Select(x => new CustomerListDto
                 {
                     Id = x.Id,
@@ -212,7 +211,46 @@ namespace LoyaltyConsole.Business.Implementations
                     ImageUrl = x.CustomerImage.ImageUrl
                 })
                 .ToListAsync();
+
+            return new PagedResult<CustomerListDto>
+            {
+                Items = items,
+                Page = page,
+                PageSize = pageSize,
+                TotalCount = totalCount
+            };
         }
+
+        //public async Task<ICollection<CustomerListDto>> SearchCustomer(string input)
+        //{
+        //    return await _customerRepository.Table
+        //        .AsNoTracking()
+        //        .Where(x => x.FullName.Contains(input))
+        //        .Select(x => new CustomerListDto
+        //        {
+        //            Id = x.Id,
+        //            FullName = x.FullName,
+        //            PhoneNumber = x.PhoneNumber
+        //        })
+        //        .ToListAsync();
+        //}
+
+        //public async Task<ICollection<CustomerListDto>> GetListAsync()
+        //{
+        //    return await _customerRepository.Table
+        //        .AsNoTracking()
+        //        .Include(x => x.CustomerImage)
+        //        .Include(x => x.CashbackBalance)
+        //        .Select(x => new CustomerListDto
+        //        {
+        //            Id = x.Id,
+        //            FullName = x.FullName,
+        //            PhoneNumber = x.PhoneNumber,
+        //            TotalCashback = x.CashbackBalance.TotalCashback,
+        //            ImageUrl = x.CustomerImage.ImageUrl
+        //        })
+        //        .ToListAsync();
+        //}
 
     }
 }

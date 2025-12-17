@@ -1,214 +1,112 @@
 ﻿using LoyaltyConsole.MVC.ApiResponseMessages;
 using LoyaltyConsole.MVC.Services.Interfaces;
-using RestSharp;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
 
 namespace LoyaltyConsole.MVC.Services.Implementations
 {
     public class CrudService : ICrudService
     {
-        private readonly RestClient _restClient;
-        private readonly IConfiguration _configuration;
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly HttpClient _client;
+        private readonly IHttpContextAccessor _context;
 
-        public CrudService(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+        public CrudService(HttpClient client, IHttpContextAccessor context)
         {
-            _configuration = configuration;
-            _httpContextAccessor = httpContextAccessor;
-            _restClient = new RestClient(_configuration.GetSection("Api:URL").Value);
-            var token = _httpContextAccessor.HttpContext.Request.Cookies["token"];
+            _client = client;
+            _context = context;
 
-            if (token != null)
+            var token = _context.HttpContext?.Request.Cookies["token"];
+            if (!string.IsNullOrEmpty(token))
             {
-                _restClient.AddDefaultHeader("Authorization", "Bearer " + token);
+                _client.DefaultRequestHeaders.Authorization =
+                    new AuthenticationHeaderValue("Bearer", token);
             }
         }
 
-        public async Task Create<T>(string endpoint, T entity) where T : class
+        // ---------------- GET ----------------
+
+        public async Task<T> GetAsync<T>(string endpoint)
         {
-            var request = new RestRequest(endpoint, Method.Post);
-            request.AddJsonBody(entity);
+            var response = await _client.GetAsync(endpoint);
 
-            var response = await _restClient.ExecuteAsync<ApiResponseMessage<T>>(request);
+            var content = await response.Content.ReadAsStringAsync();
 
-            if (!response.IsSuccessful)
+            if (!response.IsSuccessStatusCode)
             {
-                var errorMessage = $"Error: {response.StatusCode} Content: {response.Content}";
-                throw new Exception(errorMessage);
+                throw new Exception(
+                    $"API Error | Status: {(int)response.StatusCode} | Body: {content}"
+                );
+            }
+
+            var apiResponse =
+                await response.Content.ReadFromJsonAsync<ApiResponseMessage<T>>();
+
+            return apiResponse.Data;
+        }
+
+        // ---------------- CREATE ----------------
+
+        public async Task CreateAsync<T>(string endpoint, T entity)
+        {
+            var response = await _client.PostAsJsonAsync(endpoint, entity);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                throw new Exception(error);
             }
         }
 
-        public async Task CreateWithImage<T>(string endpoint, T entity) where T : class
+        // ---------------- CREATE WITH IMAGE ----------------
+
+        public async Task CreateWithImageAsync<T>(string endpoint, T entity) where T : class
         {
-            var request = new RestRequest(endpoint, Method.Post);
+            var form = new MultipartFormDataContent();
 
-            var formProperties = typeof(T).GetProperties();
-
-            bool hasFile = formProperties.Any(p => typeof(IFormFile).IsAssignableFrom(p.PropertyType));
-
-            if (hasFile)
+            foreach (var prop in typeof(T).GetProperties())
             {
-                foreach (var prop in formProperties)
+                var value = prop.GetValue(entity);
+                if (value == null) continue;
+
+                if (value is IFormFile file)
                 {
-                    var value = prop.GetValue(entity);
-                    if (value is IFormFile file)
-                    {
-                        using var ms = new MemoryStream();
-                        await file.CopyToAsync(ms);
-                        request.AddFile(prop.Name, ms.ToArray(), file.FileName, file.ContentType);
-                    }
-                    else if (value != null)
-                    {
-                        request.AddParameter(prop.Name, value.ToString());
-                    }
-                }
-            }
-            else
-            {
-                request.AddJsonBody(entity);
-            }
+                    var stream = file.OpenReadStream();
+                    var fileContent = new StreamContent(stream);
+                    fileContent.Headers.ContentType =
+                        new MediaTypeHeaderValue(file.ContentType);
 
-            var response = await _restClient.ExecuteAsync<ApiResponseMessage<T>>(request);
-
-            if (!response.IsSuccessful)
-            {
-                var errorMessage = $"Error: {response.StatusCode} Content: {response.Content}";
-                throw new Exception(errorMessage);
-            }
-        }
-
-        public async Task Delete<T>(string endpoint, int id)
-        {
-            var request = new RestRequest(endpoint, Method.Delete);
-
-            var response = await _restClient.ExecuteAsync<ApiResponseMessage<T>>(request);
-
-            if (!response.IsSuccessful)
-            {
-                var errorMessage = $"Error: {response.StatusCode}. Content: {response.Content}";
-                throw new Exception(errorMessage);
-            }
-        }
-
-        public async Task DeleteItem<T>(string endpoint)
-        {
-            var request = new RestRequest(endpoint, Method.Delete);
-
-            var response = await _restClient.ExecuteAsync<ApiResponseMessage<T>>(request);
-            if (!response.IsSuccessful)
-            {
-                var errorMessage = $"Error: {response.StatusCode}. Content: {response.Content}";
-                throw new Exception(errorMessage);
-            }
-        }
-
-        public async Task<T> GetAllAsync<T>(string endpoint)
-        {
-            var request = new RestRequest(endpoint, Method.Get);
-            var response = await _restClient.ExecuteAsync<ApiResponseMessage<T>>(request);
-
-            if (!response.IsSuccessful)
-            {
-                var errorMessage = $"Error: {response.StatusCode}. Content: {response.Content}";
-                throw new Exception(errorMessage);
-            }
-
-            return response.Data.Data;
-        }
-
-        public async Task<T> GetByStringIdAsync<T>(string endpoint, string? id)
-        {
-            var request = new RestRequest(endpoint, Method.Get);
-            var response = await _restClient.ExecuteAsync<ApiResponseMessage<T>>(request);
-
-            if (!response.IsSuccessful)
-            {
-                string errorMessage = "An error occurred";
-
-                if (response.Data != null && !string.IsNullOrEmpty(response.Data.ErrorMessage))
-                {
-                    errorMessage = response.Data.ErrorMessage;
-                }
-                else if (!string.IsNullOrEmpty(response.ErrorMessage))
-                {
-                    errorMessage = response.ErrorMessage;
+                    form.Add(fileContent, prop.Name, file.FileName);
                 }
                 else
                 {
-                    errorMessage = response.StatusDescription ?? response.StatusCode.ToString();
+                    form.Add(new StringContent(value.ToString()), prop.Name);
                 }
-
-                throw new Exception(errorMessage);
             }
 
-            return response.Data.Data;
+            var response = await _client.PostAsync(endpoint, form);
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception("Create failed");
         }
 
+        // ---------------- UPDATE ----------------
 
-        public async Task<T> GetByIdAsync<T>(string endpoint, int? id)
+        public async Task UpdateAsync<T>(string endpoint, T entity)
         {
-            if (id < 1) throw new Exception();
-            var request = new RestRequest(endpoint, Method.Get);
-            var response = await _restClient.ExecuteAsync<ApiResponseMessage<T>>(request);
+            var response = await _client.PutAsJsonAsync(endpoint, entity);
 
-            if (!response.IsSuccessful)
-            {
-                if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
-                {
-                    throw new Exception(response.Data.ErrorMessage);
-                }
-                else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
-                {
-                    throw new Exception(response.Data.ErrorMessage);
-                }
-            }
-
-            return response.Data.Data;
+            if (!response.IsSuccessStatusCode)
+                throw new Exception("Update failed");
         }
 
+        // ---------------- DELETE ----------------
 
-        public async Task Update<T>(string endpoint, T entity) where T : class
+        public async Task DeleteAsync(string endpoint)
         {
-            var request = new RestRequest(endpoint, Method.Put);
-            request.AddJsonBody(entity);
+            var response = await _client.DeleteAsync(endpoint);
 
-            var response = await _restClient.ExecuteAsync<ApiResponseMessage<T>>(request);
-
-            if (!response.IsSuccessful)
-            {
-                if (response.StatusCode == System.Net.HttpStatusCode.BadRequest && response.Data.PropertyName is not null)
-                {
-                    throw new Exception(response.Data.ErrorMessage);
-                }
-                else if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
-                {
-                    throw new Exception(response.Data.ErrorMessage);
-                }
-                else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
-                {
-                    throw new Exception(response.Data.ErrorMessage);
-                }
-            }
-        }
-
-        public async Task<bool> IsExist(string endpoint, int? id)
-        {
-            if (id < 1) throw new ArgumentException("Invalid Id");
-
-            var request = new RestRequest($"{endpoint}/{id}", Method.Get);
-            var response = await _restClient.ExecuteAsync(request);
-
-            if (response.StatusCode == System.Net.HttpStatusCode.OK)
-            {
-                return true;
-            }
-            else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
-            {
-                return false;
-            }
-            else
-            {
-                throw new Exception($"Error Status code: {response.StatusCode} Message: {response.Content}");
-            }
+            if (!response.IsSuccessStatusCode)
+                throw new Exception("Delete failed");
         }
     }
 }

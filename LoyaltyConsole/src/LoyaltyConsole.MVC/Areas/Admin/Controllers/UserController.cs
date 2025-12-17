@@ -1,5 +1,4 @@
 ﻿using LoyaltyConsole.MVC.Areas.Admin.ViewModels.AuthVMs;
-using LoyaltyConsole.MVC.Areas.Admin.ViewModels.CustomerVMs;
 using LoyaltyConsole.MVC.Enums;
 using LoyaltyConsole.MVC.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -22,61 +21,55 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
         {
             SetFullName();
 
-            if (ViewBag.Role is null) return RedirectToAction("AdminLogin", "Auth", new { area = "Admin" });
+            if (ViewBag.Role is null)
+                return RedirectToAction("AdminLogin", "Auth", new { area = "Admin" });
 
-            if (ViewBag.Role != "SuperAdmin") return RedirectToAction("Index", "Home", new { area = "Admin" });
+            if (ViewBag.Role != "SuperAdmin")
+                return RedirectToAction("Index", "Home", new { area = "Admin" });
 
-            var datas = await _crudService.GetAllAsync<List<AuthGetVM>>("/auth/GetAllAdmins");
-            return View(datas);
+            var users =
+                await _crudService.GetAsync<List<AuthGetVM>>("/auth/GetAllAdmins");
+
+            return View(users);
         }
+
+        // ---------------- APPROVE ----------------
 
         public async Task<IActionResult> ApproveAdmin(string id)
         {
-            SetFullName();
-            if (ViewBag.Role is null) return RedirectToAction("AdminLogin", "Auth", new { area = "Admin" });
-
-            if (ViewBag.Role != "SuperAdmin") return RedirectToAction("home", "Index", new { area = "Admin" });
-
-            try
-            {
-                var user = await _crudService.GetByStringIdAsync<AuthGetVM>($"/auth/{id}", id);
-                if (user == null) return NotFound();
-
-                var vm = new AuthEditVM
-                {
-                    Status = AdminStatus.Rejected,
-                    FullName = user.FullName,
-                    Email = user.Email,
-                    PhoneNumber = user.PhoneNumber,
-                    BirthDay = user.BirthDay,
-                    Gender = user.Gender
-                };
-
-                await _crudService.Update($"/auth/{id}", vm);
-            }
-            catch (Exception)
-            {
-                TempData["Error"] = "Error approving admin";
-            }
-
-            return RedirectToAction("Index");
+            return await ChangeStatus(id, AdminStatus.Approved);
         }
+
+        // ---------------- REJECT ----------------
 
         public async Task<IActionResult> RejectAdmin(string id)
         {
-            SetFullName();
-            if (ViewBag.Role is null) return RedirectToAction("AdminLogin", "Auth", new { area = "Admin" });
+            return await ChangeStatus(id, AdminStatus.Rejected);
+        }
 
-            if (ViewBag.Role != "SuperAdmin") return RedirectToAction("home", "Index", new { area = "Admin" });
+        // ---------------- SHARED LOGIC ----------------
+
+        private async Task<IActionResult> ChangeStatus(string id, AdminStatus status)
+        {
+            SetFullName();
+
+            if (ViewBag.Role is null)
+                return RedirectToAction("AdminLogin", "Auth", new { area = "Admin" });
+
+            if (ViewBag.Role != "SuperAdmin")
+                return RedirectToAction("Index", "Home", new { area = "Admin" });
 
             try
             {
-                var user = await _crudService.GetByStringIdAsync<AuthGetVM>($"/auth/{id}", id);
-                if (user == null) return NotFound();
+                var user =
+                    await _crudService.GetAsync<AuthGetVM>($"/auth/{id}");
+
+                if (user == null)
+                    return NotFound();
 
                 var vm = new AuthEditVM
                 {
-                    Status = AdminStatus.Rejected,
+                    Status = status,
                     FullName = user.FullName,
                     Email = user.Email,
                     PhoneNumber = user.PhoneNumber,
@@ -84,15 +77,14 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
                     Gender = user.Gender
                 };
 
-                await _crudService.Update($"/auth/{id}", vm);
+                await _crudService.UpdateAsync($"/auth/{id}", vm);
             }
-            catch (Exception)
+            catch
             {
-                TempData["Error"] = "Error rejecting admin";
+                TempData["Error"] = "Operation failed";
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
-
     }
 }

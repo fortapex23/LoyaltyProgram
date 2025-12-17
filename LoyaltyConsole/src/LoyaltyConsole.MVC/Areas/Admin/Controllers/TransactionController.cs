@@ -3,7 +3,6 @@ using LoyaltyConsole.MVC.Areas.Admin.ViewModels.CustomerVMs;
 using LoyaltyConsole.MVC.Areas.Admin.ViewModels.TransactionVMs;
 using LoyaltyConsole.MVC.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Mono.TextTemplating;
 
 namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
 {
@@ -22,35 +21,29 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
             SetFullName();
 
             if (ViewBag.Role is null)
-            {
                 return RedirectToAction("AdminLogin", "Auth", new { area = "Admin" });
-            }
-
-            var transactions = await _crudService.GetAllAsync<List<TransactionGetVM>>("/transactions");
-            var customers = await _crudService.GetAllAsync<List<CustomerGetVM>>("/customers");
-
-            foreach (var tx in transactions)
-            {
-                tx.Customer = customers.FirstOrDefault(c => c.Id == tx.CustomerId);
-            }
 
             int pageSize = 8;
-            var paginatedtrans = PaginatedList<TransactionGetVM>.Create(transactions.AsQueryable(), page, pageSize);
 
-            return View(paginatedtrans);
+            var endpoint = $"/transactions?page={page}&pageSize={pageSize}";
+
+            var transactions =
+                await _crudService.GetAsync<PagedResult<TransactionGetVM>>(endpoint);
+
+            return View(transactions);
         }
 
+        // ---------------- CREATE ----------------
 
         public async Task<IActionResult> Create()
         {
             SetFullName();
 
             if (ViewBag.Role is null)
-            {
                 return RedirectToAction("AdminLogin", "Auth", new { area = "Admin" });
-            }
 
-            ViewBag.Customers = await _crudService.GetAllAsync<List<CustomerGetVM>>("/customers");
+            ViewBag.Customers =
+                await _crudService.GetAsync<List<CustomerGetVM>>("/customers");
 
             return View();
         }
@@ -58,80 +51,93 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(TransactionCreateVM vm)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Customers =
+                    await _crudService.GetAsync<List<CustomerGetVM>>("/customers");
+                return View(vm);
+            }
+
             try
             {
-                await _crudService.Create("/transactions", vm);
+                await _crudService.CreateAsync("/transactions", vm);
             }
-            catch (Exception ex)
+            catch
             {
-                return View();
+                ModelState.AddModelError("", "Transaction creation failed");
+                return View(vm);
             }
 
             return RedirectToAction(nameof(Index));
         }
+
+        // ---------------- DELETE ----------------
 
         public async Task<IActionResult> Delete(int id)
         {
             SetFullName();
 
             if (ViewBag.Role is null)
-            {
                 return RedirectToAction("AdminLogin", "Auth", new { area = "Admin" });
-            }
 
             try
             {
-                await _crudService.Delete<object>($"/transactions/{id}", id);
+                await _crudService.DeleteAsync($"/transactions/{id}");
             }
-            catch (Exception)
+            catch
             {
-                TempData["Error"] = "Transaction Not Found";
+                TempData["Error"] = "Transaction not found";
             }
 
             return RedirectToAction(nameof(Index));
         }
+
+        // ---------------- UPDATE ----------------
 
         public async Task<IActionResult> Update(int id)
         {
             SetFullName();
 
             if (ViewBag.Role is null)
-            {
                 return RedirectToAction("AdminLogin", "Auth", new { area = "Admin" });
-            }
 
-            ViewBag.Customers = await _crudService.GetAllAsync<List<CustomerGetVM>>("/customers");
-
-            TransactionUpdateVM data = null;
+            ViewBag.Customers =
+                await _crudService.GetAsync<List<CustomerGetVM>>("/customers");
 
             try
             {
-                data = await _crudService.GetByIdAsync<TransactionUpdateVM>($"/Transactions/{id}", id);
+                var transaction =
+                    await _crudService.GetAsync<TransactionUpdateVM>($"/transactions/{id}");
+                return View(transaction);
             }
-            catch (Exception)
+            catch
             {
-                TempData["Err"] = "Transaction not found";
-                //return RedirectToAction("Index");
+                TempData["Error"] = "Transaction not found";
+                return RedirectToAction(nameof(Index));
             }
-
-            return View(data);
         }
 
         [HttpPost]
         public async Task<IActionResult> Update(int id, TransactionUpdateVM vm)
         {
-            ViewBag.Customers = await _crudService.GetAllAsync<List<CustomerGetVM>>("/customers");
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Customers =
+                    await _crudService.GetAsync<List<CustomerGetVM>>("/customers");
+                return View(vm);
+            }
 
             try
             {
-                await _crudService.Update($"/Transactions/{id}", vm);
+                await _crudService.UpdateAsync($"/transactions/{id}", vm);
             }
-            catch (Exception ex)
+            catch
             {
-                return View();
+                ModelState.AddModelError("", "Update failed");
+                return View(vm);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
     }
 }

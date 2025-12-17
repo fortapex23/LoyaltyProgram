@@ -2,14 +2,10 @@
 {
     public interface ICrudService
     {
-        Task<T> GetByIdAsync<T>(string endpoint, int? id);
-        Task<T> GetByStringIdAsync<T>(string endpoint, string? id);
-        Task<T> GetAllAsync<T>(string endpoint);
-        Task Delete<T>(string endpoint, int id);
-        Task DeleteItem<T>(string endpoint);
-        Task CreateWithImage<T>(string endpoint, T entity) where T : class;
-        Task Create<T>(string endpoint, T entity) where T : class;
-        Task Update<T>(string endpoint, T entity) where T : class;
-        Task<bool> IsExist(string endpoint, int? id);
+        Task<T> GetAsync<T>(string endpoint);
+        Task CreateAsync<T>(string endpoint, T entity);
+        Task CreateWithImageAsync<T>(string endpoint, T entity) where T : class;
+        Task UpdateAsync<T>(string endpoint, T entity);
+        Task DeleteAsync(string endpoint);
     }
 }

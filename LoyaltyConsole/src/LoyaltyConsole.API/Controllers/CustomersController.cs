@@ -1,6 +1,7 @@
 ﻿using LoyaltyConsole.API.ApiResponses;
 using LoyaltyConsole.Business.DTOs.CustomerDtos;
 using LoyaltyConsole.Business.Interfaces;
+using LoyaltyConsole.Business.PaginatedLists;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LoyaltyConsole.API.Controllers
@@ -16,17 +17,29 @@ namespace LoyaltyConsole.API.Controllers
             _customerService = customerService;
         }
 
-        [HttpGet("search")]
-        public async Task<IActionResult> Search(string input)
+        [HttpGet]
+        public async Task<IActionResult> GetAll(int page = 1, int pageSize = 5, string? search = null)
         {
-            var customers = await _customerService.SearchCustomer(input);
+            var result = await _customerService.GetPagedListAsync(page, pageSize, search);
 
-            return Ok(new ApiResponse<ICollection<CustomerListDto>>
+            return Ok(new ApiResponse<PagedResult<CustomerListDto>>
             {
-                Data = customers,
+                Data = result,
                 StatusCode = StatusCodes.Status200OK
             });
         }
+
+        //[HttpGet("search")]
+        //public async Task<IActionResult> Search(string input)
+        //{
+        //    var customers = await _customerService.SearchCustomer(input);
+
+        //    return Ok(new ApiResponse<ICollection<CustomerListDto>>
+        //    {
+        //        Data = customers,
+        //        StatusCode = StatusCodes.Status200OK
+        //    });
+        //}
 
         [HttpGet("isexist/{id}")]
         public async Task<IActionResult> IsExist(int id)
@@ -40,17 +53,17 @@ namespace LoyaltyConsole.API.Controllers
             });
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
-        {
-            var customers = await _customerService.GetListAsync();
+        //[HttpGet]
+        //public async Task<IActionResult> GetAll()
+        //{
+        //    var customers = await _customerService.GetListAsync();
 
-            return Ok(new ApiResponse<ICollection<CustomerListDto>>
-            {
-                Data = customers,
-                StatusCode = StatusCodes.Status200OK
-            });
-        }
+        //    return Ok(new ApiResponse<ICollection<CustomerListDto>>
+        //    {
+        //        Data = customers,
+        //        StatusCode = StatusCodes.Status200OK
+        //    });
+        //}
 
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] CustomerCreateDto dto)

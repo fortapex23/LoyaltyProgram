@@ -1,3 +1,5 @@
+﻿using LoyaltyConsole.MVC.Services.Implementations;
+using LoyaltyConsole.MVC.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace LoyaltyConsole.MVC
@@ -19,7 +21,10 @@ namespace LoyaltyConsole.MVC
 
             builder.Services.AddRegisterService();
             builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            builder.Services.AddHttpClient();
+            builder.Services.AddHttpClient<ICrudService, CrudService>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:7027/api/");
+            });
 
             var app = builder.Build();
 

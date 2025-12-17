@@ -1,10 +1,11 @@
 ﻿@using LoyaltyConsole.MVC.Areas.Admin.PaginatedLists
 @using LoyaltyConsole.MVC.Areas.Admin.ViewModels.CustomerVMs
 
-@model PaginatedList<CustomerGetVM>
+@model PagedResult<CustomerGetVM>
 @{
-    int count = (Model.ActivePage - 1) * 5;
+    int count = (Model.Page - 1) * Model.PageSize;
 }
+
 
 <!-- Content Start -->
 <div class="content">
@@ -17,6 +18,15 @@
         <div class="row g-4">
             <div class="col-12">
                 <div class="bg-light rounded p-4" >
+
+                    @if (Model == null)
+                    {
+                        <div class="alert alert-danger text-center">
+                            Failed to load customers.
+                        </div>
+                        return;
+                    }
+
                     <div style="display: flex; align-items: center;">
                         <h6 class="mb-0">CUSTOMERS</h6>
                         <div style="width: 100%">
@@ -44,7 +54,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (!Model.Any())
+                                @if (!Model.Items.Any())
                                 {
                                     <tr>
                                         <td colspan="10" class="text-center fw-bold">No Customers</td>
@@ -52,7 +62,7 @@
                                 }
                                 else
                                 {
-                                    @foreach (var cst in Model)
+                                    @foreach (var cst in Model.Items)
                                     {
                                         count++;
                                         <tr>
@@ -114,23 +124,42 @@
                             </div>
                         </div>
 
-                        @if (Model.Any() && Model.TotalPage > 1)
+                        @if (Model.Items.Any() && Model.TotalPages > 1)
                         {
-                            <div style="display: flex; justify-content: center">
-                                <nav aria-label="...">
+                            <div style="display:flex; justify-content:center">
+                                <nav>
                                     <ul class="pagination">
-                                        <li class="page-item @(Model.Prev == false ? "disabled" : "")">
-                                            <a class="page-link" asp-action="index" asp-route-page="@(Model.ActivePage - 1)">Previous</a>
+
+                                        <li class="page-item @(Model.HasPrevious ? "" : "disabled")">
+                                            <a class="page-link"
+                                               asp-action="Index"
+                                               asp-route-page="@(Model.Page - 1)"
+                                               asp-route-search="@ViewBag.Search">
+                                                Previous
+                                            </a>
                                         </li>
-                                        @for (int i = 1; i <= Model.TotalPage; i++)
+
+                                        @for (int i = 1; i <= Model.TotalPages; i++)
                                         {
-                                            <li class="page-item @(Model.ActivePage == i ? "active" : "")">
-                                                <a class="page-link" asp-action="index" asp-route-page="@i">@i</a>
+                                            <li class="page-item @(Model.Page == i ? "active" : "")">
+                                                <a class="page-link"
+                                                   asp-action="Index"
+                                                   asp-route-page="@i"
+                                                   asp-route-search="@ViewBag.Search">
+                                                    @i
+                                                </a>
                                             </li>
                                         }
-                                        <li class="page-item @(Model.Next == false ? "disabled" : "")">
-                                            <a class="page-link" asp-action="index" asp-route-page="@(Model.ActivePage + 1)">Next</a>
+
+                                        <li class="page-item @(Model.HasNext ? "" : "disabled")">
+                                            <a class="page-link"
+                                               asp-action="Index"
+                                               asp-route-page="@(Model.Page + 1)"
+                                               asp-route-search="@ViewBag.Search">
+                                                Next
+                                            </a>
                                         </li>
+
                                     </ul>
                                 </nav>
                             </div>

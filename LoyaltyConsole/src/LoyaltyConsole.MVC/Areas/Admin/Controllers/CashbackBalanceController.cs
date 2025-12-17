@@ -15,49 +15,59 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
             _crudService = crudService;
         }
 
-        public async Task<IActionResult> Index()
+        // No own index → redirect to Customers
+        public IActionResult Index()
         {
-            return View("Index", "Customer");
+            return RedirectToAction("Index", "Customer");
         }
+
+        // ---------------- UPDATE ----------------
 
         public async Task<IActionResult> Update(int id)
         {
-            ViewBag.Customers = await _crudService.GetAllAsync<List<CustomerGetVM>>("/customers");
-
             SetFullName();
 
             if (ViewBag.Role is null)
-            {
                 return RedirectToAction("AdminLogin", "Auth", new { area = "Admin" });
-            }
 
-            CashbackBalanceUpdateVM data = null;
+            ViewBag.Customers =
+                await _crudService.GetAsync<List<CustomerGetVM>>("/customers");
 
             try
             {
-                data = await _crudService.GetByIdAsync<CashbackBalanceUpdateVM>($"/CashbackBalances/{id}", id);
+                var data =
+                    await _crudService.GetAsync<CashbackBalanceUpdateVM>(
+                        $"/cashbackbalances/{id}");
+
+                return View(data);
             }
-            catch (Exception)
+            catch
             {
-                //TempData["Err"] = "CashbackBalance not found";
+                TempData["Error"] = "Cashback balance not found";
                 return RedirectToAction("Index", "Customer");
             }
-
-            return View(data);
         }
 
         [HttpPost]
         public async Task<IActionResult> Update(int id, CashbackBalanceUpdateVM vm)
         {
-            ViewBag.Customers = await _crudService.GetAllAsync<List<CustomerGetVM>>("/customers");
+            SetFullName();
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Customers =
+                    await _crudService.GetAsync<List<CustomerGetVM>>("/customers");
+                return View(vm);
+            }
 
             try
             {
-                await _crudService.Update($"/CashbackBalances/{id}", vm);
+                await _crudService.UpdateAsync($"/cashbackbalances/{id}", vm);
             }
-            catch (Exception ex)
+            catch
             {
-                return View();
+                ModelState.AddModelError("", "Update failed");
+                return View(vm);
             }
 
             return RedirectToAction("Index", "Customer");

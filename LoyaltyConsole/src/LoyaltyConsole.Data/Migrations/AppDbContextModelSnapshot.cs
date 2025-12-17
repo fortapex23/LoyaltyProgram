@@ -77,6 +77,10 @@ namespace LoyaltyConsole.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
@@ -480,8 +484,7 @@ namespace LoyaltyConsole.Data.Migrations
                     b.Navigation("CashbackBalance")
                         .IsRequired();
 
-                    b.Navigation("CustomerImage")
-                        .IsRequired();
+                    b.Navigation("CustomerImage");
 
                     b.Navigation("Transactions");
                 });
