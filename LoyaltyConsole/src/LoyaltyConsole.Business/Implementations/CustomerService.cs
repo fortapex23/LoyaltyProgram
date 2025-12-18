@@ -117,16 +117,6 @@ namespace LoyaltyConsole.Business.Implementations
             await _customerRepository.CommitAsync();
         }
 
-        public async Task<CustomerGetDto> GetById(int id)
-        {
-            if (id < 1) throw new InvalidDataException("Invalid Id");
-
-            var customer = await _customerRepository.GetByIdAsync(id);
-            if (customer == null) throw new NotFoundException("Customer not found");
-
-            return _mapper.Map<CustomerGetDto>(customer);
-        }
-
         public async Task<CustomerGetDto> GetSingleByExpression(
             bool asnotracking = false,
             Expression<Func<Customer, bool>>? expression = null,
@@ -138,16 +128,16 @@ namespace LoyaltyConsole.Business.Implementations
             return _mapper.Map<CustomerGetDto>(customer);
         }
 
-        public async Task SoftDeleteAsync(int id)
-        {
-            if (id < 1) throw new InvalidDataException("Invalid Id");
+        //public async Task SoftDeleteAsync(int id)
+        //{
+        //    if (id < 1) throw new InvalidDataException("Invalid Id");
 
-            var customer = await _customerRepository.GetByIdAsync(id);
-            if (customer == null) throw new NotFoundException("Customer not found.");
+        //    var customer = await _customerRepository.GetByIdAsync(id);
+        //    if (customer == null) throw new NotFoundException("Customer not found.");
             
-            customer.IsDeleted = true;
-            await _customerRepository.CommitAsync();
-        }
+        //    customer.IsDeleted = true;
+        //    await _customerRepository.CommitAsync();
+        //}
 
         public async Task UpdateAsync(int? id, CustomerUpdateDto dto)
         {

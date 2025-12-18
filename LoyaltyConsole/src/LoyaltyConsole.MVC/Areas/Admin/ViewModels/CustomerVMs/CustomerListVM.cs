@@ -1,8 +1,6 @@
-﻿using LoyaltyConsole.Business.DTOs.CashbackBalanceDtos;
-
-namespace LoyaltyConsole.Business.DTOs.CustomerDtos
+﻿namespace LoyaltyConsole.MVC.Areas.Admin.ViewModels.CustomerVMs
 {
-    public class CustomerListDto
+    public class CustomerListVM
     {
         public int Id { get; set; }
         public string FullName { get; set; }
@@ -10,6 +8,7 @@ namespace LoyaltyConsole.Business.DTOs.CustomerDtos
         public decimal TotalCashback { get; set; }
         public decimal CashbackRedeemed { get; set; }
         public decimal CashbackAvailable { get; set; }
-        public string ImageUrl { get; set; }
+
+        public string? ImageUrl { get; set; }
     }
 }

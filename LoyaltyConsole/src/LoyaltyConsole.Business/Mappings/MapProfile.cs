@@ -29,6 +29,24 @@ namespace LoyaltyConsole.Business.Mappings
                 opt.MapFrom(src => src.CustomerImage != null
                 ? new CustomerImageGetDto(src.CustomerImage.ImageUrl)
                 : null));
+            CreateMap<Customer, CustomerListDto>()
+                .ForMember(dest => dest.TotalCashback,
+                    opt => opt.MapFrom(src => src.CashbackBalance != null
+                        ? src.CashbackBalance.TotalCashback
+                        : 0))
+                .ForMember(dest => dest.CashbackAvailable,
+                    opt => opt.MapFrom(src => src.CashbackBalance != null
+                        ? src.CashbackBalance.CashbackAvailable
+                        : 0))
+                .ForMember(dest => dest.CashbackRedeemed,
+                    opt => opt.MapFrom(src => src.CashbackBalance != null
+                        ? src.CashbackBalance.CashbackRedeemed
+                        : 0))
+                .ForMember(dest => dest.ImageUrl,
+                    opt => opt.MapFrom(src => src.CustomerImage != null
+                        ? src.CustomerImage.ImageUrl
+                        : null));
+
 
             CreateMap<CustomerImageGetDto, CustomerImage>().ReverseMap();
         }

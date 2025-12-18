@@ -1,7 +1,7 @@
 ﻿@using LoyaltyConsole.MVC.Areas.Admin.PaginatedLists
 @using LoyaltyConsole.MVC.Areas.Admin.ViewModels.CustomerVMs
 
-@model PagedResult<CustomerGetVM>
+@model PagedResult<CustomerListVM>
 @{
     int count = (Model.Page - 1) * Model.PageSize;
 }
@@ -18,15 +18,6 @@
         <div class="row g-4">
             <div class="col-12">
                 <div class="bg-light rounded p-4" >
-
-                    @if (Model == null)
-                    {
-                        <div class="alert alert-danger text-center">
-                            Failed to load customers.
-                        </div>
-                        return;
-                    }
-
                     <div style="display: flex; align-items: center;">
                         <h6 class="mb-0">CUSTOMERS</h6>
                         <div style="width: 100%">
@@ -46,7 +37,7 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Img</th>
                                     <th scope="col">Name</th>
-                                    <th scope="col">Birthday</th>
+                                    <th scope="col">Number</th>
                                     <th scope="col">Gained</th>
                                     <th scope="col">Redeemed</th>
                                     <th scope="col">Available</th>
@@ -68,12 +59,12 @@
                                         <tr>
                                             <td>@count</td>
                                             <td>
-                                                @if (!string.IsNullOrEmpty(cst.CustomerImage?.ImageUrl))
+                                                @if (!string.IsNullOrEmpty(cst?.ImageUrl))
                                                 {
-                                                    <img src="@cst.CustomerImage.ImageUrl"
+                                                    <img src="@cst.ImageUrl"
                                                          alt="Customer Image"
                                                          style="width:30px;height:30px;border-radius:50%;cursor:pointer"
-                                                         onclick="showImageModal('@cst.CustomerImage.ImageUrl')" />
+                                                         onclick="showImageModal('@cst.ImageUrl')" />
                                                 }
                                                 else
                                                 {
@@ -81,17 +72,18 @@
                                                 }
                                             </td>
                                             <td>@cst.FullName</td>
-                                            <td>@cst.Birthday.ToString("dd/ MM/ yyyy")</td>
-                                            <td>@cst.CashbackBalance.TotalCashback</td>
-                                            <td>@cst.CashbackBalance.CashbackRedeemed</td>
-                                            <td>@cst.CashbackBalance.CashbackAvailable</td>
+                                            @* <td>@cst.Birthday.ToString("dd/ MM/ yyyy")</td> *@
+                                            <td>@cst.PhoneNumber</td>
+                                            <td>@(cst.TotalCashback)</td>
+                                            <td>@(cst.CashbackRedeemed)</td>
+                                            <td>@(cst.CashbackAvailable)</td>
                                             <td>
-                                                <div class="hover-tip">
+                                                @* <div class="hover-tip">
                                                     <a asp-controller="cashbackbalance" asp-action="update" asp-route-id="@cst.CashbackBalance.Id" class="btn btn-outline-warning">
                                                         <i style="color: black" class="fa-solid fa-credit-card"></i>
                                                     </a>
                                                     <span class="hover-text">balance</span>
-                                                </div>
+                                                </div> *@
 
                                                 <div class="hover-tip">
                                                     <a asp-action="Update" asp-route-id="@cst.Id" class="btn btn-outline-primary">

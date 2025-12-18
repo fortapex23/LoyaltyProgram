@@ -18,27 +18,19 @@ public class CustomerController : BaseController
     {
         SetFullName();
 
-        var endpoint = "";
-
         if (ViewBag.Role is null)
             return RedirectToAction("AdminLogin", "Auth", new { area = "Admin" });
 
-        if (search  != null)
-        {
-            endpoint = $"/api/customers?page={page}&pageSize=5&search={search}";
-        }
-        else
-        {
-            endpoint = $"/api/customers?page={page}&pageSize=5";
-        }
+        var endpoint = search != null
+            ? $"/api/customers?page={page}&pageSize=5&search={search}"
+            : $"/api/customers?page={page}&pageSize=5";
 
-
-        var customers = await _crudService.GetAsync<PagedResult<CustomerGetVM>>(endpoint);
+        var customers = await _crudService.GetAsync<PagedResult<CustomerListVM>>(endpoint);
 
         ViewBag.Search = search;
-
         return View(customers);
     }
+
 
     public IActionResult Create()
     {
