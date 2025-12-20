@@ -49,7 +49,7 @@ public class CustomerController : BaseController
 
         try
         {
-            await _crudService.CreateWithImageAsync("/customers", vm);
+            await _crudService.CreateWithImageAsync("customers", vm);
         }
         catch (Exception ex)
         {
