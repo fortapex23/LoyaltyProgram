@@ -100,7 +100,7 @@ namespace LoyaltyConsole.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, CustomerUpdateDto dto)
+        public async Task<IActionResult> Update([FromForm] CustomerUpdateDto dto, int id)
         {
             await _customerService.UpdateAsync(id, dto);
             return NoContent();

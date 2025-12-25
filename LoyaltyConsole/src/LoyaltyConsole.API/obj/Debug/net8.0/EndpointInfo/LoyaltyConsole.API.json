@@ -475,24 +475,39 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/CustomerUpdateDto"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CustomerUpdateDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CustomerUpdateDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CustomerUpdateDto"
+                "type": "object",
+                "properties": {
+                  "PhoneNumber": {
+                    "type": "string"
+                  },
+                  "FullName": {
+                    "type": "string"
+                  },
+                  "Birthday": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "ImageFile": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "PhoneNumber": {
+                  "style": "form"
+                },
+                "FullName": {
+                  "style": "form"
+                },
+                "Birthday": {
+                  "style": "form"
+                },
+                "ImageFile": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -768,29 +783,6 @@
         ],
         "type": "integer",
         "format": "int32"
-      },
-      "CustomerUpdateDto": {
-        "type": "object",
-        "properties": {
-          "phoneNumber": {
-            "type": "string",
-            "nullable": true
-          },
-          "fullName": {
-            "type": "string",
-            "nullable": true
-          },
-          "birthday": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "imageFile": {
-            "type": "string",
-            "format": "binary",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
       },
       "GenderType": {
         "enum": [

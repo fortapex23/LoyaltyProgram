@@ -74,9 +74,9 @@
                                             <td>@cst.FullName</td>
                                             @* <td>@cst.Birthday.ToString("dd/ MM/ yyyy")</td> *@
                                             <td>@cst.PhoneNumber</td>
-                                            <td>@(cst.TotalCashback)</td>
-                                            <td>@(cst.CashbackRedeemed)</td>
-                                            <td>@(cst.CashbackAvailable)</td>
+                                            <td>@cst.TotalCashback</td>
+                                            <td>@cst.CashbackRedeemed</td>
+                                            <td>@cst.CashbackAvailable</td>
                                             <td>
                                                 @* <div class="hover-tip">
                                                     <a asp-controller="cashbackbalance" asp-action="update" asp-route-id="@cst.CashbackBalance.Id" class="btn btn-outline-warning">

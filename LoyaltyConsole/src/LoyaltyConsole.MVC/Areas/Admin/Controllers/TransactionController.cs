@@ -25,7 +25,7 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
 
             int pageSize = 8;
 
-            var endpoint = $"/transactions?page={page}&pageSize={pageSize}";
+            var endpoint = $"transactions?page={page}&pageSize={pageSize}";
 
             var transactions =
                 await _crudService.GetAsync<PagedResult<TransactionGetVM>>(endpoint);
@@ -43,7 +43,7 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
                 return RedirectToAction("AdminLogin", "Auth", new { area = "Admin" });
 
             ViewBag.Customers =
-                await _crudService.GetAsync<List<CustomerGetVM>>("/customers");
+                await _crudService.GetAsync<List<CustomerGetVM>>("customers");
 
             return View();
         }
@@ -54,13 +54,13 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
             if (!ModelState.IsValid)
             {
                 ViewBag.Customers =
-                    await _crudService.GetAsync<List<CustomerGetVM>>("/customers");
+                    await _crudService.GetAsync<List<CustomerGetVM>>("customers");
                 return View(vm);
             }
 
             try
             {
-                await _crudService.CreateAsync("/transactions", vm);
+                await _crudService.CreateAsync("transactions", vm);
             }
             catch
             {
@@ -82,7 +82,7 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
 
             try
             {
-                await _crudService.DeleteAsync($"/transactions/{id}");
+                await _crudService.DeleteAsync($"transactions/{id}");
             }
             catch
             {
@@ -102,12 +102,12 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
                 return RedirectToAction("AdminLogin", "Auth", new { area = "Admin" });
 
             ViewBag.Customers =
-                await _crudService.GetAsync<List<CustomerGetVM>>("/customers");
+                await _crudService.GetAsync<List<CustomerGetVM>>("customers");
 
             try
             {
                 var transaction =
-                    await _crudService.GetAsync<TransactionUpdateVM>($"/transactions/{id}");
+                    await _crudService.GetAsync<TransactionUpdateVM>($"transactions/{id}");
                 return View(transaction);
             }
             catch
@@ -123,13 +123,13 @@ namespace LoyaltyConsole.MVC.Areas.Admin.Controllers
             if (!ModelState.IsValid)
             {
                 ViewBag.Customers =
-                    await _crudService.GetAsync<List<CustomerGetVM>>("/customers");
+                    await _crudService.GetAsync<List<CustomerGetVM>>("customers");
                 return View(vm);
             }
 
             try
             {
-                await _crudService.UpdateAsync($"/transactions/{id}", vm);
+                await _crudService.UpdateAsync($"transactions/{id}", vm);
             }
             catch
             {

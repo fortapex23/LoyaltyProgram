@@ -62,14 +62,14 @@ public class CustomerController : BaseController
 
     public async Task<IActionResult> Delete(int id)
     {
-        await _crudService.DeleteAsync($"/customers/{id}");
+        await _crudService.DeleteAsync($"customers/{id}");
         return RedirectToAction(nameof(Index));
     }
 
     public async Task<IActionResult> Update(int id)
     {
         var customer =
-            await _crudService.GetAsync<CustomerUpdateVM>($"/customers/{id}");
+            await _crudService.GetAsync<CustomerUpdateVM>($"customers/{id}");
 
         return View(customer);
     }
@@ -79,7 +79,7 @@ public class CustomerController : BaseController
     {
         if (!ModelState.IsValid) return View(vm);
 
-        await _crudService.UpdateAsync($"/customers/{id}", vm);
+        await _crudService.UpdateWithImageAsync($"customers", id, vm);
         return RedirectToAction(nameof(Index));
     }
 }

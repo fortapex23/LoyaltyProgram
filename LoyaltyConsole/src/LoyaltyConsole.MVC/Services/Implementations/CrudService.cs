@@ -23,8 +23,6 @@ namespace LoyaltyConsole.MVC.Services.Implementations
             }
         }
 
-        // ---------------- GET ----------------
-
         public async Task<T> GetAsync<T>(string endpoint)
         {
             var response = await _client.GetAsync(endpoint);
@@ -44,8 +42,6 @@ namespace LoyaltyConsole.MVC.Services.Implementations
             return apiResponse.Data;
         }
 
-        // ---------------- CREATE ----------------
-
         public async Task CreateAsync<T>(string endpoint, T entity)
         {
             var response = await _client.PostAsJsonAsync(endpoint, entity);
@@ -56,8 +52,6 @@ namespace LoyaltyConsole.MVC.Services.Implementations
                 throw new Exception(error);
             }
         }
-
-        // ---------------- CREATE WITH IMAGE ----------------
 
         public async Task CreateWithImageAsync<T>(string endpoint, T entity) where T : class
         {
@@ -89,7 +83,39 @@ namespace LoyaltyConsole.MVC.Services.Implementations
                 throw new Exception("Create failed");
         }
 
-        // ---------------- UPDATE ----------------
+        public async Task UpdateWithImageAsync<T>(string endpoint, int id, T entity) where T : class
+        {
+            var form = new MultipartFormDataContent();
+
+            foreach (var prop in typeof(T).GetProperties())
+            {
+                var value = prop.GetValue(entity);
+                if (value == null) continue;
+
+                if (value is IFormFile file)
+                {
+                    var stream = file.OpenReadStream();
+                    var fileContent = new StreamContent(stream);
+                    fileContent.Headers.ContentType =
+                        new MediaTypeHeaderValue(file.ContentType);
+
+                    form.Add(fileContent, prop.Name, file.FileName);
+                }
+                else
+                {
+                    form.Add(new StringContent(value.ToString()), prop.Name);
+                }
+            }
+
+            var response = await _client.PutAsync($"{endpoint}/{id}", form);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                throw new Exception($"Update failed: {error}");
+            }
+        }
+
 
         public async Task UpdateAsync<T>(string endpoint, T entity)
         {
@@ -98,8 +124,6 @@ namespace LoyaltyConsole.MVC.Services.Implementations
             if (!response.IsSuccessStatusCode)
                 throw new Exception("Update failed");
         }
-
-        // ---------------- DELETE ----------------
 
         public async Task DeleteAsync(string endpoint)
         {

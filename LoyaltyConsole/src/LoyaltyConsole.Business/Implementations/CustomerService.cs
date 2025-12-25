@@ -56,7 +56,7 @@ namespace LoyaltyConsole.Business.Implementations
             customer.CreatedDate = DateTime.Now;
             customer.UpdatedDate = DateTime.Now;
 
-            if (customer.Birthday >= DateTime.Now)
+            if (dto.Birthday >= DateTime.Now)
                 throw new Exceptions.InvalidDataException("Invalid Birthday");
 
             if (dto.ImageFile != null && dto.ImageFile.Length > 0)
@@ -128,17 +128,6 @@ namespace LoyaltyConsole.Business.Implementations
             return _mapper.Map<CustomerGetDto>(customer);
         }
 
-        //public async Task SoftDeleteAsync(int id)
-        //{
-        //    if (id < 1) throw new InvalidDataException("Invalid Id");
-
-        //    var customer = await _customerRepository.GetByIdAsync(id);
-        //    if (customer == null) throw new NotFoundException("Customer not found.");
-            
-        //    customer.IsDeleted = true;
-        //    await _customerRepository.CommitAsync();
-        //}
-
         public async Task UpdateAsync(int? id, CustomerUpdateDto dto)
         {
             if (id < 1 || id is null) throw new InvalidDataException("Invalid Id");
@@ -146,7 +135,7 @@ namespace LoyaltyConsole.Business.Implementations
             var customer = await _customerRepository.GetByIdAsync((int)id);
             if (customer == null) throw new NotFoundException("Customer not found");
 
-            if (customer.Birthday >= DateTime.Now)
+            if (dto.Birthday >= DateTime.Now)
                 throw new InvalidDataException("Invalid Birthday");
 
             _mapper.Map(dto, customer);
@@ -154,24 +143,29 @@ namespace LoyaltyConsole.Business.Implementations
 
             if (dto.ImageFile != null && dto.ImageFile.Length > 0)
             {
+                if (customer.CustomerImage != null)
+                {
+                    if (!string.IsNullOrEmpty(customer.CustomerImage.PublicId))
+                    {
+                        await _photoService.DeletePhotoAsync(customer.CustomerImage.PublicId);
+                    }
+
+                    _customerimageRepository.Delete(customer.CustomerImage);
+                }
+
                 var uploadResult = await _photoService.AddPhotoAsync(dto.ImageFile);
 
                 if (uploadResult.Error != null)
                     throw new Exception(uploadResult.Error.Message);
 
-                CustomerImage cusImage = new CustomerImage
+                customer.CustomerImage = new CustomerImage
                 {
                     ImageUrl = uploadResult.SecureUrl.ToString(),
                     PublicId = uploadResult.PublicId,
                     CreatedDate = DateTime.Now,
-                    UpdatedDate = DateTime.Now,
-                    Customer = customer
+                    UpdatedDate = DateTime.Now
                 };
-
-                await _customerimageRepository.CreateAsync(cusImage);
             }
-
-            await _customerRepository.CommitAsync();
         }
 
         public async Task<PagedResult<CustomerListDto>> GetPagedListAsync(int page, int pageSize, string? search)
@@ -210,6 +204,17 @@ namespace LoyaltyConsole.Business.Implementations
                 TotalCount = totalCount
             };
         }
+
+        //public async Task SoftDeleteAsync(int id)
+        //{
+        //    if (id < 1) throw new InvalidDataException("Invalid Id");
+
+        //    var customer = await _customerRepository.GetByIdAsync(id);
+        //    if (customer == null) throw new NotFoundException("Customer not found.");
+
+        //    customer.IsDeleted = true;
+        //    await _customerRepository.CommitAsync();
+        //}
 
         //public async Task<ICollection<CustomerListDto>> SearchCustomer(string input)
         //{
