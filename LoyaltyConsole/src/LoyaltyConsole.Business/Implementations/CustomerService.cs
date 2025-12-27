@@ -132,7 +132,8 @@ namespace LoyaltyConsole.Business.Implementations
         {
             if (id < 1 || id is null) throw new InvalidDataException("Invalid Id");
 
-            var customer = await _customerRepository.GetByIdAsync((int)id);
+            var customer = await _customerRepository.GetByExpression(expression: c => c.Id == id, 
+                                                                    includes: "CustomerImage").FirstOrDefaultAsync();
             if (customer == null) throw new NotFoundException("Customer not found");
 
             if (dto.Birthday >= DateTime.Now)
@@ -160,12 +161,15 @@ namespace LoyaltyConsole.Business.Implementations
 
                 customer.CustomerImage = new CustomerImage
                 {
+                    CustomerId = customer.Id,
                     ImageUrl = uploadResult.SecureUrl.ToString(),
                     PublicId = uploadResult.PublicId,
                     CreatedDate = DateTime.Now,
                     UpdatedDate = DateTime.Now
                 };
             }
+
+            await _customerRepository.CommitAsync();
         }
 
         public async Task<PagedResult<CustomerListDto>> GetPagedListAsync(int page, int pageSize, string? search)
