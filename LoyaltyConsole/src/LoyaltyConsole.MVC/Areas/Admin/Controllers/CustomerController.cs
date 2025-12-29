@@ -1,6 +1,7 @@
 ﻿using LoyaltyConsole.MVC.Areas.Admin.Controllers;
 using LoyaltyConsole.MVC.Areas.Admin.PaginatedLists;
 using LoyaltyConsole.MVC.Areas.Admin.ViewModels.CustomerVMs;
+using LoyaltyConsole.MVC.Exceptions;
 using LoyaltyConsole.MVC.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -51,9 +52,9 @@ public class CustomerController : BaseController
         {
             await _crudService.CreateWithImageAsync("customers", vm);
         }
-        catch (Exception ex)
+        catch (ApiValidationException ex)
         {
-            ModelState.AddModelError("", ex.Message);
+            ModelState.AddModelError(nameof(vm.Birthday), ex.Message);
             return View(vm);
         }
 

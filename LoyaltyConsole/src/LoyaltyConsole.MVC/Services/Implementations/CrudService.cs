@@ -1,4 +1,6 @@
-﻿using LoyaltyConsole.MVC.ApiResponseMessages;
+﻿using LoyaltyConsole.API.ApiResponses;
+using LoyaltyConsole.MVC.ApiResponseMessages;
+using LoyaltyConsole.MVC.Exceptions;
 using LoyaltyConsole.MVC.Services.Interfaces;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
@@ -80,7 +82,10 @@ namespace LoyaltyConsole.MVC.Services.Implementations
             var response = await _client.PostAsync(endpoint, form);
 
             if (!response.IsSuccessStatusCode)
-                throw new Exception("Create failed");
+            {
+                var error = await response.Content.ReadFromJsonAsync<ApiResponse<string>>();
+                throw new ApiValidationException(error?.ErrorMessage ?? "Create failed");
+            }
         }
 
         public async Task UpdateWithImageAsync<T>(string endpoint, int id, T entity) where T : class
